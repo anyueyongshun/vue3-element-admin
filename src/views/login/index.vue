@@ -141,7 +141,7 @@ const { height } = useWindowSize();
 
 const loginData = ref<LoginData>({
   username: "admin",
-  password: "123456",
+  password: "111111",
 });
 
 const loginRules = computed(() => {
@@ -165,23 +165,23 @@ const loginRules = computed(() => {
         trigger: "blur",
       },
     ],
-    captchaCode: [
+    /* captchaCode: [
       {
         required: true,
         trigger: "blur",
         message: t("login.message.captchaCode.required"),
-      },
-    ],
+      }, 
+    ],*/
   };
 });
 
 /** 获取验证码 */
-function getCaptcha() {
+/* function getCaptcha() {
   AuthAPI.getCaptcha().then((data) => {
     loginData.value.captchaKey = data.captchaKey;
     captchaBase64.value = data.captchaBase64;
   });
-}
+} */
 
 /** 登录 */
 const route = useRoute();
@@ -207,7 +207,7 @@ function handleLogin() {
           router.push({ path: redirect, query: otherQueryParams });
         })
         .catch(() => {
-          getCaptcha();
+          /* getCaptcha(); */
         })
         .finally(() => {
           loading.value = false;
@@ -241,7 +241,7 @@ function checkCapslock(event: KeyboardEvent) {
 }
 
 onMounted(() => {
-  getCaptcha();
+  /* getCaptcha(); */
 });
 </script>
 

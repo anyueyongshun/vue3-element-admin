@@ -14,12 +14,12 @@ export interface LoginData {
   /**
    * 验证码缓存key
    */
-  captchaKey?: string;
+  /* captchaKey?: string; */
 
   /**
    * 验证码
    */
-  captchaCode?: string;
+  /* captchaCode?: string; */
 }
 
 /**
