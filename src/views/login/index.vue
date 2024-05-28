@@ -64,7 +64,7 @@
         </el-tooltip>
 
         <!-- 验证码 -->
-        <el-form-item prop="captchaCode">
+        <!-- <el-form-item prop="captchaCode">
           <div class="flex-y-center w-full">
             <svg-icon icon-class="captcha" class="mx-2" />
             <el-input
@@ -82,7 +82,7 @@
               class="rounded-tr-md rounded-br-md cursor-pointer h-[48px]"
             />
           </div>
-        </el-form-item>
+        </el-form-item> -->
 
         <!-- 登录按钮 -->
         <el-button
@@ -95,10 +95,10 @@
         </el-button>
 
         <!-- 账号密码提示 -->
-        <div class="mt-10 text-sm">
+        <!-- <div class="mt-10 text-sm">
           <span>{{ $t("login.username") }}: admin</span>
           <span class="ml-4"> {{ $t("login.password") }}: 123456</span>
-        </div>
+        </div> -->
       </el-form>
     </el-card>
 
