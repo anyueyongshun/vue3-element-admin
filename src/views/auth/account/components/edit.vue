@@ -53,6 +53,7 @@ const props = defineProps({
   },
 });
 
+//取账号明细
 function GetDetail() {
   if (props.id !== "" && dialogShow.value === true) {
     getDetail(props.id)
@@ -63,6 +64,7 @@ function GetDetail() {
   }
 }
 
+//编辑账号提交
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
@@ -79,10 +81,12 @@ function handleSubmit() {
   });
 }
 
+//关闭编辑框
 function closeDialog() {
   dialogShow.value = false;
 }
 
+//验证规则
 const rules = reactive({
   loginName: [
     { required: true, message: "请输入登录名", trigger: "blur" },

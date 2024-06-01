@@ -42,6 +42,7 @@ const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);
 
+//新增账号提交
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
@@ -58,10 +59,12 @@ function handleSubmit() {
   });
 }
 
+//关闭新增框
 function closeDialog() {
   dialogShow.value = false;
 }
 
+//验证规则
 const rules = reactive({
   loginName: [
     { required: true, message: "请输入登录名", trigger: "blur" },

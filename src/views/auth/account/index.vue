@@ -119,7 +119,6 @@ import { getAccountPage, updateStatus } from "@/api/auth/account";
 import {
   AccountQuery,
   AccountModel,
-  AccountPageResult,
   AccountUpdateStatusModel,
 } from "@/api/auth/account/model";
 import addAccount from "./components/add.vue";
@@ -137,6 +136,7 @@ const accountId = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
 
+//分页查询账号列表
 function handleQuery() {
   loading.value = true;
   getAccountPage(queryParams)
@@ -149,21 +149,25 @@ function handleQuery() {
     });
 }
 
+//调整分页大小时调用查询
 const handleSizeChange = (val: number) => {
   queryParams.pageSize = val;
   queryParams.pageNum = 1;
   handleQuery();
 };
 
+//显示新增账号框
 function handleAdd() {
   dialogAddRef.value.dialogShow = true;
 }
 
+//显示编辑账号框
 function handleEdit(row: AccountModel) {
   accountId.value = row.id ?? "";
   dialogEditRef.value.dialogShow = true;
 }
 
+//更新账号的状态
 function handleUpdateStatus(row: AccountModel, status: number) {
   var data: AccountUpdateStatusModel = {
     id: row.id,
@@ -176,11 +180,13 @@ function handleUpdateStatus(row: AccountModel, status: number) {
     .finally(() => {});
 }
 
+//双击行显示编辑账号
 function handleDbClick(row: AccountModel, column: any, event: any) {
   accountId.value = row.id ?? "";
   dialogEditRef.value.dialogShow = true;
 }
 
+//返回账号状态显示的tag类型
 function getTagType(row: AccountModel) {
   if (row.status == 1) {
     return "success";
