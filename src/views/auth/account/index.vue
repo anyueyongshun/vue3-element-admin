@@ -63,6 +63,7 @@
         <el-table-column prop="addTime" label="创建时间" />
         <el-table-column prop="lastLoginTime" label="上次登录时间" />
         <el-table-column prop="lastLoginIP" label="上次登录IP" />
+        <el-table-column prop="memo" label="备注" />
         <el-table-column fixed="right" label="操作" width="190">
           <template #default="scope">
             <el-button

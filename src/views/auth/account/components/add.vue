@@ -24,6 +24,13 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="备注" prop="memo">
+            <el-input v-model="formData.memo" placeholder="请输入备注" />
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
     <template #footer>
       <el-button type="primary" @click="handleSubmit">确 定</el-button>
