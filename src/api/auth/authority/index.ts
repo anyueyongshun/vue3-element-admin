@@ -1,29 +1,33 @@
 import request from "@/utils/request";
 import { AxiosPromise } from "axios";
 import { Tree } from "./model";
-import { RoleAddModel, RoleEditModel, RoleUpdateStatusModel } from "./model";
+import {
+  AuthorityAddModel,
+  AuthorityEditModel,
+  AuthorityUpdateStatusModel,
+} from "./model";
 
 //加载权限树
 export function loadTree() {
   return request<any, Tree>({
-    url: "/role/GetRoleTree",
+    url: "/authority/GetAuthorityTree",
     method: "get",
   });
 }
 
 //新增权限
-export function addAccount(data: RoleAddModel): AxiosPromise<boolean> {
+export function addAuthority(data: AuthorityAddModel): AxiosPromise<boolean> {
   return request({
-    url: "/role/add",
+    url: "/authority/add",
     method: "post",
     data: data,
   });
 }
 
 //编辑权限
-export function editAccount(data: RoleEditModel): AxiosPromise<boolean> {
+export function editAuthority(data: AuthorityEditModel): AxiosPromise<boolean> {
   return request({
-    url: "/role/update",
+    url: "/authority/update",
     method: "post",
     data: data,
   });
@@ -31,10 +35,10 @@ export function editAccount(data: RoleEditModel): AxiosPromise<boolean> {
 
 //更新权限状态
 export function updateStatus(
-  data: RoleUpdateStatusModel
+  data: AuthorityUpdateStatusModel
 ): AxiosPromise<boolean> {
   return request({
-    url: "/role/UpdateStatus",
+    url: "/authority/UpdateStatus",
     method: "post",
     data: data,
   });
@@ -42,8 +46,8 @@ export function updateStatus(
 
 //取权限明细
 export function getDetail(id: string) {
-  return request<any, RoleEditModel>({
-    url: "/role/GetById?id=" + id,
+  return request<any, AuthorityEditModel>({
+    url: "/authority/GetById?id=" + id,
     method: "get",
   });
 }
