@@ -28,7 +28,7 @@
             <i-ep-search />查询
           </el-button>
           <el-button type="success" @click="handleAdd()">
-            <el-icon><DocumentAdd /></el-icon>新增
+            <i-ep-plus />新增
           </el-button>
         </el-form-item>
       </el-form>

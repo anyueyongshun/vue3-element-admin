@@ -38,6 +38,3 @@ export interface AccountUpdateStatusModel {
   id?: string;
   status?: number;
 }
-
-//
-//export type AccountPageResult = PageResult<AccountModel[]>;
