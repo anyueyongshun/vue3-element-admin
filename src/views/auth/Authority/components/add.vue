@@ -15,6 +15,13 @@
       </el-row>
       <el-row>
         <el-col :span="24">
+          <el-form-item label="权限码" prop="code">
+            <el-input v-model="formData.code" placeholder="请输入权限码" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="启用权限" prop="IsAuth">
             <el-switch v-model="formData.isAuth" />
           </el-form-item>
@@ -87,6 +94,16 @@ function closeDialog() {
 const rules = reactive({
   name: [
     { required: true, message: "请输入名称", trigger: "blur" },
+    {
+      required: true,
+      min: 1,
+      max: 20,
+      message: "请输入1-20个字符",
+      trigger: ["blur", "change"],
+    },
+  ],
+  code: [
+    { required: true, message: "请输入编码", trigger: "blur" },
     {
       required: true,
       min: 1,
