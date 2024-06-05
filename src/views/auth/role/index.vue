@@ -46,32 +46,42 @@
               >
                 <i-ep-edit />编辑
               </el-button>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleDelete(node, data)"
+              <el-popconfirm
+                title="确认要删除?"
+                @confirm="handleDelete(node, data)"
               >
-                <i-ep-delete />删除
-              </el-button>
+                <template #reference>
+                  <el-button type="primary" size="small" link>
+                    <i-ep-delete />删除
+                  </el-button>
+                </template>
+              </el-popconfirm>
             </span>
           </span>
         </template>
       </el-tree>
     </el-card>
   </div>
+  <addRole
+    ref="dialogAddRef"
+    @handle-query-event="handleLoadTree"
+    v-model:pId="parentId"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { loadTree } from "@/api/auth/role/index";
-import { Tree } from "@/api/auth/role/model";
+import { loadTree, updateStatus } from "@/api/auth/role/index";
+import { Tree, RoleUpdateStatusModel } from "@/api/auth/role/model";
+import addRole from "./components/add.vue";
+import editRole from "./components/edit.vue";
+import { stringify } from "querystring";
 
 const filterText = ref("");
+const parentId = ref("");
+const dialogAddRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<Tree[]>([]);
-
-//const datas: Tree[] = [];
 
 const props = {
   label: "name",
@@ -89,6 +99,7 @@ const handleCheckChange = (
 function handleLoadTree() {
   loadTree()
     .then((data) => {
+      datas.length = 0;
       datas.push(data);
     })
     .finally(() => {});
@@ -99,11 +110,22 @@ const filterNode = (value: any, data: any) => {
   return data.name?.includes(value);
 };
 
-function handleAdd(node: Node, data: Tree) {}
+function handleAdd(node: Node, data: Tree) {
+  parentId.value = data.id ?? "";
+  dialogAddRef.value.dialogShow = true;
+}
 
 function handleEdit(node: Node, data: Tree) {}
 
-function handleDelete(node: Node, data: Tree) {}
+function handleDelete(node: Node, data: Tree) {
+  var model: RoleUpdateStatusModel = { id: data.id, status: 3 };
+  updateStatus(model)
+    .then((data) => {
+      ElMessage.success("操作成功");
+      handleLoadTree();
+    })
+    .finally(() => {});
+}
 
 watch(filterText, (val) => {
   treeRef.value!.filter(val);

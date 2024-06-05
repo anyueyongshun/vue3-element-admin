@@ -12,7 +12,7 @@ export function loadTree() {
 }
 
 //新增角色
-export function addAccount(data: RoleAddModel): AxiosPromise<boolean> {
+export function addRole(data: RoleAddModel): AxiosPromise<boolean> {
   return request({
     url: "/role/add",
     method: "post",
@@ -21,7 +21,7 @@ export function addAccount(data: RoleAddModel): AxiosPromise<boolean> {
 }
 
 //编辑角色
-export function editAccount(data: RoleEditModel): AxiosPromise<boolean> {
+export function editRole(data: RoleEditModel): AxiosPromise<boolean> {
   return request({
     url: "/role/update",
     method: "post",
