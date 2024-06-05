@@ -47,7 +47,7 @@ import { ref, reactive, onMounted } from "vue";
 import { addRole } from "@/api/auth/role";
 import { RoleAddModel } from "@/api/auth/role/model";
 
-const formData = reactive<RoleAddModel>({});
+const formData = reactive<RoleAddModel>({ order: 1 });
 const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);

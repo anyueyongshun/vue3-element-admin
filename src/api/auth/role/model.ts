@@ -22,6 +22,7 @@ export interface RoleEditModel {
   order?: number;
   isAdmin?: boolean;
   memo?: string;
+  status?: number;
 }
 
 //更新角色状态用的模型

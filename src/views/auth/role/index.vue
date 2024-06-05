@@ -1,13 +1,18 @@
 <template>
   <div class="app-container">
     <div class="search-container">
-      <el-form>
+      <el-form :inline="true">
         <el-form-item label="名称">
           <el-input
             v-model="filterText"
             style="width: 240px"
             placeholder="请输入名称"
           />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="handleLoadTree">
+            <i-ep-refresh />刷新</el-button
+          >
         </el-form-item>
       </el-form>
     </div>
@@ -67,6 +72,11 @@
     @handle-query-event="handleLoadTree"
     v-model:pId="parentId"
   />
+  <editRole
+    ref="dialogEditRef"
+    @handle-query-event="handleLoadTree"
+    v-model:id="roleId"
+  />
 </template>
 
 <script setup lang="ts">
@@ -79,7 +89,9 @@ import { stringify } from "querystring";
 
 const filterText = ref("");
 const parentId = ref("");
+const roleId = ref("");
 const dialogAddRef = ref();
+const dialogEditRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<Tree[]>([]);
 
@@ -88,6 +100,7 @@ const props = {
   children: "children",
 };
 
+//CheckChange
 const handleCheckChange = (
   data: Tree,
   checked: boolean,
@@ -96,6 +109,7 @@ const handleCheckChange = (
   console.log(data, checked, indeterminate);
 };
 
+//加载角色树
 function handleLoadTree() {
   loadTree()
     .then((data) => {
@@ -110,13 +124,19 @@ const filterNode = (value: any, data: any) => {
   return data.name?.includes(value);
 };
 
+//新增角色
 function handleAdd(node: Node, data: Tree) {
   parentId.value = data.id ?? "";
   dialogAddRef.value.dialogShow = true;
 }
 
-function handleEdit(node: Node, data: Tree) {}
+//编辑角色
+function handleEdit(node: Node, data: Tree) {
+  roleId.value = data.id ?? "";
+  dialogEditRef.value.dialogShow = true;
+}
 
+//删除角色
 function handleDelete(node: Node, data: Tree) {
   var model: RoleUpdateStatusModel = { id: data.id, status: 3 };
   updateStatus(model)
