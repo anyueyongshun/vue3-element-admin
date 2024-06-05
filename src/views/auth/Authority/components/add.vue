@@ -54,7 +54,7 @@ import { ref, reactive, onMounted } from "vue";
 import { addAuthority } from "@/api/auth/authority";
 import { AuthorityAddModel } from "@/api/auth/authority/model";
 
-const formData = reactive<AuthorityAddModel>({ order: 1 });
+const formData = reactive<AuthorityAddModel>({ order: 1, isAuth: true });
 const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);

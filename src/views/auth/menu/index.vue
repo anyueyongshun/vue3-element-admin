@@ -95,7 +95,7 @@ const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<Tree[]>([]);
 
 const props = {
-  label: "name",
+  label: "title",
   children: "children",
 };
 

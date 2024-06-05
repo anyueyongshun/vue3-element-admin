@@ -31,7 +31,7 @@
         <template #default="{ node, data }">
           <span class="custom-tree-node">
             <span>
-              <el-icon v-if="data.isAuth"><UserFilled /></el-icon>
+              <el-icon v-if="!data.isAuth"><Remove /></el-icon>
               {{ node.label }}
             </span>
             <span>

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogShow" width="400px" title="编辑菜单">
+  <el-dialog v-model="dialogShow" width="600px" title="编辑菜单">
     <el-form
       ref="dataFormRef"
       :model="formData"
