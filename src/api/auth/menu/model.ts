@@ -36,6 +36,7 @@ export interface MenuEditModel {
   target?: string;
   order?: number;
   memo?: string;
+  status?: number;
 }
 
 //更新菜单状态用的模型

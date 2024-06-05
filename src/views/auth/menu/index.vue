@@ -31,7 +31,7 @@
         <template #default="{ node, data }">
           <span class="custom-tree-node">
             <span>
-              <el-icon v-if="data.isAuth"><UserFilled /></el-icon>
+              <el-icon><UserFilled /></el-icon>
               {{ node.label }}
             </span>
             <span>
@@ -67,28 +67,28 @@
       </el-tree>
     </el-card>
   </div>
-  <addAuthority
+  <addMenu
     ref="dialogAddRef"
     @handle-query-event="handleLoadTree"
     v-model:pId="parentId"
   />
-  <editAuthority
+  <editMenu
     ref="dialogEditRef"
     @handle-query-event="handleLoadTree"
-    v-model:id="authorityId"
+    v-model:id="menuId"
   />
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { loadTree, updateStatus } from "@/api/auth/authority/index";
-import { Tree, AuthorityUpdateStatusModel } from "@/api/auth/authority/model";
-import addAuthority from "./components/add.vue";
-import editAuthority from "./components/edit.vue";
+import { loadTree, updateStatus } from "@/api/auth/menu/index";
+import { Tree, MenuUpdateStatusModel } from "@/api/auth/menu/model";
+import addMenu from "./components/add.vue";
+import editMenu from "./components/edit.vue";
 
 const filterText = ref("");
 const parentId = ref("");
-const authorityId = ref("");
+const menuId = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
@@ -108,7 +108,7 @@ const handleCheckChange = (
   console.log(data, checked, indeterminate);
 };
 
-//加载权限树
+//加载菜单树
 function handleLoadTree() {
   loadTree()
     .then((data) => {
@@ -123,21 +123,21 @@ const filterNode = (value: any, data: any) => {
   return data.name?.includes(value);
 };
 
-//新增权限
+//新增菜单
 function handleAdd(node: Node, data: Tree) {
   parentId.value = data.id ?? "";
   dialogAddRef.value.dialogShow = true;
 }
 
-//编辑权限
+//编辑菜单
 function handleEdit(node: Node, data: Tree) {
-  authorityId.value = data.id ?? "";
+  menuId.value = data.id ?? "";
   dialogEditRef.value.dialogShow = true;
 }
 
-//删除权限
+//删除菜单
 function handleDelete(node: Node, data: Tree) {
-  var model: AuthorityUpdateStatusModel = { id: data.id, status: 3 };
+  var model: MenuUpdateStatusModel = { id: data.id, status: 3 };
   updateStatus(model)
     .then((data) => {
       ElMessage.success("操作成功");
