@@ -67,28 +67,28 @@
       </el-tree>
     </el-card>
   </div>
-  <addRole
+  <addAuthority
     ref="dialogAddRef"
     @handle-query-event="handleLoadTree"
     v-model:pId="parentId"
   />
-  <editRole
+  <editAuthority
     ref="dialogEditRef"
     @handle-query-event="handleLoadTree"
-    v-model:id="roleId"
+    v-model:id="authorityId"
   />
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { loadTree, updateStatus } from "@/api/auth/role/index";
-import { Tree, RoleUpdateStatusModel } from "@/api/auth/role/model";
-import addRole from "./components/add.vue";
-import editRole from "./components/edit.vue";
+import { loadTree, updateStatus } from "@/api/auth/authority/index";
+import { Tree, AuthorityUpdateStatusModel } from "@/api/auth/authority/model";
+import addAuthority from "./components/add.vue";
+import editAuthority from "./components/edit.vue";
 
 const filterText = ref("");
 const parentId = ref("");
-const roleId = ref("");
+const authorityId = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
@@ -108,7 +108,7 @@ const handleCheckChange = (
   console.log(data, checked, indeterminate);
 };
 
-//加载角色树
+//加载权限树
 function handleLoadTree() {
   loadTree()
     .then((data) => {
@@ -123,21 +123,21 @@ const filterNode = (value: any, data: any) => {
   return data.name?.includes(value);
 };
 
-//新增角色
+//新增权限
 function handleAdd(node: Node, data: Tree) {
   parentId.value = data.id ?? "";
   dialogAddRef.value.dialogShow = true;
 }
 
-//编辑角色
+//编辑权限
 function handleEdit(node: Node, data: Tree) {
-  roleId.value = data.id ?? "";
+  authorityId.value = data.id ?? "";
   dialogEditRef.value.dialogShow = true;
 }
 
-//删除角色
+//删除权限
 function handleDelete(node: Node, data: Tree) {
-  var model: RoleUpdateStatusModel = { id: data.id, status: 3 };
+  var model: AuthorityUpdateStatusModel = { id: data.id, status: 3 };
   updateStatus(model)
     .then((data) => {
       ElMessage.success("操作成功");

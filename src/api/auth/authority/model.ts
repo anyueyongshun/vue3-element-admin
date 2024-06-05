@@ -3,7 +3,7 @@ export interface Tree {
   id?: string;
   name?: string;
   children?: Tree[];
-  IsAuth?: boolean;
+  isAuth?: boolean;
 }
 
 //新增权限用的模型
@@ -11,7 +11,7 @@ export interface AuthorityAddModel {
   parentId?: string;
   name?: string;
   order?: number;
-  IsAuth?: boolean;
+  isAuth?: boolean;
   memo?: string;
 }
 
@@ -20,8 +20,9 @@ export interface AuthorityEditModel {
   id?: string;
   name?: string;
   order?: number;
-  IsAuth?: boolean;
+  isAuth?: boolean;
   memo?: string;
+  status?: string;
 }
 
 //更新权限状态用的模型
