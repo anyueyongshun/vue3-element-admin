@@ -26,7 +26,7 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="URL" prop="url">
-            <el-input v-model="formData.url" placeholder="请输入url" />
+            <el-input v-model="formData.url" placeholder="请输入URL" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -121,6 +121,36 @@ const rules = reactive({
       min: 1,
       max: 20,
       message: "请输入1-20个字符",
+      trigger: ["blur", "change"],
+    },
+  ],
+  title: [
+    { required: true, message: "请输入标题", trigger: "blur" },
+    {
+      required: true,
+      min: 1,
+      max: 20,
+      message: "请输入1-20个字符",
+      trigger: ["blur", "change"],
+    },
+  ],
+  routePath: [
+    { required: true, message: "请输入路由", trigger: "blur" },
+    {
+      required: true,
+      min: 1,
+      max: 50,
+      message: "请输入1-50个字符",
+      trigger: ["blur", "change"],
+    },
+  ],
+  url: [
+    { required: true, message: "请输入URL", trigger: "blur" },
+    {
+      required: true,
+      min: 1,
+      max: 100,
+      message: "请输入1-100个字符",
       trigger: ["blur", "change"],
     },
   ],
