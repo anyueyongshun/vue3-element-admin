@@ -112,6 +112,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
             enabledCollections: ["ep"],
           }),
         ],
+        directoryAsNamespace: false,
         // 指定自定义组件位置(默认:src/components)
         dirs: ["src/components", "src/**/components"],
         // 指定自动导入组件TS类型声明文件路径 (false:关闭自动生成)

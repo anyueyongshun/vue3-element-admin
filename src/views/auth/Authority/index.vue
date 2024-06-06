@@ -83,8 +83,8 @@
 import { ref, reactive, onMounted } from "vue";
 import { loadTree, updateStatus } from "@/api/auth/authority/index";
 import { Tree, AuthorityUpdateStatusModel } from "@/api/auth/authority/model";
-import addAuthority from "./components/add.vue";
-import editAuthority from "./components/edit.vue";
+import addAuthority from "./components/addAuth.vue";
+import editAuthority from "./components/editAuth.vue";
 
 const filterText = ref("");
 const parentId = ref("");

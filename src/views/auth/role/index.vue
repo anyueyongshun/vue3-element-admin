@@ -83,8 +83,8 @@
 import { ref, reactive, onMounted } from "vue";
 import { loadTree, updateStatus } from "@/api/auth/role/index";
 import { Tree, RoleUpdateStatusModel } from "@/api/auth/role/model";
-import addRole from "./components/add.vue";
-import editRole from "./components/edit.vue";
+import addRole from "./components/addRole.vue";
+import editRole from "./components/editRole.vue";
 
 const filterText = ref("");
 const parentId = ref("");

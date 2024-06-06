@@ -83,8 +83,8 @@
 import { ref, reactive, onMounted } from "vue";
 import { loadTree, updateStatus } from "@/api/auth/menu/index";
 import { Tree, MenuUpdateStatusModel } from "@/api/auth/menu/model";
-import addMenu from "./components/add.vue";
-import editMenu from "./components/edit.vue";
+import addMenu from "./components/addMenu.vue";
+import editMenu from "./components/editMenu.vue";
 
 const filterText = ref("");
 const parentId = ref("");

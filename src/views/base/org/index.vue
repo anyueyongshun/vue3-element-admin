@@ -83,8 +83,8 @@
 import { ref, reactive, onMounted } from "vue";
 import { loadTree, updateStatus } from "@/api/base/org/index";
 import { Tree, OrgUpdateStatusModel } from "@/api/base/org/model";
-import addOrg from "./components/add.vue";
-import editOrg from "./components/edit.vue";
+import addOrg from "./components/addOrg.vue";
+import editOrg from "./components/editOrg.vue";
 
 const filterText = ref("");
 const parentId = ref("");
