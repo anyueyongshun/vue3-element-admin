@@ -8,6 +8,7 @@ export interface Tree {
   isShow?: boolean;
   icon?: string;
   children?: Tree[];
+  parentId?: string;
 }
 
 //新增菜单用的模型

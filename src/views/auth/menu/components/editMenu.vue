@@ -173,6 +173,7 @@ const rules = reactive({
       trigger: ["blur", "change"],
     },
   ],
+  target: [{ required: true, message: "请选择打开方式", trigger: "blur" }],
   memo: [
     {
       required: false,

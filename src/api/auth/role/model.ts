@@ -4,6 +4,7 @@ export interface Tree {
   name?: string;
   children?: Tree[];
   isAdmin?: boolean;
+  parentId?: string;
 }
 
 //新增角色用的模型

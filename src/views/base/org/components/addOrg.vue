@@ -102,6 +102,7 @@ const rules = reactive({
       trigger: ["blur", "change"],
     },
   ],
+  orgType: [{ required: true, message: "请选择机构类型", trigger: "blur" }],
   memo: [
     {
       required: false,

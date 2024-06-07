@@ -54,6 +54,7 @@
               <el-popconfirm
                 title="确认要删除?"
                 @confirm="handleDelete(node, data)"
+                v-if="data.parentId != '00000000-0000-0000-0000-000000000000'"
               >
                 <template #reference>
                   <el-button type="primary" size="small" link>

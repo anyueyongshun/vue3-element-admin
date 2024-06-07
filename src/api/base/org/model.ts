@@ -4,6 +4,7 @@ export interface Tree {
   name?: string;
   children?: Tree[];
   orgType?: number;
+  parentId?: string;
 }
 
 //新增组织机构用的模型

@@ -5,6 +5,7 @@ export interface Tree {
   children?: Tree[];
   isAuth?: boolean;
   code?: string;
+  parentId?: string;
 }
 
 //新增权限用的模型
