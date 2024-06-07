@@ -29,12 +29,12 @@
         style="width: 100%"
         @row-dblclick="handleDbClick"
       >
-        <el-table-column type="index" width="70" align="center" label="index" />
+        <el-table-column type="index" width="70" align="center" label="序号" />
         <el-table-column prop="name" label="名称" />
         <el-table-column prop="order" label="排序" />
         <el-table-column prop="status" label="状态" />
         <el-table-column prop="memo" label="备注" />
-        <el-table-column fixed="right" label="Operations" width="180">
+        <el-table-column fixed="right" label="操作" width="180">
           <template #default="scope">
             <el-button
               type="success"
