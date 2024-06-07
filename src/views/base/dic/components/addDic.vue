@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogShow" width="400px" title="新增组织机构">
+  <el-dialog v-model="dialogShow" width="400px" title="新增字典">
     <el-form
       ref="dataFormRef"
       :model="formData"
@@ -15,22 +15,22 @@
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-form-item label="类型" prop="orgType">
-            <el-select v-model="formData.orgType" placeholder="请选择类型">
-              <el-option
-                v-for="item in orgTypeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
+          <el-form-item label="排序" prop="order">
+            <el-input-number v-model="formData.order" :min="1" :max="100" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-form-item label="排序" prop="order">
-            <el-input-number v-model="formData.order" :min="1" :max="100" />
+          <el-form-item label="状态" prop="status">
+            <el-select v-model="formData.status" placeholder="请选择状态">
+              <el-option
+                v-for="item in statusOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
           </el-form-item>
         </el-col>
       </el-row>
@@ -51,16 +51,16 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { addOrg } from "@/api/base/org";
-import { OrgAddModel } from "@/api/base/org/model";
+import { addDic } from "@/api/base/dic";
+import { DicAddModel } from "@/api/base/dic/model";
 
-const formData = reactive<OrgAddModel>({ order: 1 });
+const formData = reactive<DicAddModel>({ order: 1 });
 const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);
 
 const props = defineProps({
-  pId: {
+  groupId: {
     type: String,
     default: () => {
       return "";
@@ -68,11 +68,11 @@ const props = defineProps({
   },
 });
 
-//新增组织机构提交
+//新增字典提交
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
-      addOrg(formData)
+      addDic(formData)
         .then((data) => {
           if (data) {
             ElMessage.success("新增成功");
@@ -102,7 +102,7 @@ const rules = reactive({
       trigger: ["blur", "change"],
     },
   ],
-  orgType: [{ required: true, message: "请选择机构类型", trigger: "blur" }],
+  DicType: [{ required: true, message: "请选择机构类型", trigger: "blur" }],
   memo: [
     {
       required: false,
@@ -114,23 +114,27 @@ const rules = reactive({
   ],
 });
 
-const orgTypeOptions = [
+const statusOptions = [
   {
     value: 1,
-    label: "公司",
+    label: "启用",
   },
   {
     value: 2,
-    label: "部门",
+    label: "禁用",
+  },
+  {
+    value: 3,
+    label: "删除",
   },
 ];
 
 defineExpose({ dialogShow });
 
 watch(
-  () => props.pId,
+  () => props.groupId,
   (newVal: string) => {
-    formData.parentId = props.pId;
+    formData.dicGroupId = props.groupId;
   }
 );
 

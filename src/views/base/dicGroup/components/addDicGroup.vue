@@ -59,15 +59,6 @@ const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);
 
-const props = defineProps({
-  pId: {
-    type: String,
-    default: () => {
-      return "";
-    },
-  },
-});
-
 //新增字典组提交
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
@@ -130,13 +121,6 @@ const statusOptions = [
 ];
 
 defineExpose({ dialogShow });
-
-watch(
-  () => props.pId,
-  (newVal: string) => {
-    formData.parentId = props.pId;
-  }
-);
 
 onMounted(() => {});
 </script>

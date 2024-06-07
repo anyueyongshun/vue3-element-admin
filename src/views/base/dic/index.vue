@@ -1,168 +1,167 @@
 <template>
   <div class="app-container">
     <div class="search-container">
-      <el-form :inline="true">
+      <el-form :inline="true" :model="queryParams">
         <el-form-item label="名称">
           <el-input
-            v-model="filterText"
+            v-model="queryParams.Name"
             style="width: 240px"
             placeholder="请输入名称"
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleLoadTree">
-            <i-ep-refresh />刷新</el-button
-          >
+          <el-button type="primary" @click="handleQuery()">
+            <i-ep-search />查询
+          </el-button>
+          <el-button type="success" @click="handleAdd()">
+            <i-ep-plus />新增
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
     <el-card class="table-container">
-      <el-tree
-        node-key="id"
-        :props="props"
+      <el-table
+        border
+        v-loading="loading"
+        highlight-current-row
         :data="datas"
-        show-checkbox
-        default-expand-all
-        :highlight-current="true"
-        :expand-on-click-node="false"
-        :filter-node-method="filterNode"
-        @check-change="handleCheckChange"
+        stripe
+        style="width: 100%"
+        @row-dblclick="handleDbClick"
       >
-        <template #default="{ node, data }">
-          <span class="custom-tree-node">
-            <span>
-              <el-icon v-if="data.isAdmin"><UserFilled /></el-icon>
-              {{ node.label }}
-            </span>
-            <span>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleAdd(node, data)"
-              >
-                <i-ep-plus />新增
-              </el-button>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleEdit(node, data)"
-              >
-                <i-ep-edit />编辑
-              </el-button>
-              <el-popconfirm
-                title="确认要删除?"
-                @confirm="handleDelete(node, data)"
-                v-if="data.parentId != '00000000-0000-0000-0000-000000000000'"
-              >
-                <template #reference>
-                  <el-button type="primary" size="small" link>
-                    <i-ep-delete />删除
-                  </el-button>
-                </template>
-              </el-popconfirm>
-            </span>
-          </span>
-        </template>
-      </el-tree>
+        <el-table-column type="index" width="70" align="center" label="index" />
+        <el-table-column prop="name" label="名称" />
+        <el-table-column prop="order" label="排序" />
+        <el-table-column prop="status" label="状态" />
+        <el-table-column prop="memo" label="备注" />
+        <el-table-column fixed="right" label="Operations" width="180">
+          <template #default="scope">
+            <el-button
+              type="success"
+              size="small"
+              @click="handleEdit(scope.row)"
+            >
+              <el-icon><Document /></el-icon>
+              编辑
+            </el-button>
+            <el-button
+              type="warning"
+              size="small"
+              @click="handleDelete(scope.row)"
+            >
+              <el-icon>
+                <Delete />
+              </el-icon>
+              删除
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <template #footer>
+        <el-pagination
+          background
+          v-if="total > 0"
+          v-model:total="total"
+          v-model:current-page="queryParams.pageNum"
+          v-model:page-size="queryParams.pageSize"
+          @current-change="handleQuery"
+          @size-change="handleSizeChange"
+          :page-sizes="[10, 15, 20, 25, 30, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+        />
+      </template>
     </el-card>
   </div>
-  <addOrg
+  <addDic
     ref="dialogAddRef"
-    @handle-query-event="handleLoadTree"
-    v-model:pId="parentId"
+    @handle-query-event="handleQuery"
+    v-model:pId="dicGroupId"
   />
-  <editOrg
+  <editDic
     ref="dialogEditRef"
-    @handle-query-event="handleLoadTree"
-    v-model:id="OrgId"
+    @handle-query-event="handleQuery"
+    v-model:groupId="dicId"
   />
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { loadTree, updateStatus } from "@/api/base/org/index";
-import { Tree, OrgUpdateStatusModel } from "@/api/base/org/model";
-import addOrg from "./components/addOrg.vue";
-import editOrg from "./components/editOrg.vue";
+import { getDicGroupPage, updateStatus } from "@/api/base/dic/index";
+import {
+  DicModel,
+  DicUpdateStatusModel,
+  QueryModel,
+} from "@/api/base/dic/model";
+import addDic from "./components/addDic.vue";
+import editDic from "./components/editDic.vue";
 
-const filterText = ref("");
-const parentId = ref("");
-const OrgId = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
-const treeRef = ref<InstanceType<typeof ElTree>>();
-const datas = reactive<Tree[]>([]);
+const dicGroupId = ref("");
+const dicId = ref("");
 
-const props = {
-  label: "name",
-  children: "children",
-};
+const loading = ref(false);
+const total = ref(0);
+const queryParams = reactive<QueryModel>({
+  pageNum: 1,
+  pageSize: 10,
+});
+const datas = ref<DicModel[]>([]);
 
-//CheckChange
-const handleCheckChange = (
-  data: Tree,
-  checked: boolean,
-  indeterminate: boolean
-) => {
-  console.log(data, checked, indeterminate);
-};
-
-//加载组织机构树
-function handleLoadTree() {
-  loadTree()
+//加载字典列表
+function handleQuery() {
+  loading.value = true;
+  getDicGroupPage(queryParams)
     .then((data) => {
-      datas.length = 0;
-      datas.push(data);
+      datas.value = data.list;
+      total.value = data.total;
     })
-    .finally(() => {});
+    .finally(() => {
+      loading.value = false;
+    });
 }
 
-const filterNode = (value: any, data: any) => {
-  if (!value) return true;
-  return data.name?.includes(value);
+//调整页大小
+const handleSizeChange = (val: number) => {
+  queryParams.pageSize = val;
+  queryParams.pageNum = 1;
+  handleQuery();
 };
 
-//新增组织机构
-function handleAdd(node: Node, data: Tree) {
-  parentId.value = data.id ?? "";
-  dialogAddRef.value.dialogShow = true;
-}
-
-//编辑组织机构
-function handleEdit(node: Node, data: Tree) {
-  OrgId.value = data.id ?? "";
+//编辑字典
+function handleDbClick(row: DicModel, column: any, event: any) {
+  dicId.value = row.id ?? "";
   dialogEditRef.value.dialogShow = true;
 }
 
-//删除组织机构
-function handleDelete(node: Node, data: Tree) {
-  var model: OrgUpdateStatusModel = { id: data.id, status: 3 };
+//新增字典
+function handleAdd() {
+  //parentId.value = data.id ?? "";
+  dialogAddRef.value.dialogShow = true;
+}
+
+//编辑字典
+function handleEdit(row: DicModel) {
+  dicId.value = row.id ?? "";
+  dialogEditRef.value.dialogShow = true;
+}
+
+//删除字典
+function handleDelete(row: DicModel) {
+  var model: DicUpdateStatusModel = { id: row.id, status: 3 };
   updateStatus(model)
     .then((data) => {
       ElMessage.success("操作成功");
-      handleLoadTree();
+      handleQuery();
     })
     .finally(() => {});
 }
 
-watch(filterText, (val) => {
+/* watch(filterText, (val) => {
   treeRef.value!.filter(val);
-});
+}); */
 
 onMounted(() => {
-  handleLoadTree();
+  handleQuery();
 });
 </script>
-
-<style>
-.custom-tree-node {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 8px;
-  font-size: 14px;
-}
-</style>

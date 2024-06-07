@@ -4,7 +4,7 @@
       <el-form :inline="true" :model="queryParams">
         <el-form-item label="名称">
           <el-input
-            v-model="queryParams.name"
+            v-model="queryParams.Name"
             style="width: 240px"
             placeholder="请输入名称"
           />
@@ -107,7 +107,7 @@ const datas = ref<DicGroupModel[]>([]);
 function handleQuery() {
   loading.value = true;
   getDicGroupPage(queryParams)
-    .then(({ data }) => {
+    .then((data) => {
       datas.value = data.list;
       total.value = data.total;
     })

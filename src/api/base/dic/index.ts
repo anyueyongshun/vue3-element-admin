@@ -1,49 +1,55 @@
 import request from "@/utils/request";
 import { AxiosPromise } from "axios";
-import { Tree } from "./model";
-import { OrgAddModel, OrgEditModel, OrgUpdateStatusModel } from "./model";
+import { DicModel } from "./model";
+import {
+  DicAddModel,
+  DicEditModel,
+  DicUpdateStatusModel,
+  QueryModel,
+} from "./model";
 
-//加载组织机构树
-export function loadTree() {
-  return request<any, Tree>({
-    url: "/Organization/GetOrgTree",
+//加载字典列表
+export function getDicGroupPage(queryParams: QueryModel) {
+  return request<any, PageResult<DicModel[]>>({
+    url: "/Dic/PageList",
     method: "get",
+    params: queryParams,
   });
 }
 
-//新增组织机构
-export function addOrg(data: OrgAddModel): AxiosPromise<boolean> {
+//新增字典
+export function addDic(data: DicAddModel): AxiosPromise<boolean> {
   return request({
-    url: "/Organization/add",
+    url: "/Dic/add",
     method: "post",
     data: data,
   });
 }
 
-//编辑组织机构
-export function editOrg(data: OrgEditModel): AxiosPromise<boolean> {
+//编辑字典
+export function editDic(data: DicEditModel): AxiosPromise<boolean> {
   return request({
-    url: "/Organization/update",
+    url: "/Dic/update",
     method: "post",
     data: data,
   });
 }
 
-//更新组织机构状态
+//更新字典状态
 export function updateStatus(
-  data: OrgUpdateStatusModel
+  data: DicUpdateStatusModel
 ): AxiosPromise<boolean> {
   return request({
-    url: "/Organization/UpdateStatus",
+    url: "/Dic/UpdateStatus",
     method: "post",
     data: data,
   });
 }
 
-//取组织机构明细
+//取字典明细
 export function getDetail(id: string) {
-  return request<any, OrgEditModel>({
-    url: "/Organization/GetById?id=" + id,
+  return request<any, DicEditModel>({
+    url: "/Dic/GetById?id=" + id,
     method: "get",
   });
 }

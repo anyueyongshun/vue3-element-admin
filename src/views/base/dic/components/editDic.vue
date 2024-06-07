@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogShow" width="400px" title="编辑组织机构">
+  <el-dialog v-model="dialogShow" width="400px" title="编辑字典">
     <el-form
       ref="dataFormRef"
       :model="formData"
@@ -10,20 +10,6 @@
         <el-col :span="24">
           <el-form-item label="名称" prop="name">
             <el-input v-model="formData.name" placeholder="请输入名称" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="类型" prop="orgType">
-            <el-select v-model="formData.orgType" placeholder="请选择类型">
-              <el-option
-                v-for="item in orgTypeOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
           </el-form-item>
         </el-col>
       </el-row>
@@ -65,16 +51,16 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { editOrg, getDetail } from "@/api/base/org";
-import { OrgEditModel } from "@/api/base/org/model";
+import { editDic, getDetail } from "@/api/base/dic";
+import { DicEditModel } from "@/api/base/dic/model";
 
-const formData = reactive<OrgEditModel>({});
+const formData = reactive<DicEditModel>({});
 const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);
 
 const props = defineProps({
-  id: {
+  dicId: {
     type: String,
     default: () => {
       return "";
@@ -82,11 +68,11 @@ const props = defineProps({
   },
 });
 
-//新增组织机构提交
+//新增字典提交
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
-      editOrg(formData)
+      editDic(formData)
         .then((data) => {
           if (data) {
             ElMessage.success("编辑成功");
@@ -99,9 +85,9 @@ function handleSubmit() {
   });
 }
 
-//取组织机构详细
+//取字典详细
 function handleGetDetail() {
-  getDetail(props.id).then((data) => {
+  getDetail(props.dicId).then((data) => {
     Object.assign(formData, data);
   });
 }
@@ -123,7 +109,7 @@ const rules = reactive({
       trigger: ["blur", "change"],
     },
   ],
-  orgType: [{ required: true, message: "请选择机构类型", trigger: "blur" }],
+  status: [{ required: true, message: "请选择状态", trigger: "blur" }],
   memo: [
     {
       required: false,
@@ -150,21 +136,10 @@ const statusOptions = [
   },
 ];
 
-const orgTypeOptions = [
-  {
-    value: 1,
-    label: "公司",
-  },
-  {
-    value: 2,
-    label: "部门",
-  },
-];
-
 defineExpose({ dialogShow });
 
 watch(
-  () => props.id,
+  () => props.dicId,
   (newVal: string) => {
     handleGetDetail();
   }
