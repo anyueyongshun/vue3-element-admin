@@ -17,6 +17,14 @@ export function getDicGroupPage(queryParams: QueryModel) {
   });
 }
 
+//加载字典组列表
+export function getDicGroups() {
+  return request<any, PageResult<DicGroupModel[]>>({
+    url: "/DicGroup/GetAll",
+    method: "get",
+  });
+}
+
 //新增字典组
 export function addDicGroup(data: DicGroupAddModel): AxiosPromise<boolean> {
   return request({

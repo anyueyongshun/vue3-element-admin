@@ -1,7 +1,9 @@
 <template>
   <div class="app-container">
     <el-row :gutter="20">
-      <el-col :lg="4" :xs="24" class="mb-[12px]" />
+      <el-col :lg="4" :xs="24" class="mb-[12px]">
+        <groupSelect ref="dicGroupSelect" @handle-query-event="handleQuery" />
+      </el-col>
       <el-col :lg="20" :xs="24">
         <div class="search-container">
           <el-form :inline="true" :model="queryParams">
@@ -121,9 +123,11 @@ import {
 } from "@/api/base/dic/model";
 import addDic from "./components/addDic.vue";
 import editDic from "./components/editDic.vue";
+import groupSelect from "../dicGroup/components/groupSelect.vue";
 
 const dialogAddRef = ref();
 const dialogEditRef = ref();
+const dicGroupSelect = ref();
 const dicGroupId = ref("");
 const dicId = ref("");
 
@@ -138,6 +142,7 @@ const datas = ref<DicModel[]>([]);
 //加载字典列表
 function handleQuery() {
   loading.value = true;
+  queryParams.DicGroupId = dicGroupSelect.value.dicGroupId;
   getDicGroupPage(queryParams)
     .then((data) => {
       datas.value = data.list;

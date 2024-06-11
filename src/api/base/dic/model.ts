@@ -1,5 +1,6 @@
 export interface QueryModel extends PageQuery {
   Name?: string;
+  DicGroupId?: string;
 }
 
 //字典列表的模型
