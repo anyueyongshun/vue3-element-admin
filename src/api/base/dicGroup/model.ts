@@ -8,6 +8,7 @@ export interface DicGroupModel {
   name?: string;
   order?: number;
   status?: number;
+  statusDesc?: number;
   memo?: string;
 }
 

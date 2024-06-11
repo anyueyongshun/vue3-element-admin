@@ -54,7 +54,7 @@ import { ref, reactive, onMounted } from "vue";
 import { addDicGroup } from "@/api/base/dicGroup";
 import { DicGroupAddModel } from "@/api/base/dicGroup/model";
 
-const formData = reactive<DicGroupAddModel>({ order: 1 });
+const formData = reactive<DicGroupAddModel>({ order: 1, status: 1 });
 const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);
@@ -94,6 +94,7 @@ const rules = reactive({
     },
   ],
   status: [{ required: true, message: "请选择状态", trigger: "blur" }],
+  order: [{ required: true, message: "请输入排序", trigger: "blur" }],
   memo: [
     {
       required: false,

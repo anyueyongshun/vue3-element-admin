@@ -176,6 +176,7 @@ function handleUpdateStatus(row: AccountModel, status: number) {
   };
   updateStatus(data)
     .then((data) => {
+      ElMessage.success("操作成功");
       handleQuery();
     })
     .finally(() => {});

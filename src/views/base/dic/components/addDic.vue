@@ -54,7 +54,7 @@ import { ref, reactive, onMounted } from "vue";
 import { addDic } from "@/api/base/dic";
 import { DicAddModel } from "@/api/base/dic/model";
 
-const formData = reactive<DicAddModel>({ order: 1 });
+const formData = reactive<DicAddModel>({ order: 1, status: 1 });
 const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
 const emit = defineEmits(["handleQueryEvent"]);
@@ -102,7 +102,8 @@ const rules = reactive({
       trigger: ["blur", "change"],
     },
   ],
-  DicType: [{ required: true, message: "请选择机构类型", trigger: "blur" }],
+  status: [{ required: true, message: "请选择状态", trigger: "blur" }],
+  order: [{ required: true, message: "请输入排序", trigger: "blur" }],
   memo: [
     {
       required: false,

@@ -110,6 +110,7 @@ const rules = reactive({
     },
   ],
   status: [{ required: true, message: "请选择状态", trigger: "blur" }],
+  order: [{ required: true, message: "请输入排序", trigger: "blur" }],
   memo: [
     {
       required: false,

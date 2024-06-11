@@ -30,8 +30,7 @@
       >
         <template #default="{ node, data }">
           <span class="custom-tree-node">
-            <span>
-              <el-icon v-if="!data.isAuth"><Remove /></el-icon>
+            <span :style="[data.isAuth ? {} : { color: '#c1acac' }]">
               {{ node.label }}
             </span>
             <span>

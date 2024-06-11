@@ -32,28 +32,42 @@
         <el-table-column type="index" width="70" align="center" label="序号" />
         <el-table-column prop="name" label="名称" />
         <el-table-column prop="order" label="排序" />
-        <el-table-column prop="status" label="状态" />
+        <el-table-column label="状态" width="70">
+          <template #default="scope">
+            <el-tag
+              :type="getTagType(scope.row)"
+              effect="dark"
+              round
+              size="small"
+              @click="
+                handleUpdateStatus(scope.row, scope.row.status === 1 ? 2 : 1)
+              "
+              >{{ scope.row.statusDesc }}</el-tag
+            >
+          </template>
+        </el-table-column>
         <el-table-column prop="memo" label="备注" />
         <el-table-column fixed="right" label="操作" width="180">
           <template #default="scope">
             <el-button
-              type="success"
+              type="primary"
               size="small"
+              link
               @click="handleEdit(scope.row)"
             >
               <el-icon><Document /></el-icon>
               编辑
             </el-button>
-            <el-button
-              type="warning"
-              size="small"
-              @click="handleDelete(scope.row)"
+            <el-popconfirm
+              title="确认要删除?"
+              @confirm="handleUpdateStatus(scope.row, 3)"
             >
-              <el-icon>
-                <Delete />
-              </el-icon>
-              删除
-            </el-button>
+              <template #reference>
+                <el-button type="primary" size="small" link>
+                  <i-ep-delete />删除
+                </el-button>
+              </template>
+            </el-popconfirm>
           </template>
         </el-table-column>
       </el-table>
@@ -140,15 +154,29 @@ function handleEdit(row: DicGroupModel) {
   dialogEditRef.value.dialogShow = true;
 }
 
-//删除字典组
-function handleDelete(row: DicGroupModel) {
-  var model: DicGroupUpdateStatusModel = { id: row.id, status: 3 };
-  updateStatus(model)
+//更新字典组状态
+function handleUpdateStatus(row: DicGroupModel, status: number) {
+  var data: DicGroupUpdateStatusModel = {
+    id: row.id,
+    status: status,
+  };
+  updateStatus(data)
     .then((data) => {
       ElMessage.success("操作成功");
       handleQuery();
     })
     .finally(() => {});
+}
+
+//状态类型
+function getTagType(row: DicGroupModel) {
+  if (row.status == 1) {
+    return "success";
+  } else if (row.status == 2) {
+    return "warning";
+  } else {
+    return "danger";
+  }
 }
 
 onMounted(() => {
