@@ -70,6 +70,10 @@ const props = defineProps({
 
 //新增字典提交
 function handleSubmit() {
+  if (props.groupId == "") {
+    ElMessage.success("请选择一个字典组");
+    return;
+  }
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
       addDic(formData)
@@ -139,5 +143,9 @@ watch(
   }
 );
 
-onMounted(() => {});
+onMounted(() => {
+  if (props.groupId == "") {
+    ElMessage.success("请选择一个字典组");
+  }
+});
 </script>

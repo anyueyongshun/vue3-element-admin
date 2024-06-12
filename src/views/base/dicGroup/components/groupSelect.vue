@@ -18,13 +18,10 @@
     </el-table>
   </card>
 </template>
-
-<script setup lan="ts">
+<script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import { getDicGroups } from "@/api/base/dicGroup/index";
-import {
-  DicGroupModel,
-} from "@/api/base/dicGroup/model";
+import { DicGroupModel } from "@/api/base/dicGroup/model";
 
 const loading = ref(false);
 const dicGroupId = ref("");
@@ -36,8 +33,8 @@ function handleQuery() {
   loading.value = true;
   getDicGroups()
     .then((data) => {
-      datas.length=0;
-      datas=data;
+      datas.length = 0;
+      datas.push(...data);
     })
     .finally(() => {
       loading.value = false;
@@ -46,8 +43,8 @@ function handleQuery() {
 
 //点击字典组
 function handleRowClick(row: DicGroupModel, column: any, event: any) {
-  dicGroupId.value=row.id
-  emit("handleQueryEvent",row.id);
+  dicGroupId.value = row.id;
+  emit("handleQueryEvent");
 }
 
 defineExpose({ dicGroupId });

@@ -104,12 +104,12 @@
   <addDic
     ref="dialogAddRef"
     @handle-query-event="handleQuery"
-    v-model:pId="dicGroupId"
+    v-model:groupId="dicGroupId"
   />
   <editDic
     ref="dialogEditRef"
     @handle-query-event="handleQuery"
-    v-model:groupId="dicId"
+    v-model:dicId="dicId"
   />
 </template>
 
@@ -143,6 +143,7 @@ const datas = ref<DicModel[]>([]);
 function handleQuery() {
   loading.value = true;
   queryParams.DicGroupId = dicGroupSelect.value.dicGroupId;
+  dicGroupId.value = dicGroupSelect.value.dicGroupId;
   getDicGroupPage(queryParams)
     .then((data) => {
       datas.value = data.list;
@@ -202,10 +203,6 @@ function getTagType(row: DicModel) {
     return "danger";
   }
 }
-
-/* watch(filterText, (val) => {
-  treeRef.value!.filter(val);
-}); */
 
 onMounted(() => {
   handleQuery();
