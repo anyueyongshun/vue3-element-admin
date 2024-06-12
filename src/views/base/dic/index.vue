@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-row :gutter="20">
+    <el-row :gutter="12">
       <el-col :lg="4" :xs="24" class="mb-[12px]">
         <groupSelect ref="dicGroupSelect" @handle-query-event="handleQuery" />
       </el-col>
@@ -12,6 +12,7 @@
                 v-model="queryParams.Name"
                 style="width: 240px"
                 placeholder="请输入名称"
+                clearable
               />
             </el-form-item>
             <el-form-item>
@@ -63,7 +64,7 @@
             <el-table-column fixed="right" label="操作" width="180">
               <template #default="scope">
                 <el-button
-                  type="success"
+                  type="primary"
                   size="small"
                   link
                   @click="handleEdit(scope.row)"

@@ -143,9 +143,5 @@ watch(
   }
 );
 
-onMounted(() => {
-  if (props.groupId == "") {
-    ElMessage.success("请选择一个字典组");
-  }
-});
+onMounted(() => {});
 </script>

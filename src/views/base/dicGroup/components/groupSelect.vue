@@ -1,6 +1,6 @@
 <template>
-  <card>
-    <el-input v-model="groupName" placeholder="字典组名称" clearable>
+  <el-card>
+    <el-input v-model="searchGroupName" placeholder="字典组名称" clearable>
       <template #prefix>
         <i-ep-search />
       </template>
@@ -9,17 +9,17 @@
       border
       v-loading="loading"
       highlight-current-row
-      :data="datas"
+      :data="filterTableData"
       stripe
       style="width: 100%"
       @row-click="handleRowClick"
     >
       <el-table-column prop="name" label="字典组名称" />
     </el-table>
-  </card>
+  </el-card>
 </template>
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, computed } from "vue";
 import { getDicGroups } from "@/api/base/dicGroup/index";
 import { DicGroupModel } from "@/api/base/dicGroup/model";
 
@@ -27,6 +27,14 @@ const loading = ref(false);
 const dicGroupId = ref("");
 const datas = reactive<DicGroupModel[]>([]);
 const emit = defineEmits(["handleQueryEvent"]);
+const searchGroupName = ref("");
+const filterTableData = computed(() =>
+  datas.filter(
+    (data) =>
+      !searchGroupName.value ||
+      data.name.toLowerCase().includes(searchGroupName.value.toLowerCase())
+  )
+);
 
 //加载字典组列表
 function handleQuery() {
@@ -43,7 +51,7 @@ function handleQuery() {
 
 //点击字典组
 function handleRowClick(row: DicGroupModel, column: any, event: any) {
-  dicGroupId.value = row.id;
+  dicGroupId.value = row.id ?? "";
   emit("handleQueryEvent");
 }
 

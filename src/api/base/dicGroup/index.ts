@@ -19,7 +19,7 @@ export function getDicGroupPage(queryParams: QueryModel) {
 
 //加载字典组列表
 export function getDicGroups() {
-  return request<any, PageResult<DicGroupModel[]>>({
+  return request<any, DicGroupModel[]>({
     url: "/DicGroup/GetAll",
     method: "get",
   });
