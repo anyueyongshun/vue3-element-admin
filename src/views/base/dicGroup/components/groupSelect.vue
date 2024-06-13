@@ -1,10 +1,12 @@
 <template>
   <el-card>
-    <el-input v-model="searchGroupName" placeholder="字典组名称" clearable>
-      <template #prefix>
-        <i-ep-search />
-      </template>
-    </el-input>
+    <div class="mb-2">
+      <el-input v-model="searchGroupName" placeholder="字典组名称" clearable>
+        <template #prefix>
+          <i-ep-search />
+        </template>
+      </el-input>
+    </div>
     <el-table
       border
       v-loading="loading"

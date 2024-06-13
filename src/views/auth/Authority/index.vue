@@ -19,13 +19,14 @@
     <el-card class="table-container">
       <el-tree
         node-key="id"
+        ref="treeRef"
         :props="props"
         :data="datas"
         show-checkbox
         default-expand-all
         :highlight-current="true"
         :expand-on-click-node="false"
-        :filter-node-method="filterNode"
+        :filter-node-method="handleFilter"
         @check-change="handleCheckChange"
       >
         <template #default="{ node, data }">
@@ -118,10 +119,13 @@ function handleLoadTree() {
     .finally(() => {});
 }
 
-const filterNode = (value: any, data: any) => {
-  if (!value) return true;
-  return data.name?.includes(value);
-};
+//过滤tree
+function handleFilter(value: string, data: any) {
+  if (!value) {
+    return true;
+  }
+  return data.name.indexOf(value) !== -1;
+}
 
 //新增权限
 function handleAdd(node: Node, data: Tree) {
@@ -146,9 +150,14 @@ function handleDelete(node: Node, data: Tree) {
     .finally(() => {});
 }
 
-watch(filterText, (val) => {
-  treeRef.value!.filter(val);
-});
+watchEffect(
+  () => {
+    treeRef.value?.filter(filterText.value);
+  },
+  {
+    flush: "post", // watchEffect会在DOM挂载或者更新之前就会触发，此属性控制在DOM元素更新后运行
+  }
+);
 
 onMounted(() => {
   handleLoadTree();
