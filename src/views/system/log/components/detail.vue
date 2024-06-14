@@ -4,7 +4,7 @@
       <el-descriptions-item label="账号" width="60px">
         {{ logDetail.loginName }}
       </el-descriptions-item>
-      <el-descriptions-item label="日志类型">
+      <el-descriptions-item label="类型">
         {{ logDetail.logTypeDesc }}
       </el-descriptions-item>
       <el-descriptions-item label="地址">
