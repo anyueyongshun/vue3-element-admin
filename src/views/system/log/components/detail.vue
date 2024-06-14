@@ -13,6 +13,9 @@
       <el-descriptions-item label="时间">
         {{ logDetail.addTime }}
       </el-descriptions-item>
+      <el-descriptions-item label="来源" span="2">
+        {{ logDetail.source }}
+      </el-descriptions-item>
       <el-descriptions-item label="内容" span="2">
         {{ logDetail.message }}
       </el-descriptions-item>
