@@ -4,20 +4,26 @@
       <el-form :inline="true" :model="queryParams">
         <el-form-item label="内容">
           <el-input
-            v-model="queryParams.Message"
-            style="width: 240px"
+            v-model="queryParams.message"
+            style="width: 120px"
             placeholder="请输入日志内容"
+            clearable
           />
         </el-form-item>
         <el-form-item label="账号">
           <el-input
-            v-model="queryParams.LoginName"
-            style="width: 240px"
+            v-model="queryParams.loginName"
+            style="width: 120px"
             placeholder="请输入登录账号"
+            clearable
           />
         </el-form-item>
         <el-form-item label="类型">
-          <el-select v-model="queryParams.logType" placeholder="请选择日志类型">
+          <el-select
+            v-model="queryParams.logType"
+            placeholder="请选择日志类型"
+            style="width: 120px"
+          >
             <el-option
               v-for="item in logTypeOptions"
               :key="item.value"
@@ -27,16 +33,17 @@
           </el-select>
         </el-form-item>
         <el-form-item label="日期">
-          <el-input
-            v-model="queryParams.FromDate"
-            style="width: 240px"
+          <el-date-picker
+            v-model="queryParams.fromDate"
+            style="width: 150px"
             placeholder="请输入开始日期"
           />
         </el-form-item>
-        <el-form-item label="--">
-          <el-input
-            v-model="queryParams.ToDate"
-            style="width: 240px"
+        <el-form-item label="--" />
+        <el-form-item>
+          <el-date-picker
+            v-model="queryParams.toDate"
+            style="width: 150px"
             placeholder="请输入结束日期"
           />
         </el-form-item>
@@ -58,10 +65,10 @@
         @row-dblclick="handleDbClick"
       >
         <el-table-column type="index" width="70" align="center" label="序号" />
+        <el-table-column prop="loginName" label="账号" width="150" />
+        <el-table-column prop="logTypeDesc" label="类型" width="100" />
         <el-table-column prop="message" label="内容" />
-        <el-table-column prop="loginName" label="账号" />
-        <el-table-column prop="logType" label="类型" />
-        <el-table-column prop="addTime" label="时间" />
+        <el-table-column prop="addTime" label="时间" width="200" />
         <el-table-column fixed="right" label="操作" width="180">
           <template #default="scope">
             <el-button
@@ -104,13 +111,13 @@
   <detailLog
     ref="dialogDetailRef"
     @handle-query-event="handleQuery"
-    v-model:id="logId"
+    v-model:logId="logId"
   />
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { getLogPage, getDetail, deleteLog } from "@/api/system/log/index";
+import { getLogPage, deleteLog } from "@/api/system/log/index";
 import { QueryModel, LogModel } from "@/api/system/log/model";
 import detailLog from "./components/detail.vue";
 
@@ -122,6 +129,7 @@ const total = ref(0);
 const queryParams = reactive<QueryModel>({
   pageNum: 1,
   pageSize: 10,
+  logType: 0,
 });
 const datas = ref<LogModel[]>([]);
 
@@ -159,7 +167,7 @@ function handleDetail(row: LogModel) {
 
 //删除日志
 function handleDelete(row: LogModel) {
-  deleteLog(row.id)
+  deleteLog(row.id ?? "")
     .then((data) => {
       ElMessage.success("操作成功");
       handleQuery();
@@ -170,16 +178,20 @@ function handleDelete(row: LogModel) {
 //日志类型
 const logTypeOptions = [
   {
+    value: 0,
+    label: "==全部==",
+  },
+  {
     value: 1,
-    label: "启用",
+    label: "登录日志",
   },
   {
     value: 2,
-    label: "禁用",
+    label: "异常日志",
   },
   {
     value: 3,
-    label: "删除",
+    label: "操作日志",
   },
 ];
 

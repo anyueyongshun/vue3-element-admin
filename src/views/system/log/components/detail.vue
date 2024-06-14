@@ -1,66 +1,35 @@
 <template>
-  <el-dialog v-model="dialogShow" width="400px" title="编辑字典组">
-    <el-form
-      ref="dataFormRef"
-      :model="formData"
-      :rules="rules"
-      label-width="auto"
-    >
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="名称" prop="name">
-            <el-input v-model="formData.name" placeholder="请输入名称" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="排序" prop="order">
-            <el-input-number v-model="formData.order" :min="1" :max="100" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="状态" prop="status">
-            <el-select v-model="formData.status" placeholder="请选择状态">
-              <el-option
-                v-for="item in statusOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="备注" prop="memo">
-            <el-input v-model="formData.memo" placeholder="请输入备注" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-    </el-form>
-    <template #footer>
-      <el-button type="primary" @click="handleSubmit">确 定</el-button>
-      <el-button @click="closeDialog">取 消</el-button>
-    </template>
+  <el-dialog v-model="dialogShow" width="1000px" title="日志详细">
+    <el-descriptions :column="2" border>
+      <el-descriptions-item label="账号" width="60px">
+        {{ logDetail.loginName }}
+      </el-descriptions-item>
+      <el-descriptions-item label="日志类型">
+        {{ logDetail.logTypeDesc }}
+      </el-descriptions-item>
+      <el-descriptions-item label="地址">
+        {{ logDetail.requestUrl }}
+      </el-descriptions-item>
+      <el-descriptions-item label="时间">
+        {{ logDetail.addTime }}
+      </el-descriptions-item>
+      <el-descriptions-item label="内容" span="2">
+        {{ logDetail.message }}
+      </el-descriptions-item>
+      <el-descriptions-item label="堆栈" span="2">
+        {{ logDetail.stackTrace }}
+      </el-descriptions-item>
+    </el-descriptions>
   </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
-import { editDicGroup, getDetail } from "@/api/system/log";
-import { DicGroupEditModel } from "@/api/system/log/model";
+import { LogModel } from "@/api/system/log/model";
+import { getDetail } from "@/api/system/log";
 
-const formData = reactive<DicGroupEditModel>({});
-const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
-const emit = defineEmits(["handleQueryEvent"]);
-
 const props = defineProps({
-  id: {
+  logId: {
     type: String,
     default: () => {
       return "";
@@ -68,83 +37,28 @@ const props = defineProps({
   },
 });
 
-//新增字典组提交
-function handleSubmit() {
-  dataFormRef.value.validate((isValid: boolean) => {
-    if (isValid) {
-      editDicGroup(formData)
-        .then((data) => {
-          if (data) {
-            ElMessage.success("编辑成功");
-            dialogShow.value = false;
-            emit("handleQueryEvent");
-          }
-        })
-        .finally();
-    }
-  });
+const logDetail = reactive<LogModel>({});
+
+function GetDetail() {
+  if (props.logId != "") {
+    getDetail(props.logId)
+      .then((data) => {
+        Object.assign(logDetail, data);
+      })
+      .finally(() => {});
+  }
 }
-
-//取字典组详细
-function handleGetDetail() {
-  getDetail(props.id).then((data) => {
-    Object.assign(formData, data);
-  });
-}
-
-//关闭新增框
-function closeDialog() {
-  dialogShow.value = false;
-}
-
-//验证规则
-const rules = reactive({
-  name: [
-    { required: true, message: "请输入名称", trigger: "blur" },
-    {
-      required: true,
-      min: 1,
-      max: 20,
-      message: "请输入1-20个字符",
-      trigger: ["blur", "change"],
-    },
-  ],
-  status: [{ required: true, message: "请选择状态", trigger: "blur" }],
-  order: [{ required: true, message: "请输入排序", trigger: "blur" }],
-  memo: [
-    {
-      required: false,
-      min: 0,
-      max: 100,
-      message: "最多输入100个字符",
-      trigger: ["blur", "change"],
-    },
-  ],
-});
-
-const statusOptions = [
-  {
-    value: 1,
-    label: "启用",
-  },
-  {
-    value: 2,
-    label: "禁用",
-  },
-  {
-    value: 3,
-    label: "删除",
-  },
-];
 
 defineExpose({ dialogShow });
 
 watch(
-  () => props.id,
+  () => props.logId,
   (newVal: string) => {
-    handleGetDetail();
+    GetDetail();
   }
 );
 
-onMounted(() => {});
+onMounted(() => {
+  GetDetail();
+});
 </script>

@@ -1,9 +1,9 @@
 export interface QueryModel extends PageQuery {
-  Message?: string;
-  LogType?: number;
-  LoginName?: string;
-  FromDate?: Date;
-  ToDate?: Date;
+  message?: string;
+  logType?: number;
+  loginName?: string;
+  fromDate?: Date;
+  toDate?: Date;
 }
 
 //日志列表的模型
@@ -22,4 +22,5 @@ export interface LogModel {
   accountId?: string;
   loginName?: string;
   logType?: number;
+  logTypeDesc?: string;
 }
