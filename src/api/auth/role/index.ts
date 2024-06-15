@@ -53,8 +53,8 @@ export function getDetail(id: string) {
     method: "get",
   });
 }
-
-//角色添加权限
+//-------------------------------
+//角色添加菜单
 export function assignMenu(data: RoleAuthorityModel): AxiosPromise<boolean> {
   return request({
     url: "/role/AddMenu",
@@ -63,7 +63,7 @@ export function assignMenu(data: RoleAuthorityModel): AxiosPromise<boolean> {
   });
 }
 
-//角色添加菜单
+//角色添加权限
 export function assignAuth(data: RoleMenuModel): AxiosPromise<boolean> {
   return request({
     url: "/role/addAuth",

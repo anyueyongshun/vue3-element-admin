@@ -2,8 +2,7 @@
   <el-dialog
     v-model="dialogShow"
     width="600px"
-    height="300"
-    :title="'为[' + roleName + ']分配权限和菜单'"
+    :title="'为角色[' + roleName + ']分配权限和菜单'"
   >
     <el-tabs v-model="activeName">
       <el-tab-pane label="权限" name="authority">

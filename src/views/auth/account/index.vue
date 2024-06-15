@@ -86,7 +86,12 @@
               </template>
             </el-popconfirm>
 
-            <el-button type="primary" size="small" link>
+            <el-button
+              type="primary"
+              size="small"
+              link
+              @click="handleAssign(scope.row)"
+            >
               <i-ep-lock />权限
             </el-button>
           </template>
@@ -113,6 +118,11 @@
     @handle-query-event="handleQuery"
     v-model:id="accountId"
   />
+  <assignRoleAuth
+    ref="dialogRoleAuthRef"
+    v-model:accountId="accountId"
+    v-model:accountName="accountName"
+  />
 </template>
 
 <script setup lang="ts">
@@ -125,6 +135,7 @@ import {
 } from "@/api/auth/account/model";
 import addAccount from "./components/add.vue";
 import editAccount from "./components/edit.vue";
+import assignRoleAuth from "./components/assignRoleAuth.vue";
 
 const loading = ref(false);
 const total = ref(0);
@@ -135,8 +146,10 @@ const queryParams = reactive<AccountQuery>({
 });
 const AccountDatas = ref<AccountModel[]>();
 const accountId = ref("");
+const accountName = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
+const dialogRoleAuthRef = ref();
 
 //分页查询账号列表
 function handleQuery() {
@@ -187,6 +200,13 @@ function handleUpdateStatus(row: AccountModel, status: number) {
 function handleDbClick(row: AccountModel, column: any, event: any) {
   accountId.value = row.id ?? "";
   dialogEditRef.value.dialogShow = true;
+}
+
+//给账号分配权限、菜单、角色
+function handleAssign(row: AccountModel) {
+  accountId.value = row.id ?? "";
+  accountName.value = row.loginName ?? "";
+  dialogRoleAuthRef.value.dialogShow = true;
 }
 
 //返回账号状态显示的tag类型

@@ -1,3 +1,5 @@
+export declare type TreeKey = string | number;
+
 //账号的查询条件用的模型
 export interface AccountQuery extends PageQuery {
   fromDate?: Date;
@@ -37,4 +39,23 @@ export interface AccountAddModel {
 export interface AccountUpdateStatusModel {
   id?: string;
   status?: number;
+}
+
+//账号与权限的关系模型
+export interface AccountAuthorityModel {
+  accountId: string;
+  authorityIds?: TreeKey[];
+  authorityType?: number;
+}
+
+//账号与菜单的关系模型
+export interface AccountMenuModel {
+  accountId: string;
+  menuIds?: TreeKey[];
+}
+
+//账号与角色的关系模型
+export interface AccountRoleModel {
+  accountId: string;
+  roleIds?: TreeKey[];
 }
