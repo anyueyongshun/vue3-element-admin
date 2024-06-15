@@ -12,6 +12,7 @@ export interface DicModel {
   dicGroupId?: string;
   memo?: string;
   statusDesc?: string;
+  groupName?: string;
 }
 
 //新增字典用的模型

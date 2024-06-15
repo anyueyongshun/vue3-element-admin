@@ -41,6 +41,7 @@
               align="center"
               label="序号"
             />
+            <el-table-column prop="groupName" label="分组" />
             <el-table-column prop="name" label="名称" />
             <el-table-column prop="order" label="排序" />
             <el-table-column label="状态" width="70">
