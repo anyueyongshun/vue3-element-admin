@@ -112,7 +112,7 @@ const handleCheckChange = (
 
 //加载权限树
 function handleLoadTree() {
-  loadTree()
+  loadTree(false)
     .then((data) => {
       datas.length = 0;
       datas.push(data);

@@ -8,9 +8,9 @@ import {
 } from "./model";
 
 //加载权限树
-export function loadTree() {
+export function loadTree(disabled: boolean) {
   return request<any, Tree>({
-    url: "/authority/GetAuthorityTree",
+    url: "/authority/GetAuthorityTree?disabled=" + disabled,
     method: "get",
   });
 }

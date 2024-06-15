@@ -7,6 +7,7 @@ export interface Tree {
   code?: string;
   parentId?: string;
   isRoot?: boolean;
+  disabled?: boolean;
 }
 
 //新增权限用的模型

@@ -2,7 +2,7 @@
   <el-dialog
     v-model="dialogShow"
     width="600px"
-    :title="'为账号[' + accountName + ']分配角色，权限和菜单'"
+    :title="'为账号[' + accountName + ']分配角色、权限、菜单'"
   >
     <el-tabs v-model="activeName">
       <el-tab-pane label="权限(拥有)" name="authorityOwner">
@@ -229,7 +229,7 @@ import {
   getMenuIds,
 } from "@/api/auth/account/index";
 
-const activeName = ref("authorityInclude");
+const activeName = ref("authorityOwner");
 const dialogShow = ref(false);
 
 const datasAuthOwner = reactive<Tree[]>([]);
@@ -269,14 +269,24 @@ const props = defineProps({
 //加载权限树
 function handleLoadAuthTree() {
   if (props.accountId != "") {
-    loadAuthTree()
+    loadAuthTree(false)
       .then((data) => {
-        datasAuthOwner.length = 0;
-        datasAuthOwner.push(data);
         datasAuthInclude.length = 0;
         datasAuthInclude.push(data);
         datasAuthExclude.length = 0;
         datasAuthExclude.push(data);
+      })
+      .finally(() => {});
+  }
+}
+
+//加载权限树
+function handleLoadAuthOwnerTree() {
+  if (props.accountId != "") {
+    loadAuthTree(true)
+      .then((data) => {
+        datasAuthOwner.length = 0;
+        datasAuthOwner.push(data);
       })
       .finally(() => {});
   }
@@ -415,6 +425,14 @@ function handleSetMenu() {
 }
 
 //过滤tree
+function handleAuthOwnerFilter(value: string, data: any) {
+  if (!value) {
+    return true;
+  }
+  return data.name.indexOf(value) !== -1;
+}
+
+//过滤tree
 function handleAuthIncludeFilter(value: string, data: any) {
   if (!value) {
     return true;
@@ -449,6 +467,7 @@ function handleMenuFilter(value: string, data: any) {
 const propsTree = {
   label: "name",
   children: "children",
+  disabled: "disabled",
 };
 
 defineExpose({ dialogShow });
@@ -456,6 +475,7 @@ defineExpose({ dialogShow });
 watch(
   () => props.accountId,
   (newVal: string) => {
+    handleLoadAuthOwnerTree();
     handleLoadAuthTree();
     handleLoadMenuTree();
     handleLoadRoleTree();
@@ -469,6 +489,7 @@ watch(
 
 watchEffect(
   () => {
+    treeAuthOwnerRef.value?.filter(filterAuthOwnerText.value);
     treeAuthIncludeRef.value?.filter(filterAuthIncludeText.value);
     treeAuthExcludeRef.value?.filter(filterAuthExcludeText.value);
     treeRoleRef.value?.filter(filterRoleText.value);
@@ -480,6 +501,7 @@ watchEffect(
 );
 
 onMounted(() => {
+  handleLoadAuthOwnerTree();
   handleLoadAuthTree();
   handleLoadMenuTree();
   handleLoadRoleTree();
