@@ -7,6 +7,7 @@
             placeholder="请输入登录名"
             maxlength="20"
             v-model="queryParams.loginName"
+            clearable
           />
         </el-form-item>
         <el-form-item label="状态">

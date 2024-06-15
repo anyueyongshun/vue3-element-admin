@@ -6,6 +6,7 @@ export interface Tree {
   isAuth?: boolean;
   code?: string;
   parentId?: string;
+  isRoot?: boolean;
 }
 
 //新增权限用的模型

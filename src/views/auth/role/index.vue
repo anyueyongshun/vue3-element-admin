@@ -7,6 +7,7 @@
             v-model="filterText"
             style="width: 240px"
             placeholder="请输入名称"
+            clearable
           />
         </el-form-item>
         <el-form-item>
@@ -49,13 +50,14 @@
                 size="small"
                 link
                 @click="handleEdit(node, data)"
+                v-if="!data.isRoot"
               >
                 <i-ep-edit />编辑
               </el-button>
               <el-popconfirm
                 title="确认要删除?"
                 @confirm="handleDelete(node, data)"
-                v-if="data.parentId != '00000000-0000-0000-0000-000000000000'"
+                v-if="!data.isRoot"
               >
                 <template #reference>
                   <el-button type="primary" size="small" link>
@@ -63,6 +65,15 @@
                   </el-button>
                 </template>
               </el-popconfirm>
+              <el-button
+                type="primary"
+                size="small"
+                link
+                @click="handleAssign(node, data)"
+                v-if="!data.isRoot"
+              >
+                <i-ep-lock />权限
+              </el-button>
             </span>
           </span>
         </template>
@@ -79,6 +90,11 @@
     @handle-query-event="handleLoadTree"
     v-model:id="roleId"
   />
+  <assignAuthMenu
+    ref="dialogAssignRef"
+    v-model:roleId="roleId"
+    v-model:roleName="roleName"
+  />
 </template>
 
 <script setup lang="ts">
@@ -87,12 +103,15 @@ import { loadTree, updateStatus } from "@/api/auth/role/index";
 import { Tree, RoleUpdateStatusModel } from "@/api/auth/role/model";
 import addRole from "./components/addRole.vue";
 import editRole from "./components/editRole.vue";
+import assignAuthMenu from "./components/assignAuthMenu.vue";
 
 const filterText = ref("");
 const parentId = ref("");
 const roleId = ref("");
+const roleName = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
+const dialogAssignRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<Tree[]>([]);
 
@@ -149,6 +168,13 @@ function handleDelete(node: Node, data: Tree) {
       handleLoadTree();
     })
     .finally(() => {});
+}
+
+//给角色分配权限、菜单
+function handleAssign(node: Node, data: Tree) {
+  roleId.value = data.id ?? "";
+  roleName.value = data.name ?? "";
+  dialogAssignRef.value.dialogShow = true;
 }
 
 watchEffect(

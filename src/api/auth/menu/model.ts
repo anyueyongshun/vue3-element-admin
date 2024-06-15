@@ -9,6 +9,7 @@ export interface Tree {
   icon?: string;
   children?: Tree[];
   parentId?: string;
+  isRoot?: boolean;
 }
 
 //新增菜单用的模型

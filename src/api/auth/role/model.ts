@@ -1,3 +1,7 @@
+import { number } from "echarts";
+
+export declare type TreeKey = string | number;
+
 //角色树的模型
 export interface Tree {
   id?: string;
@@ -5,6 +9,7 @@ export interface Tree {
   children?: Tree[];
   isAdmin?: boolean;
   parentId?: string;
+  isRoot?: boolean;
 }
 
 //新增角色用的模型
@@ -30,4 +35,16 @@ export interface RoleEditModel {
 export interface RoleUpdateStatusModel {
   id?: string;
   status?: number;
+}
+
+//角色与权限的关系模型
+export interface RoleAuthorityModel {
+  roleId: string;
+  authorityIds?: TreeKey[];
+}
+
+//角色与菜单的关系模型
+export interface RoleMenuModel {
+  roleId: string;
+  menuIds?: TreeKey[];
 }
