@@ -73,8 +73,8 @@
               :filter-node-method="handleMenuFilter"
               check-strictly
             >
-              <template #default="{ node }">
-                <el-icon><UserFilled /></el-icon>
+              <template #default="{ node, data }">
+                <svg-icon :icon-class="data.icon" />
                 {{ node.label }}
               </template>
             </el-tree>
@@ -129,7 +129,7 @@ const props = defineProps({
 //加载权限树
 function handleLoadAuthTree() {
   if (props.roleId != "") {
-    loadAuthTree()
+    loadAuthTree(false)
       .then((data) => {
         datasAuth.length = 0;
         datasAuth.push(data);

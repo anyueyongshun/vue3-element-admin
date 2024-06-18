@@ -5,6 +5,7 @@ export interface Tree {
   children?: Tree[];
   orgType?: number;
   parentId?: string;
+  isRoot?: boolean;
 }
 
 //新增组织机构用的模型

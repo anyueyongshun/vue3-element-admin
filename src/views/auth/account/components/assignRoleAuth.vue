@@ -190,8 +190,8 @@
               :filter-node-method="handleMenuFilter"
               check-strictly
             >
-              <template #default="{ node }">
-                <el-icon><UserFilled /></el-icon>
+              <template #default="{ node, data }">
+                <svg-icon :icon-class="data.icon" />
                 {{ node.label }}
               </template>
             </el-tree>

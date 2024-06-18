@@ -49,13 +49,14 @@
                 size="small"
                 link
                 @click="handleEdit(node, data)"
+                v-if="!data.isRoot"
               >
                 <i-ep-edit />编辑
               </el-button>
               <el-popconfirm
                 title="确认要删除?"
                 @confirm="handleDelete(node, data)"
-                v-if="data.parentId != '00000000-0000-0000-0000-000000000000'"
+                v-if="!data.isRoot"
               >
                 <template #reference>
                   <el-button type="primary" size="small" link>
