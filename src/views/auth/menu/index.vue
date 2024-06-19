@@ -65,6 +65,15 @@
                   </el-button>
                 </template>
               </el-popconfirm>
+              <el-button
+                type="primary"
+                size="small"
+                link
+                @click="handleOwnerAccounts(node, data)"
+                v-if="!data.isRoot"
+              >
+                <svg-icon icon-class="user" />账号
+              </el-button>
             </span>
           </span>
         </template>
@@ -81,6 +90,11 @@
     @handle-query-event="handleLoadTree"
     v-model:id="menuId"
   />
+  <roleAuthMenu
+    ref="dialogRoleAuthMenuRef"
+    v-model:id="menuId"
+    v-model:accountType="accountType"
+  />
 </template>
 
 <script setup lang="ts">
@@ -89,12 +103,15 @@ import { loadTree, updateStatus } from "@/api/auth/menu/index";
 import { Tree, MenuUpdateStatusModel } from "@/api/auth/menu/model";
 import addMenu from "./components/addMenu.vue";
 import editMenu from "./components/editMenu.vue";
+import roleAuthMenu from "../account/components/roleAuthMenu.vue";
 
 const filterText = ref("");
 const parentId = ref("");
 const menuId = ref("");
+const accountType = ref("2");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
+const dialogRoleAuthMenuRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<Tree[]>([]);
 
@@ -140,6 +157,12 @@ function handleAdd(node: Node, data: Tree) {
 function handleEdit(node: Node, data: Tree) {
   menuId.value = data.id ?? "";
   dialogEditRef.value.dialogShow = true;
+}
+
+//显示拥有此菜单的账号
+function handleOwnerAccounts(node: Node, data: Tree) {
+  ElMessage.success(data.id);
+  dialogRoleAuthMenuRef.value.dialogShow = true;
 }
 
 //删除菜单

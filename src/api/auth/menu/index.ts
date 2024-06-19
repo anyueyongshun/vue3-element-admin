@@ -2,6 +2,7 @@ import request from "@/utils/request";
 import { AxiosPromise } from "axios";
 import { Tree } from "./model";
 import { MenuAddModel, MenuEditModel, MenuUpdateStatusModel } from "./model";
+import { AccountModel } from "@/api/auth/account/model";
 
 //加载菜单树
 export function loadTree() {
@@ -44,6 +45,14 @@ export function updateStatus(
 export function getDetail(id: string) {
   return request<any, MenuEditModel>({
     url: "/menu/GetById?id=" + id,
+    method: "get",
+  });
+}
+
+//获取拥有此菜单的账号
+export function getAccounts(id: string) {
+  return request<any, AccountModel[]>({
+    url: "/menu/GetAccounts?menuId=" + id,
     method: "get",
   });
 }

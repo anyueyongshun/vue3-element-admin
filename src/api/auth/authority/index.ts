@@ -6,6 +6,7 @@ import {
   AuthorityEditModel,
   AuthorityUpdateStatusModel,
 } from "./model";
+import { AccountModel } from "@/api/auth/account/model";
 
 //加载权限树
 export function loadTree(disabled: boolean) {
@@ -48,6 +49,14 @@ export function updateStatus(
 export function getDetail(id: string) {
   return request<any, AuthorityEditModel>({
     url: "/authority/GetById?id=" + id,
+    method: "get",
+  });
+}
+
+//获取拥有此权限的账号
+export function getAccounts(id: string) {
+  return request<any, AccountModel[]>({
+    url: "/authority/GetAccounts?authId=" + id,
     method: "get",
   });
 }

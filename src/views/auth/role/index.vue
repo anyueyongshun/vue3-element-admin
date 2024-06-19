@@ -74,6 +74,15 @@
               >
                 <i-ep-lock />权限
               </el-button>
+              <el-button
+                type="primary"
+                size="small"
+                link
+                @click="handleOwnerAccounts(node, data)"
+                v-if="!data.isRoot"
+              >
+                <svg-icon icon-class="user" />账号
+              </el-button>
             </span>
           </span>
         </template>
@@ -95,6 +104,11 @@
     v-model:roleId="roleId"
     v-model:roleName="roleName"
   />
+  <roleAuthMenu
+    ref="dialogRoleAuthMenuRef"
+    v-model:id="roleId"
+    accountType="3"
+  />
 </template>
 
 <script setup lang="ts">
@@ -104,6 +118,7 @@ import { Tree, RoleUpdateStatusModel } from "@/api/auth/role/model";
 import addRole from "./components/addRole.vue";
 import editRole from "./components/editRole.vue";
 import assignAuthMenu from "./components/assignAuthMenu.vue";
+import roleAuthMenu from "../account/components/roleAuthMenu.vue";
 
 const filterText = ref("");
 const parentId = ref("");
@@ -112,6 +127,7 @@ const roleName = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
 const dialogAssignRef = ref();
+const dialogRoleAuthMenuRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<Tree[]>([]);
 
@@ -157,6 +173,12 @@ function handleAdd(node: Node, data: Tree) {
 function handleEdit(node: Node, data: Tree) {
   roleId.value = data.id ?? "";
   dialogEditRef.value.dialogShow = true;
+}
+
+//显示拥有此角色的账号
+function handleOwnerAccounts(node: Node, data: Tree) {
+  roleId.value = data.id ?? "";
+  dialogRoleAuthMenuRef.value.dialogShow = true;
 }
 
 //删除角色

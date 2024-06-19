@@ -8,6 +8,7 @@ import {
   RoleAuthorityModel,
   RoleMenuModel,
 } from "./model";
+import { AccountModel } from "@/api/auth/account/model";
 
 //加载角色树
 export function loadTree() {
@@ -84,6 +85,14 @@ export function getAuthorityIds(id: string) {
 export function getMenuIds(id: string) {
   return request<any, string[]>({
     url: "/role/GetMenuIds?roleId=" + id,
+    method: "get",
+  });
+}
+
+//获取拥有此角色的账号
+export function getAccounts(id: string) {
+  return request<any, AccountModel[]>({
+    url: "/role/GetAccounts?roleId=" + id,
     method: "get",
   });
 }
