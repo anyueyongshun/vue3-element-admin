@@ -20,6 +20,7 @@
     <el-card class="table-container">
       <el-tree
         node-key="id"
+        ref="treeRef"
         :props="props"
         :data="datas"
         show-checkbox
