@@ -25,8 +25,20 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
+          <el-form-item label="显/隐" prop="isShow">
+            <el-switch
+              v-model="formData.isShow"
+              class="mb-2"
+              active-text="显示"
+              inactive-text="隐藏"
+            />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <el-form-item label="URL" prop="url">
-            <el-input v-model="formData.url" placeholder="请输入url" />
+            <el-input v-model="formData.url" placeholder="请输入URL" />
           </el-form-item>
         </el-col>
       </el-row>
