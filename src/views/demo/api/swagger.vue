@@ -2,7 +2,7 @@
 <template>
   <div class="app-container">
     <iframe
-      src="http://vapi.youlai.tech/swagger-ui.html"
+      src="http://vapi.信息化系统.tech/swagger-ui.html"
       width="100%"
       height="100%"
       frameborder="0"

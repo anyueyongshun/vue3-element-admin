@@ -34,7 +34,7 @@
         <el-dropdown-menu>
           <!-- <a
             target="_blank"
-            href="https://gitee.com/youlaiorg/vue3-element-admin"
+            href="https://gitee.com/信息化系统org/vue3-element-admin"
           >
             <el-dropdown-item>{{ $t("navbar.gitee") }}</el-dropdown-item>
           </a>

@@ -3,8 +3,8 @@
     <img src="https://img.shields.io/badge/Vite-5.2.11-green.svg"/>
     <img src="https://img.shields.io/badge/Element Plus-2.7.2-blue.svg"/>
     <img src="https://img.shields.io/badge/license-MIT-green.svg"/>
-    <a href="https://gitee.com/youlaiorg" target="_blank">
-        <img src="https://img.shields.io/badge/Author-Youlai Open Source Organization-orange.svg"/>
+    <a href="https://gitee.com/信息化系统org" target="_blank">
+        <img src="https://img.shields.io/badge/Author-信息化系统 Open Source Organization-orange.svg"/>
     </a>
  
 
@@ -16,13 +16,13 @@
 ![](https://foruda.gitee.com/images/1708618984641188532/a7cca095_716974.png "rainbow.png")
 
 <div align="center">
- <a target="_blank" href="http://vue3.youlai.tech">👀 Live Preview</a> |  <a target="_blank" href="https://juejin.cn/post/7228990409909108793">📖 Read Documentation</a>  
+ <a target="_blank" href="http://vue3.信息化系统.tech">👀 Live Preview</a> |  <a target="_blank" href="https://juejin.cn/post/7228990409909108793">📖 Read Documentation</a>  
 </div>
 
 
 ## Introduction
 
-[vue3-element-admin](https://gitee.com/youlaiorg/vue3-element-admin) is a free and open-source admin template for backend management frontend, built with popular technologies such as Vue3, Vite5, TypeScript, Element-Plus, and Pinia (with accompanying [backend source code](https://gitee.com/youlaiorg/youlai-boot)).
+[vue3-element-admin](https://gitee.com/信息化系统org/vue3-element-admin) is a free and open-source admin template for backend management frontend, built with popular technologies such as Vue3, Vite5, TypeScript, Element-Plus, and Pinia (with accompanying [backend source code](https://gitee.com/信息化系统org/信息化系统-boot)).
 
 
 
@@ -31,7 +31,7 @@
 
 - **Simple and Easy-to-use**: Upgraded version of [vue-element-admin](https://gitee.com/panjiachen/vue-element-admin) for Vue3, with minimal encapsulation and easy to get started.
 
-- **Data Interaction**: Support both local `Mock` data and remote API. Comes with [Java backend source code](https://gitee.com/youlaiorg/youlai-boot) and online API documentation.
+- **Data Interaction**: Support both local `Mock` data and remote API. Comes with [Java backend source code](https://gitee.com/信息化系统org/信息化系统-boot) and online API documentation.
 
 - **Permission Management**: Complete permission system for users, roles, menus, dictionaries, and departments.
 
@@ -51,8 +51,8 @@
 
 | Project | Gitee                                                        | Github                                                       | GitCode                                                      |
 | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Frontend | [vue3-element-admin](https://gitee.com/youlaiorg/vue3-element-admin) | [vue3-element-admin](https://github.com/youlaitech/vue3-element-admin) | [vue3-element-admin](https://gitcode.net/youlai/vue3-element-admin) |
-| Backend | [youlai-boot](https://gitee.com/youlaiorg/youlai-boot)       | [youlai-boot](https://github.com/haoxianrui/youlai-boot.git) | [youlai-boot](https://gitcode.net/youlai/youlai-boot)        |
+| Frontend | [vue3-element-admin](https://gitee.com/信息化系统org/vue3-element-admin) | [vue3-element-admin](https://github.com/信息化系统tech/vue3-element-admin) | [vue3-element-admin](https://gitcode.net/信息化系统/vue3-element-admin) |
+| Backend | [信息化系统-boot](https://gitee.com/信息化系统org/信息化系统-boot)       | [信息化系统-boot](https://github.com/haoxianrui/信息化系统-boot.git) | [信息化系统-boot](https://gitcode.net/信息化系统/信息化系统-boot)        |
 
 ## Environment Setup
 
@@ -66,7 +66,7 @@
 
 ```bash
 # Clone the repository
-git clone https://gitee.com/youlaiorg/vue3-element-admin.git
+git clone https://gitee.com/信息化系统org/vue3-element-admin.git
 
 # Change directory
 cd vue3-element-admin
@@ -100,7 +100,7 @@ server {
 	}
 	# Reverse proxy configuration
 	location /prod-api/ {
-			proxy_pass http://vapi.youlai.tech/; # Replace vapi.youlai.tech with your backend API address
+			proxy_pass http://vapi.信息化系统.tech/; # Replace vapi.信息化系统.tech with your backend API address
 	}
 }
 ```
@@ -113,7 +113,7 @@ The project supports both online API and local mock API. By default, it uses the
 
 > If you have a basic understanding of Java development, follow these steps to convert online API to local backend API and set up a full-stack development environment.
 
-1. Get the backend source code based on `Java` and `SpringBoot` from [youlai-boot](https://gitee.com/youlaiorg/youlai-boot.git).
+1. Get the backend source code based on `Java` and `SpringBoot` from [信息化系统-boot](https://gitee.com/信息化系统org/信息化系统-boot.git).
 2. Follow the instructions in the backend project's README.md to set up the local environment.
 3. Modify the value of `VITE_APP_API_URL` in the `.env.development` file to `http://localhost:8989`, replacing it with the backend API URL.
 
@@ -135,7 +135,7 @@ The project supports both online API and local mock API. By default, it uses the
 
 - **Other issues**
 
-  If you have any other issues or suggestions, please open an [issue](https://gitee.com/youlaiorg/vue3-element-admin/issues/new).
+  If you have any other issues or suggestions, please open an [issue](https://gitee.com/信息化系统org/vue3-element-admin/issues/new).
 
 ## Project Documentation
 
@@ -152,7 +152,7 @@ Execute `pnpm run commit` to invoke interactive git commit and complete the info
 
 ## Community 🚀
 
-> **Follow "Youlai Tech" WeChat Official Account to get the QR code for the community.**
+> **Follow "信息化系统 Tech" WeChat Official Account to get the QR code for the community.**
 >
 > If the QR code for the community has expired, please add my WeChat (haoxianrui) and indicate whether you are interested in "Frontend", "Backend", or "Full Stack" to get the latest QR code.
 >
@@ -160,5 +160,5 @@ Execute `pnpm run commit` to invoke interactive git commit and complete the info
 
 | Official Account | Community |
 |:----:|:----:|
-| ![Youlai Tech WeChat Official Account QR Code](https://foruda.gitee.com/images/1687689212187063809/3c69eaee_716974.png) | ![Community QR Code](https://foruda.gitee.com/images/1687689212139273561/6a65ef69_716974.png) |
+| ![信息化系统 Tech WeChat Official Account QR Code](https://foruda.gitee.com/images/1687689212187063809/3c69eaee_716974.png) | ![Community QR Code](https://foruda.gitee.com/images/1687689212139273561/6a65ef69_716974.png) |
 

@@ -11,7 +11,7 @@ export default defineMock([
         nickname: "系统管理员",
         username: "admin",
         avatar:
-          "https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
+          "https://oss.信息化系统.tech/信息化系统-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
         roles: ["ROOT"],
         perms: [
           "sys:menu:delete",
@@ -55,7 +55,7 @@ export default defineMock([
             mobile: "17621210366",
             gender: 1,
             avatar:
-              "https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
+              "https://oss.信息化系统.tech/信息化系统-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
             email: "",
             status: 1,
             deptId: 1,
@@ -68,8 +68,8 @@ export default defineMock([
             mobile: "17621210366",
             gender: 1,
             avatar:
-              "https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
-            email: "youlaitech@163.com",
+              "https://oss.信息化系统.tech/信息化系统-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
+            email: "信息化系统tech@163.com",
             status: 1,
             deptId: 3,
             roleIds: [3],
@@ -167,7 +167,7 @@ const userMap: Record<string, any> = {
     mobile: "17621210366",
     gender: 1,
     avatar:
-      "https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
+      "https://oss.信息化系统.tech/信息化系统-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
     email: "",
     status: 1,
     deptId: 1,
@@ -180,8 +180,8 @@ const userMap: Record<string, any> = {
     mobile: "17621210366",
     gender: 1,
     avatar:
-      "https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
-    email: "youlaitech@163.com",
+      "https://oss.信息化系统.tech/信息化系统-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
+    email: "信息化系统tech@163.com",
     status: 1,
     deptId: 3,
     roleIds: [3],

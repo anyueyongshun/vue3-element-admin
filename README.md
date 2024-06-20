@@ -3,8 +3,8 @@
     <img src="https://img.shields.io/badge/Vite-5.2.11-green.svg"/>
     <img src="https://img.shields.io/badge/Element Plus-2.7.3-blue.svg"/>
     <img src="https://img.shields.io/badge/license-MIT-green.svg"/>
-    <a href="https://gitee.com/youlaiorg" target="_blank">
-        <img src="https://img.shields.io/badge/Author-有来开源组织-orange.svg"/>
+    <a href="https://gitee.com/信息化系统org" target="_blank">
+        <img src="https://img.shields.io/badge/Author-信息化系统开源组织-orange.svg"/>
     </a>
     <div align="center"> 中文 | <a href="./README.en-US.md">English</div>
 </div>
@@ -12,19 +12,19 @@
 ![](https://foruda.gitee.com/images/1708618984641188532/a7cca095_716974.png "rainbow.png")
 
 <div align="center">
-  <a target="_blank" href="http://vue3.youlai.tech">👀 在线预览</a> |  <a target="_blank" href="https://juejin.cn/post/7228990409909108793">📖 阅读文档</a>  
+  <a target="_blank" href="http://vue3.信息化系统.tech">👀 在线预览</a> |  <a target="_blank" href="https://juejin.cn/post/7228990409909108793">📖 阅读文档</a>  
 </div>
 
 ## 项目简介
 
-[vue3-element-admin](https://gitee.com/youlaiorg/vue3-element-admin) 是基于 Vue3 + Vite5+ TypeScript5 + Element-Plus + Pinia 等主流技术栈构建的免费开源的后台管理前端模板（配套[后端源码](https://gitee.com/youlaiorg/youlai-boot)）。
+[vue3-element-admin](https://gitee.com/信息化系统org/vue3-element-admin) 是基于 Vue3 + Vite5+ TypeScript5 + Element-Plus + Pinia 等主流技术栈构建的免费开源的后台管理前端模板（配套[后端源码](https://gitee.com/信息化系统org/信息化系统-boot)）。
 
 
 ## 项目特色
 
 - **简洁易用**：基于 [vue-element-admin](https://gitee.com/panjiachen/vue-element-admin) 升级的 Vue3 版本，无过渡封装 ，易上手。
 
-- **数据交互**：同时支持本地 `Mock` 和线上接口，配套 [Java 后端源码](https://gitee.com/youlaiorg/youlai-boot)和[在线接口文档](https://www.apifox.cn/apidoc/shared-195e783f-4d85-4235-a038-eec696de4ea5)。
+- **数据交互**：同时支持本地 `Mock` 和线上接口，配套 [Java 后端源码](https://gitee.com/信息化系统org/信息化系统-boot)和[在线接口文档](https://www.apifox.cn/apidoc/shared-195e783f-4d85-4235-a038-eec696de4ea5)。
 
 - **权限管理**：用户、角色、菜单、字典、部门等完善的权限系统功能。
 
@@ -46,8 +46,8 @@
 
 | 项目 | Gitee                                                        | Github                                                       | GitCode                                                      |
 | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 前端 | [vue3-element-admin](https://gitee.com/youlaiorg/vue3-element-admin) | [vue3-element-admin](https://github.com/youlaitech/vue3-element-admin) | [vue3-element-admin](https://gitcode.net/youlai/vue3-element-admin) |
-| 后端 | [youlai-boot](https://gitee.com/youlaiorg/youlai-boot)       | [youlai-boot](https://github.com/haoxianrui/youlai-boot.git) | [youlai-boot](https://gitcode.net/youlai/youlai-boot)        |
+| 前端 | [vue3-element-admin](https://gitee.com/信息化系统org/vue3-element-admin) | [vue3-element-admin](https://github.com/信息化系统tech/vue3-element-admin) | [vue3-element-admin](https://gitcode.net/信息化系统/vue3-element-admin) |
+| 后端 | [信息化系统-boot](https://gitee.com/信息化系统org/信息化系统-boot)       | [信息化系统-boot](https://github.com/haoxianrui/信息化系统-boot.git) | [信息化系统-boot](https://gitcode.net/信息化系统/信息化系统-boot)        |
 
 ## 环境准备
 
@@ -61,7 +61,7 @@
 
 ```bash
 # 克隆代码
-git clone https://gitee.com/youlaiorg/vue3-element-admin.git
+git clone https://gitee.com/信息化系统org/vue3-element-admin.git
 
 # 切换目录
 cd vue3-element-admin
@@ -97,8 +97,8 @@ server {
 	}
 	# 反向代理配置
 	location /prod-api/ {
-            # vapi.youlai.tech 替换后端API地址，注意保留后面的斜杠 /
-            proxy_pass http://vapi.youlai.tech/; 
+            # vapi.信息化系统.tech 替换后端API地址，注意保留后面的斜杠 /
+            proxy_pass http://vapi.信息化系统.tech/; 
 	}
 }
 ```
@@ -111,9 +111,9 @@ server {
 
 > 如果您具备Java开发基础，按照以下步骤将在线接口转为本地后端接口，创建企业级前后端分离开发环境，助您走向全栈之路。
 
-1. 获取基于 `Java` 和 `SpringBoot` 开发的后端 [youlai-boot](https://gitee.com/youlaiorg/youlai-boot.git) 源码。
-2. 根据后端工程的说明文档 [README.md](https://gitee.com/youlaiorg/youlai-boot#%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C) 完成本地启动。
-3. 修改 `.env.development` 文件中的 `VITE_APP_API_URL` 的值，将其从 http://vapi.youlai.tech 更改为 http://localhost:8989。
+1. 获取基于 `Java` 和 `SpringBoot` 开发的后端 [信息化系统-boot](https://gitee.com/信息化系统org/信息化系统-boot.git) 源码。
+2. 根据后端工程的说明文档 [README.md](https://gitee.com/信息化系统org/信息化系统-boot#%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C) 完成本地启动。
+3. 修改 `.env.development` 文件中的 `VITE_APP_API_URL` 的值，将其从 http://vapi.信息化系统.tech 更改为 http://localhost:8989。
 
 
 ## 注意事项
@@ -138,7 +138,7 @@ server {
 
 - **其他问题**
 
-  如果有其他问题或者建议，建议 [ISSUE](https://gitee.com/youlaiorg/vue3-element-admin/issues/new)
+  如果有其他问题或者建议，建议 [ISSUE](https://gitee.com/信息化系统org/vue3-element-admin/issues/new)
 
 
 
@@ -164,12 +164,12 @@ server {
 
 Thanks to all the contributors!
 
-[![contributors](https://contrib.rocks/image?repo=youlaitech/vue3-element-admin)](https://github.com/youlaitech/vue3-element-admin/graphs/contributors)
+[![contributors](https://contrib.rocks/image?repo=信息化系统tech/vue3-element-admin)](https://github.com/信息化系统tech/vue3-element-admin/graphs/contributors)
 
 
 ## 交流群🚀
 
-> **关注「有来技术」公众号，获取交流群二维码。**
+> **关注「信息化系统技术」公众号，获取交流群二维码。**
 >
 > 如果交流群的二维码过期，请加微信(haoxianrui)并备注「前端」、「后端」或「全栈」以获取最新二维码。
 >
@@ -177,5 +177,5 @@ Thanks to all the contributors!
 
 | 公众号 | 交流群 |
 |:----:|:----:|
-| ![有来技术公众号二维码](https://foruda.gitee.com/images/1687689212187063809/3c69eaee_716974.png) | ![交流群二维码](https://foruda.gitee.com/images/1687689212139273561/6a65ef69_716974.png) |
+| !信息化系统技术公众号二维码](https://foruda.gitee.com/images/1687689212187063809/3c69eaee_716974.png) | ![交流群二维码](https://foruda.gitee.com/images/1687689212139273561/6a65ef69_716974.png) |
 

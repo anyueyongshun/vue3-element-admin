@@ -14,7 +14,7 @@ const contentConfig: IContentConfig = {
           id: 1,
           username: "tom",
           avatar:
-            "https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
+            "https://oss.信息化系统.tech/信息化系统-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
           percent: 99,
           price: 10,
           url: "https://www.baidu.com",
@@ -29,7 +29,7 @@ const contentConfig: IContentConfig = {
           id: 2,
           username: "jerry",
           avatar:
-            "https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
+            "https://oss.信息化系统.tech/信息化系统-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif",
           percent: 88,
           price: 999,
           url: "https://www.google.com",

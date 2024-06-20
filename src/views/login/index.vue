@@ -105,8 +105,8 @@
     <!-- ICP备案 -->
     <div class="absolute bottom-1 text-[10px] text-center" v-show="icpVisible">
       <p>
-        Copyright © 2021 - 2024 youlai.tech All Rights Reserved. 有来技术
-        版权所有
+        Copyright © 2021 - 2024 信息化系统.tech All Rights Reserved.
+        信息化系统技术 版权所有
       </p>
       <p>皖ICP备20006496号-3</p>
     </div>
