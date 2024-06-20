@@ -49,16 +49,23 @@
         <el-table-column prop="loginName" label="登录名" />
         <el-table-column label="状态" width="70">
           <template #default="scope">
-            <el-tag
-              :type="getTagType(scope.row)"
+            <el-tooltip
+              class="box-item"
               effect="dark"
-              round
-              size="small"
-              @click="
-                handleUpdateStatus(scope.row, scope.row.status === 1 ? 2 : 1)
-              "
-              >{{ scope.row.statusDesc }}</el-tag
+              content="点击会在 [启用] 与 [禁用] 之间切换"
+              placement="bottom"
             >
+              <el-tag
+                :type="getTagType(scope.row)"
+                effect="dark"
+                round
+                size="small"
+                @click="
+                  handleUpdateStatus(scope.row, scope.row.status === 1 ? 2 : 1)
+                "
+                >{{ scope.row.statusDesc }}</el-tag
+              >
+            </el-tooltip>
           </template>
         </el-table-column>
         <el-table-column prop="addTime" label="创建时间" />
