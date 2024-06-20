@@ -74,15 +74,22 @@
               >
                 <i-ep-lock />权限
               </el-button>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleOwnerAccounts(node, data)"
-                v-if="!data.isRoot"
+              <el-tooltip
+                class="box-item"
+                effect="dark"
+                content="查看拥有此角色的账号"
+                placement="bottom"
               >
-                <svg-icon icon-class="user" />账号
-              </el-button>
+                <el-button
+                  type="primary"
+                  size="small"
+                  link
+                  @click="handleOwnerAccounts(node, data)"
+                  v-if="!data.isRoot"
+                >
+                  <svg-icon icon-class="user" />账号
+                </el-button>
+              </el-tooltip>
             </span>
           </span>
         </template>

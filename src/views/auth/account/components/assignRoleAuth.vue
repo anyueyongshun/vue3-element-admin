@@ -181,7 +181,7 @@
             <el-tree
               node-key="id"
               ref="treeMenuRef"
-              :props="propsTree"
+              :props="propsMenuTree"
               :data="datasMenu"
               show-checkbox
               default-expand-all
@@ -461,11 +461,17 @@ function handleMenuFilter(value: string, data: any) {
   if (!value) {
     return true;
   }
-  return data.name.indexOf(value) !== -1;
+  return data.title.indexOf(value) !== -1;
 }
 
 const propsTree = {
   label: "name",
+  children: "children",
+  disabled: "disabled",
+};
+
+const propsMenuTree = {
+  label: "title",
   children: "children",
   disabled: "disabled",
 };

@@ -65,15 +65,22 @@
                   </el-button>
                 </template>
               </el-popconfirm>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleOwnerAccounts(node, data)"
-                v-if="!data.isRoot"
+              <el-tooltip
+                class="box-item"
+                effect="dark"
+                content="查看拥有此菜单的账号"
+                placement="bottom"
               >
-                <svg-icon icon-class="user" />账号
-              </el-button>
+                <el-button
+                  type="primary"
+                  size="small"
+                  link
+                  @click="handleOwnerAccounts(node, data)"
+                  v-if="!data.isRoot"
+                >
+                  <svg-icon icon-class="user" />账号
+                </el-button>
+              </el-tooltip>
             </span>
           </span>
         </template>
@@ -144,7 +151,7 @@ function handleFilter(value: string, data: any) {
   if (!value) {
     return true;
   }
-  return data.name.indexOf(value) !== -1;
+  return data.title.indexOf(value) !== -1;
 }
 
 //新增菜单
@@ -161,7 +168,7 @@ function handleEdit(node: Node, data: Tree) {
 
 //显示拥有此菜单的账号
 function handleOwnerAccounts(node: Node, data: Tree) {
-  ElMessage.success(data.id);
+  menuId.value = data.id ?? "";
   dialogRoleAuthMenuRef.value.dialogShow = true;
 }
 

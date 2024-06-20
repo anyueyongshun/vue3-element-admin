@@ -7,6 +7,7 @@
             v-model="queryParams.Name"
             style="width: 240px"
             placeholder="请输入名称"
+            clearable
           />
         </el-form-item>
         <el-form-item>

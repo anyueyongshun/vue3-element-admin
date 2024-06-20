@@ -8,7 +8,12 @@
       <div class="search-container">
         <el-form ref="queryFormRef" :inline="true">
           <el-form-item label="登录名">
-            <el-input placeholder="请输入登录名" maxlength="20" clearable />
+            <el-input
+              placeholder="请输入登录名"
+              v-model="searchLoginName"
+              maxlength="20"
+              clearable
+            />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleQuery()">
@@ -18,37 +23,37 @@
         </el-form>
       </div>
       <el-card class="table-container">
-        <el-table
-          border
-          v-loading="loading"
-          highlight-current-row
-          :data="AccountDatas"
-          stripe
-          style="width: 100%"
-        >
-          <el-table-column
-            type="index"
-            width="70"
-            align="center"
-            label="序号"
-          />
-          <el-table-column prop="loginName" label="登录名" />
-          <el-table-column label="状态" width="70">
-            <template #default="scope">
-              <el-tag
-                :type="getTagType(scope.row)"
-                effect="dark"
-                round
-                size="small"
-                >{{ scope.row.statusDesc }}</el-tag
-              >
-            </template>
-          </el-table-column>
-          <el-table-column prop="addTime" label="创建时间" />
-          <el-table-column prop="lastLoginTime" label="上次登录时间" />
-          <el-table-column prop="lastLoginIP" label="上次登录IP" />
-          <el-table-column prop="memo" label="备注" />
-        </el-table>
+        <el-scrollbar height="500px">
+          <el-table
+            border
+            v-loading="loading"
+            highlight-current-row
+            :data="filterTableData"
+            stripe
+            style="width: 100%"
+          >
+            <el-table-column
+              type="index"
+              width="70"
+              align="center"
+              label="序号"
+            />
+            <el-table-column prop="loginName" label="登录名" />
+            <el-table-column label="状态" width="70">
+              <template #default="scope">
+                <el-tag
+                  :type="getTagType(scope.row)"
+                  effect="dark"
+                  round
+                  size="small"
+                  >{{ scope.row.statusDesc }}</el-tag
+                >
+              </template>
+            </el-table-column>
+            <el-table-column prop="addTime" label="创建时间" />
+            <el-table-column prop="lastLoginTime" label="上次登录时间" />
+            <el-table-column prop="memo" label="备注" /> </el-table
+        ></el-scrollbar>
       </el-card>
     </div>
   </el-dialog>
@@ -78,22 +83,29 @@ const props = defineProps({
 });
 
 const loading = ref(false);
-const AccountDatas = ref<AccountModel[]>();
+const AccountDatas = reactive<AccountModel[]>([]);
 const dialogShow = ref(false);
 const dialogTitle = ref("");
-
+const searchLoginName = ref("");
+const filterTableData = computed(() =>
+  AccountDatas.filter(
+    (data) =>
+      !searchLoginName.value ||
+      data
+        .loginName!.toLowerCase()
+        .includes(searchLoginName.value.toLowerCase())
+  )
+);
 //查询账号列表
 function handleQuery() {
-  //ElMessage.success(props.id);
-  //ElMessage.success(props.accountType);
   if (props.id == "" || props.accountType == "") return;
-
   loading.value = true;
   if (props.accountType == "1") {
     dialogTitle.value = "权限";
     getAuthAccounts(props.id)
       .then((data) => {
-        AccountDatas.value = data;
+        AccountDatas.length = 0;
+        AccountDatas.push(...data);
       })
       .finally(() => {
         loading.value = false;
@@ -102,7 +114,8 @@ function handleQuery() {
     dialogTitle.value = "菜单";
     getMenuAccounts(props.id)
       .then((data) => {
-        AccountDatas.value = data;
+        AccountDatas.length = 0;
+        AccountDatas.push(...data);
       })
       .finally(() => {
         loading.value = false;
@@ -111,7 +124,8 @@ function handleQuery() {
     dialogTitle.value = "角色";
     getRoleAccounts(props.id)
       .then((data) => {
-        AccountDatas.value = data;
+        AccountDatas.length = 0;
+        AccountDatas.push(...data);
       })
       .finally(() => {
         loading.value = false;
