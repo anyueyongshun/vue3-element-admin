@@ -28,6 +28,7 @@ interface ImportMeta {
  */
 declare const __APP_INFO__: {
   pkg: {
+    systemName: string;
     name: string;
     version: string;
     engines: {

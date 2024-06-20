@@ -32,7 +32,7 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <a
+          <!-- <a
             target="_blank"
             href="https://gitee.com/youlaiorg/vue3-element-admin"
           >
@@ -40,7 +40,7 @@
           </a>
           <a target="_blank" href="https://juejin.cn/post/7228990409909108793">
             <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
-          </a>
+          </a> -->
           <el-dropdown-item divided @click="logout">
             {{ $t("navbar.logout") }}
           </el-dropdown-item>
