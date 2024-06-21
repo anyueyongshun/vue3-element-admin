@@ -1,87 +1,92 @@
 <template>
-  <div class="app-container">
-    <div class="search-container">
-      <el-form :inline="true">
-        <el-form-item label="名称">
-          <el-input
-            v-model="filterText"
-            style="width: 240px"
-            placeholder="请输入名称"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleLoadTree">
-            <i-ep-refresh />刷新</el-button
-          >
-        </el-form-item>
-      </el-form>
+  <div>
+    <div class="app-container">
+      <div class="search-container">
+        <el-form :inline="true">
+          <el-form-item label="名称">
+            <el-input
+              v-model="filterText"
+              style="width: 240px"
+              placeholder="请输入名称"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="handleLoadTree">
+              <i-ep-refresh />刷新</el-button
+            >
+          </el-form-item>
+        </el-form>
+      </div>
+      <el-card class="table-container">
+        <el-tree
+          node-key="id"
+          ref="treeRef"
+          :props="props"
+          :data="datas"
+          show-checkbox
+          default-expand-all
+          :highlight-current="true"
+          :expand-on-click-node="false"
+          :filter-node-method="handleFilter"
+          @check-change="handleCheckChange"
+        >
+          <template #default="{ node, data }">
+            <span class="custom-tree-node">
+              <span>
+                <svg-icon v-if="data.orgType == 1" icon-class="company" />
+                <svg-icon
+                  v-else-if="data.orgType == 2"
+                  icon-class="department"
+                />
+                {{ node.label }}
+              </span>
+              <span>
+                <el-button
+                  type="primary"
+                  size="small"
+                  link
+                  @click="handleAdd(node, data)"
+                >
+                  <i-ep-plus />新增
+                </el-button>
+                <el-button
+                  type="primary"
+                  size="small"
+                  link
+                  @click="handleEdit(node, data)"
+                  v-if="!data.isRoot"
+                >
+                  <i-ep-edit />编辑
+                </el-button>
+                <el-popconfirm
+                  title="确认要删除?"
+                  @confirm="handleDelete(node, data)"
+                  v-if="!data.isRoot"
+                >
+                  <template #reference>
+                    <el-button type="primary" size="small" link>
+                      <i-ep-delete />删除
+                    </el-button>
+                  </template>
+                </el-popconfirm>
+              </span>
+            </span>
+          </template>
+        </el-tree>
+      </el-card>
     </div>
-    <el-card class="table-container">
-      <el-tree
-        node-key="id"
-        ref="treeRef"
-        :props="props"
-        :data="datas"
-        show-checkbox
-        default-expand-all
-        :highlight-current="true"
-        :expand-on-click-node="false"
-        :filter-node-method="handleFilter"
-        @check-change="handleCheckChange"
-      >
-        <template #default="{ node, data }">
-          <span class="custom-tree-node">
-            <span>
-              <svg-icon v-if="data.orgType == 1" icon-class="company" />
-              <svg-icon v-else-if="data.orgType == 2" icon-class="department" />
-              {{ node.label }}
-            </span>
-            <span>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleAdd(node, data)"
-              >
-                <i-ep-plus />新增
-              </el-button>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleEdit(node, data)"
-                v-if="!data.isRoot"
-              >
-                <i-ep-edit />编辑
-              </el-button>
-              <el-popconfirm
-                title="确认要删除?"
-                @confirm="handleDelete(node, data)"
-                v-if="!data.isRoot"
-              >
-                <template #reference>
-                  <el-button type="primary" size="small" link>
-                    <i-ep-delete />删除
-                  </el-button>
-                </template>
-              </el-popconfirm>
-            </span>
-          </span>
-        </template>
-      </el-tree>
-    </el-card>
+    <addOrg
+      ref="dialogAddRef"
+      @handle-query-event="handleLoadTree"
+      v-model:pId="parentId"
+    />
+    <editOrg
+      ref="dialogEditRef"
+      @handle-query-event="handleLoadTree"
+      v-model:id="OrgId"
+    />
   </div>
-  <addOrg
-    ref="dialogAddRef"
-    @handle-query-event="handleLoadTree"
-    v-model:pId="parentId"
-  />
-  <editOrg
-    ref="dialogEditRef"
-    @handle-query-event="handleLoadTree"
-    v-model:id="OrgId"
-  />
 </template>
 
 <script setup lang="ts">

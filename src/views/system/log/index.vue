@@ -1,118 +1,125 @@
 <template>
-  <div class="app-container">
-    <div class="search-container">
-      <el-form :inline="true" :model="queryParams">
-        <el-form-item label="内容">
-          <el-input
-            v-model="queryParams.message"
-            style="width: 120px"
-            placeholder="请输入日志内容"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="账号">
-          <el-input
-            v-model="queryParams.loginName"
-            style="width: 120px"
-            placeholder="请输入登录账号"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="类型">
-          <el-select
-            v-model="queryParams.logType"
-            placeholder="请选择日志类型"
-            style="width: 120px"
-          >
-            <el-option
-              v-for="item in logTypeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+  <div>
+    <div class="app-container">
+      <div class="search-container">
+        <el-form :inline="true" :model="queryParams">
+          <el-form-item label="内容">
+            <el-input
+              v-model="queryParams.message"
+              style="width: 120px"
+              placeholder="请输入日志内容"
+              clearable
             />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="日期">
-          <el-date-picker
-            v-model="queryParams.fromDate"
-            style="width: 150px"
-            placeholder="请输入开始日期"
-          />
-        </el-form-item>
-        <el-form-item label="--" />
-        <el-form-item>
-          <el-date-picker
-            v-model="queryParams.toDate"
-            style="width: 150px"
-            placeholder="请输入结束日期"
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleQuery">
-            <i-ep-search />查询
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-    <el-card class="table-container">
-      <el-table
-        border
-        v-loading="loading"
-        highlight-current-row
-        :data="datas"
-        stripe
-        style="width: 100%"
-        @row-dblclick="handleDbClick"
-      >
-        <el-table-column type="index" width="70" align="center" label="序号" />
-        <el-table-column prop="loginName" label="账号" width="150" />
-        <el-table-column prop="logTypeDesc" label="类型" width="100" />
-        <el-table-column prop="message" label="内容" />
-        <el-table-column prop="addTime" label="时间" width="200" />
-        <el-table-column fixed="right" label="操作" width="180">
-          <template #default="scope">
-            <el-button
-              type="primary"
-              size="small"
-              link
-              @click="handleDetail(scope.row)"
+          </el-form-item>
+          <el-form-item label="账号">
+            <el-input
+              v-model="queryParams.loginName"
+              style="width: 120px"
+              placeholder="请输入登录账号"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="类型">
+            <el-select
+              v-model="queryParams.logType"
+              placeholder="请选择日志类型"
+              style="width: 120px"
             >
-              <el-icon><Document /></el-icon>
-              详细
+              <el-option
+                v-for="item in logTypeOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="日期">
+            <el-date-picker
+              v-model="queryParams.fromDate"
+              style="width: 150px"
+              placeholder="请输入开始日期"
+            />
+          </el-form-item>
+          <el-form-item label="--" />
+          <el-form-item>
+            <el-date-picker
+              v-model="queryParams.toDate"
+              style="width: 150px"
+              placeholder="请输入结束日期"
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="handleQuery">
+              <i-ep-search />查询
             </el-button>
-            <el-popconfirm
-              title="确认要删除?"
-              @confirm="handleDelete(scope.row)"
-            >
-              <template #reference>
-                <el-button type="primary" size="small" link>
-                  <i-ep-delete />删除
-                </el-button>
-              </template>
-            </el-popconfirm>
-          </template>
-        </el-table-column>
-      </el-table>
-      <template #footer>
-        <el-pagination
-          background
-          v-if="total > 0"
-          v-model:total="total"
-          v-model:current-page="queryParams.pageNum"
-          v-model:page-size="queryParams.pageSize"
-          @current-change="handleQuery"
-          @size-change="handleSizeChange"
-          :page-sizes="[10, 15, 20, 25, 30, 50, 100]"
-          layout="total, sizes, prev, pager, next, jumper"
-        />
-      </template>
-    </el-card>
+          </el-form-item>
+        </el-form>
+      </div>
+      <el-card class="table-container">
+        <el-table
+          border
+          v-loading="loading"
+          highlight-current-row
+          :data="datas"
+          stripe
+          style="width: 100%"
+          @row-dblclick="handleDbClick"
+        >
+          <el-table-column
+            type="index"
+            width="70"
+            align="center"
+            label="序号"
+          />
+          <el-table-column prop="loginName" label="账号" width="150" />
+          <el-table-column prop="logTypeDesc" label="类型" width="100" />
+          <el-table-column prop="message" label="内容" />
+          <el-table-column prop="addTime" label="时间" width="200" />
+          <el-table-column fixed="right" label="操作" width="180">
+            <template #default="scope">
+              <el-button
+                type="primary"
+                size="small"
+                link
+                @click="handleDetail(scope.row)"
+              >
+                <el-icon><Document /></el-icon>
+                详细
+              </el-button>
+              <el-popconfirm
+                title="确认要删除?"
+                @confirm="handleDelete(scope.row)"
+              >
+                <template #reference>
+                  <el-button type="primary" size="small" link>
+                    <i-ep-delete />删除
+                  </el-button>
+                </template>
+              </el-popconfirm>
+            </template>
+          </el-table-column>
+        </el-table>
+        <template #footer>
+          <el-pagination
+            background
+            v-if="total > 0"
+            v-model:total="total"
+            v-model:current-page="queryParams.pageNum"
+            v-model:page-size="queryParams.pageSize"
+            @current-change="handleQuery"
+            @size-change="handleSizeChange"
+            :page-sizes="[10, 15, 20, 25, 30, 50, 100]"
+            layout="total, sizes, prev, pager, next, jumper"
+          />
+        </template>
+      </el-card>
+    </div>
+    <detailLog
+      ref="dialogDetailRef"
+      @handle-query-event="handleQuery"
+      v-model:logId="logId"
+    />
   </div>
-  <detailLog
-    ref="dialogDetailRef"
-    @handle-query-event="handleQuery"
-    v-model:logId="logId"
-  />
 </template>
 
 <script setup lang="ts">

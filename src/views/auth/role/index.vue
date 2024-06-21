@@ -1,121 +1,123 @@
 <template>
-  <div class="app-container">
-    <div class="search-container">
-      <el-form :inline="true">
-        <el-form-item label="名称">
-          <el-input
-            v-model="filterText"
-            style="width: 240px"
-            placeholder="请输入名称"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleLoadTree">
-            <i-ep-refresh />刷新</el-button
-          >
-        </el-form-item>
-      </el-form>
-    </div>
-    <el-card class="table-container">
-      <el-tree
-        node-key="id"
-        ref="treeRef"
-        :props="props"
-        :data="datas"
-        show-checkbox
-        default-expand-all
-        :highlight-current="true"
-        :expand-on-click-node="false"
-        :filter-node-method="handleFilter"
-        @check-change="handleCheckChange"
-      >
-        <template #default="{ node, data }">
-          <span class="custom-tree-node">
-            <span>
-              <el-icon v-if="data.isAdmin"><UserFilled /></el-icon>
-              {{ node.label }}
-            </span>
-            <span>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleAdd(node, data)"
-              >
-                <i-ep-plus />新增
-              </el-button>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleEdit(node, data)"
-                v-if="!data.isRoot"
-              >
-                <i-ep-edit />编辑
-              </el-button>
-              <el-popconfirm
-                title="确认要删除?"
-                @confirm="handleDelete(node, data)"
-                v-if="!data.isRoot"
-              >
-                <template #reference>
-                  <el-button type="primary" size="small" link>
-                    <i-ep-delete />删除
-                  </el-button>
-                </template>
-              </el-popconfirm>
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleAssign(node, data)"
-                v-if="!data.isRoot"
-              >
-                <i-ep-lock />权限
-              </el-button>
-              <el-tooltip
-                class="box-item"
-                effect="dark"
-                content="查看拥有此角色的账号"
-                placement="bottom"
-              >
+  <div>
+    <div class="app-container">
+      <div class="search-container">
+        <el-form :inline="true">
+          <el-form-item label="名称">
+            <el-input
+              v-model="filterText"
+              style="width: 240px"
+              placeholder="请输入名称"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="handleLoadTree">
+              <i-ep-refresh />刷新</el-button
+            >
+          </el-form-item>
+        </el-form>
+      </div>
+      <el-card class="table-container">
+        <el-tree
+          node-key="id"
+          ref="treeRef"
+          :props="props"
+          :data="datas"
+          show-checkbox
+          default-expand-all
+          :highlight-current="true"
+          :expand-on-click-node="false"
+          :filter-node-method="handleFilter"
+          @check-change="handleCheckChange"
+        >
+          <template #default="{ node, data }">
+            <span class="custom-tree-node">
+              <span>
+                <el-icon v-if="data.isAdmin"><UserFilled /></el-icon>
+                {{ node.label }}
+              </span>
+              <span>
                 <el-button
                   type="primary"
                   size="small"
                   link
-                  @click="handleOwnerAccounts(node, data)"
+                  @click="handleAdd(node, data)"
+                >
+                  <i-ep-plus />新增
+                </el-button>
+                <el-button
+                  type="primary"
+                  size="small"
+                  link
+                  @click="handleEdit(node, data)"
                   v-if="!data.isRoot"
                 >
-                  <svg-icon icon-class="user" />账号
+                  <i-ep-edit />编辑
                 </el-button>
-              </el-tooltip>
+                <el-popconfirm
+                  title="确认要删除?"
+                  @confirm="handleDelete(node, data)"
+                  v-if="!data.isRoot"
+                >
+                  <template #reference>
+                    <el-button type="primary" size="small" link>
+                      <i-ep-delete />删除
+                    </el-button>
+                  </template>
+                </el-popconfirm>
+                <el-button
+                  type="primary"
+                  size="small"
+                  link
+                  @click="handleAssign(node, data)"
+                  v-if="!data.isRoot"
+                >
+                  <i-ep-lock />权限
+                </el-button>
+                <el-tooltip
+                  class="box-item"
+                  effect="dark"
+                  content="查看拥有此角色的账号"
+                  placement="bottom"
+                >
+                  <el-button
+                    type="primary"
+                    size="small"
+                    link
+                    @click="handleOwnerAccounts(node, data)"
+                    v-if="!data.isRoot"
+                  >
+                    <svg-icon icon-class="user" />账号
+                  </el-button>
+                </el-tooltip>
+              </span>
             </span>
-          </span>
-        </template>
-      </el-tree>
-    </el-card>
+          </template>
+        </el-tree>
+      </el-card>
+    </div>
+    <addRole
+      ref="dialogAddRef"
+      @handle-query-event="handleLoadTree"
+      v-model:pId="parentId"
+    />
+    <editRole
+      ref="dialogEditRef"
+      @handle-query-event="handleLoadTree"
+      v-model:id="roleId"
+    />
+    <assignAuthMenu
+      ref="dialogAssignRef"
+      v-model:roleId="roleId"
+      v-model:roleName="roleName"
+    />
+    <roleAuthMenu
+      ref="dialogRoleAuthMenuRef"
+      v-model:id="roleId"
+      accountType="3"
+    />
   </div>
-  <addRole
-    ref="dialogAddRef"
-    @handle-query-event="handleLoadTree"
-    v-model:pId="parentId"
-  />
-  <editRole
-    ref="dialogEditRef"
-    @handle-query-event="handleLoadTree"
-    v-model:id="roleId"
-  />
-  <assignAuthMenu
-    ref="dialogAssignRef"
-    v-model:roleId="roleId"
-    v-model:roleName="roleName"
-  />
-  <roleAuthMenu
-    ref="dialogRoleAuthMenuRef"
-    v-model:id="roleId"
-    accountType="3"
-  />
 </template>
 
 <script setup lang="ts">
