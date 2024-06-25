@@ -268,28 +268,24 @@ const props = defineProps({
 //------------------------账号添加权限，菜单，角色-----------------------------
 //加载权限树
 function handleLoadAuthTree() {
-  if (props.accountId != "") {
-    loadAuthTree(false)
-      .then((data) => {
-        datasAuthInclude.length = 0;
-        datasAuthInclude.push(data);
-        datasAuthExclude.length = 0;
-        datasAuthExclude.push(data);
-      })
-      .finally(() => {});
-  }
+  loadAuthTree(false)
+    .then((data) => {
+      datasAuthInclude.length = 0;
+      datasAuthInclude.push(data);
+      datasAuthExclude.length = 0;
+      datasAuthExclude.push(data);
+    })
+    .finally(() => {});
 }
 
 //加载权限树
 function handleLoadAuthOwnerTree() {
-  if (props.accountId != "") {
-    loadAuthTree(true)
-      .then((data) => {
-        datasAuthOwner.length = 0;
-        datasAuthOwner.push(data);
-      })
-      .finally(() => {});
-  }
+  loadAuthTree(true)
+    .then((data) => {
+      datasAuthOwner.length = 0;
+      datasAuthOwner.push(data);
+    })
+    .finally(() => {});
 }
 
 //加载菜单树
@@ -481,15 +477,7 @@ defineExpose({ dialogShow });
 watch(
   () => props.accountId,
   (newVal: string) => {
-    handleLoadAuthOwnerTree();
-    handleLoadAuthTree();
-    handleLoadMenuTree();
-    handleLoadRoleTree();
-    handleSetAuthOwner();
-    handleSetAuthInclude();
-    handleSetAuthExclude();
-    handleSetRole();
-    handleSetMenu();
+    handlQuery();
   }
 );
 
@@ -507,14 +495,20 @@ watchEffect(
 );
 
 onMounted(() => {
-  handleLoadAuthOwnerTree();
-  handleLoadAuthTree();
-  handleLoadMenuTree();
-  handleLoadRoleTree();
-  handleSetAuthOwner();
-  handleSetAuthInclude();
-  handleSetAuthExclude();
-  handleSetRole();
-  handleSetMenu();
+  handlQuery();
 });
+
+function handlQuery() {
+  if (dialogShow.value && props.accountId != "") {
+    handleLoadAuthOwnerTree();
+    handleLoadAuthTree();
+    handleLoadMenuTree();
+    handleLoadRoleTree();
+    handleSetAuthOwner();
+    handleSetAuthInclude();
+    handleSetAuthExclude();
+    handleSetRole();
+    handleSetMenu();
+  }
+}
 </script>

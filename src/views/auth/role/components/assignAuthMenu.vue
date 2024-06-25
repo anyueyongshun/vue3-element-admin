@@ -174,11 +174,6 @@ function handleAssignMenu() {
   };
   assignMenu(model)
     .then((data) => {
-      /* if (data.data === true) {
-        ElMessage.success("操作成功");
-      } else {
-        ElMessage.success("操作失败");
-      } */
       ElMessage.success("操作成功");
     })
     .finally(() => {});
@@ -230,10 +225,12 @@ defineExpose({ dialogShow });
 watch(
   () => props.roleId,
   (newVal: string) => {
-    handleLoadAuthTree();
-    handleLoadMenuTree();
-    handleSetAuth();
-    handleSetMenu();
+    if (dialogShow.value && props.roleId != "") {
+      handleLoadAuthTree();
+      handleLoadMenuTree();
+      handleSetAuth();
+      handleSetMenu();
+    }
   }
 );
 
@@ -256,9 +253,11 @@ watchEffect(
 );
 
 onMounted(() => {
-  handleLoadAuthTree();
-  handleLoadMenuTree();
-  handleSetAuth();
-  handleSetMenu();
+  if (dialogShow.value && props.roleId != "") {
+    handleLoadAuthTree();
+    handleLoadMenuTree();
+    handleSetAuth();
+    handleSetMenu();
+  }
 });
 </script>

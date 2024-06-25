@@ -98,7 +98,7 @@ const filterTableData = computed(() =>
 );
 //查询账号列表
 function handleQuery() {
-  if (props.id == "" || props.accountType == "") return;
+  if (props.id == "" || props.accountType == "" || !dialogShow.value) return;
   loading.value = true;
   if (props.accountType == "1") {
     dialogTitle.value = "权限";
