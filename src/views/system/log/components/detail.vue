@@ -20,7 +20,9 @@
         {{ logDetail.message }}
       </el-descriptions-item>
       <el-descriptions-item label="堆栈" span="2">
-        {{ logDetail.stackTrace }}
+        <el-scrollbar height="400px">
+          {{ logDetail.stackTrace }}
+        </el-scrollbar>
       </el-descriptions-item>
     </el-descriptions>
   </el-dialog>
