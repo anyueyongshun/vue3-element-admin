@@ -20,6 +20,15 @@
       <!-- 语言选择 -->
       <lang-select class="setting-item" />
     </template>
+    <el-badge
+      :value="viewNoticeCount"
+      :max="9"
+      class="setting-item"
+      :offset="[-7, 15]"
+      v-if="viewNoticeCount > 0"
+    >
+      <svg-icon icon-class="notice2" />
+    </el-badge>
 
     <!-- 用户头像 -->
     <el-dropdown class="setting-item" trigger="click">
@@ -28,7 +37,9 @@
           :src="userStore.user.avatar + '?imageView2/1/w/80/h/80'"
           class="rounded-full mr-10px w24px w24px"
         />
-        <span>{{ userStore.user.username }}</span>
+        <span>
+          {{ userStore.user.username }}
+        </span>
       </div>
       <template #dropdown>
         <el-dropdown-menu>
@@ -41,7 +52,17 @@
           <a target="_blank" href="https://juejin.cn/post/7228990409909108793">
             <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
           </a> -->
+          <a
+            target="_blank"
+            href="https://gitee.com/信息化系统org/vue3-element-admin"
+          >
+            <el-dropdown-item>
+              <svg-icon icon-class="user" />
+              个人信息</el-dropdown-item
+            >
+          </a>
           <el-dropdown-item divided @click="logout">
+            <svg-icon icon-class="out" />
             {{ $t("navbar.logout") }}
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -57,6 +78,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { ref, reactive, onMounted } from "vue";
 import {
   useAppStore,
   useTagsViewStore,
@@ -78,11 +100,13 @@ const isMobile = computed(() => appStore.device === DeviceEnum.MOBILE);
 
 const { isFullscreen, toggle } = useFullscreen();
 
+const viewNoticeCount = ref(0);
+
 /**
  * 注销
  */
 function logout() {
-  ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {
+  ElMessageBox.confirm("确定要退出系统吗？", "提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     type: "warning",
@@ -98,6 +122,17 @@ function logout() {
       });
   });
 }
+
+//取未阅读消息数量
+function getViewNoticeCount() {
+  userStore.getViewNoticeCount().then((data) => {
+    viewNoticeCount.value = data;
+  });
+}
+
+onMounted(() => {
+  getViewNoticeCount();
+});
 </script>
 <style lang="scss" scoped>
 .setting-item {

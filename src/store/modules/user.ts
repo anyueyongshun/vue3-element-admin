@@ -2,6 +2,7 @@ import AuthAPI from "@/api/auth";
 import UserAPI from "@/api/user";
 import { resetRouter } from "@/router";
 import { store } from "@/store";
+import request from "@/utils/request";
 
 import { LoginData } from "@/api/auth/model";
 import { UserInfo } from "@/api/user/model";
@@ -80,12 +81,21 @@ export const useUserStore = defineStore("user", () => {
     });
   }
 
+  //取未阅读通知数量
+  function getViewNoticeCount() {
+    return request<any, number>({
+      url: "/NoticeViewRecord/GetViewCount",
+      method: "get",
+    });
+  }
+
   return {
     user,
     login,
     getUserInfo,
     logout,
     resetToken,
+    getViewNoticeCount,
   };
 });
 
