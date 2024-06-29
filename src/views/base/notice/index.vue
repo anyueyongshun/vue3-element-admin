@@ -3,18 +3,18 @@
     <div class="app-container">
       <div class="search-container">
         <el-form ref="queryFormRef" :inline="true" :model="queryParams">
-          <el-form-item label="登录名">
+          <el-form-item label="标题">
             <el-input
-              placeholder="请输入登录名"
+              placeholder="请输入标题"
               maxlength="20"
-              v-model="queryParams.loginName"
+              v-model="queryParams.title"
               clearable
             />
           </el-form-item>
-          <el-form-item label="状态">
+          <el-form-item label="发布状态">
             <el-select
-              v-model="queryParams.status"
-              placeholder="请选择状态"
+              v-model="queryParams.publishStatus"
+              placeholder="请选择发布状态"
               style="width: 140px"
             >
               <el-option
@@ -40,7 +40,7 @@
           border
           v-loading="loading"
           highlight-current-row
-          :data="AccountDatas"
+          :data="NoticeDatas"
           stripe
           style="width: 100%"
           @row-dblclick="handleDbClick"
@@ -51,14 +51,13 @@
             align="center"
             label="序号"
           />
-          <!-- <el-table-column prop="id" label="Id" /> -->
-          <el-table-column prop="loginName" label="登录名" />
+          <el-table-column prop="typeName" label="分类" width="150" />
           <el-table-column label="状态" width="70">
             <template #default="scope">
               <el-tooltip
                 class="box-item"
                 effect="dark"
-                content="点击会在 [启用] 与 [禁用] 之间切换"
+                content="点击会在 [发布] 与 [草稿] 之间切换"
                 placement="bottom"
               >
                 <el-tag
@@ -67,21 +66,21 @@
                   round
                   size="small"
                   @click="
-                    handleUpdateStatus(
+                    handleUpdatePublishStatus(
                       scope.row,
-                      scope.row.status === 1 ? 2 : 1
+                      scope.row.publishStatus === 1 ? 2 : 1
                     )
                   "
-                  >{{ scope.row.statusDesc }}</el-tag
+                  >{{ scope.row.publishStatusDesc }}</el-tag
                 >
               </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column prop="addTime" label="创建时间" />
-          <el-table-column prop="lastLoginTime" label="上次登录时间" />
-          <el-table-column prop="lastLoginIP" label="上次登录IP" />
+          <el-table-column prop="title" label="标题" />
           <el-table-column prop="memo" label="备注" />
-          <el-table-column fixed="right" label="操作" width="190">
+          <el-table-column prop="addAccountName" label="创建人" width="150" />
+          <el-table-column prop="addTime" label="创建时间" width="190" />
+          <el-table-column fixed="right" label="操作" width="140">
             <template #default="scope">
               <el-button
                 type="primary"
@@ -101,15 +100,6 @@
                   </el-button>
                 </template>
               </el-popconfirm>
-
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleAssign(scope.row)"
-              >
-                <i-ep-lock />权限
-              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -128,52 +118,50 @@
         </template>
       </el-card>
     </div>
-    <addAccount ref="dialogAddRef" @handle-query-event="handleQuery" />
-    <editAccount
+    <addNotice ref="dialogAddRef" @handle-query-event="handleQuery" />
+    <editNotice
       ref="dialogEditRef"
       @handle-query-event="handleQuery"
-      v-model:id="accountId"
-    />
-    <assignRoleAuth
-      ref="dialogRoleAuthRef"
-      v-model:accountId="accountId"
-      v-model:accountName="accountName"
+      v-model:id="noticeId"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { getAccountPage, updateStatus } from "@/api/auth/account";
 import {
-  AccountQuery,
-  AccountModel,
-  AccountUpdateStatusModel,
-} from "@/api/auth/account/model";
-import addAccount from "./components/addAccount.vue";
-import editAccount from "./components/editAccount.vue";
-import assignRoleAuth from "./components/assignRoleAuth.vue";
+  getNoticePage,
+  updatePublishStatus,
+  updateStatus,
+} from "@/api/base/notice";
+import {
+  NoticeQuery,
+  NoticeModel,
+  NoticeUpdatePublishStatusModel,
+  NoticeUpdateStatusModel,
+} from "@/api/base/notice/model";
+import addNotice from "./components/addNotice.vue";
+import editNotice from "./components/editNotice.vue";
 
 const loading = ref(false);
 const total = ref(0);
-const queryParams = reactive<AccountQuery>({
+const queryParams = reactive<NoticeQuery>({
   pageNum: 1,
   pageSize: 10,
-  status: 0,
+  title: "",
+  publishStatus: 0,
 });
-const AccountDatas = ref<AccountModel[]>();
-const accountId = ref("");
-const accountName = ref("");
+const NoticeDatas = ref<NoticeModel[]>();
+const noticeId = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
-const dialogRoleAuthRef = ref();
 
-//分页查询账号列表
+//分页查询通知列表
 function handleQuery() {
   loading.value = true;
-  getAccountPage(queryParams)
+  getNoticePage(queryParams)
     .then((data) => {
-      AccountDatas.value = data.list;
+      NoticeDatas.value = data.list;
       total.value = data.total;
     })
     .finally(() => {
@@ -188,20 +176,35 @@ const handleSizeChange = (val: number) => {
   handleQuery();
 };
 
-//显示新增账号框
+//显示新增通知框
 function handleAdd() {
   dialogAddRef.value.dialogShow = true;
 }
 
-//显示编辑账号框
-function handleEdit(row: AccountModel) {
-  accountId.value = row.id ?? "";
+//显示编辑通知框
+function handleEdit(row: NoticeModel) {
+  noticeId.value = row.id ?? "";
   dialogEditRef.value.dialogShow = true;
 }
 
-//更新账号的状态
-function handleUpdateStatus(row: AccountModel, status: number) {
-  var data: AccountUpdateStatusModel = {
+//更新通知的状态
+function handleUpdatePublishStatus(row: NoticeModel, status: number) {
+  var data: NoticeUpdatePublishStatusModel = {
+    id: row.id,
+    publishStatus: status,
+  };
+  if (row.publishStatus == 1) return;
+  updatePublishStatus(data)
+    .then((data) => {
+      ElMessage.success("操作成功");
+      handleQuery();
+    })
+    .finally(() => {});
+}
+
+//更新通知的状态
+function handleUpdateStatus(row: NoticeModel, status: number) {
+  var data: NoticeUpdateStatusModel = {
     id: row.id,
     status: status,
   };
@@ -213,27 +216,20 @@ function handleUpdateStatus(row: AccountModel, status: number) {
     .finally(() => {});
 }
 
-//双击行显示编辑账号
-function handleDbClick(row: AccountModel, column: any, event: any) {
-  accountId.value = row.id ?? "";
+//双击行显示编辑通知
+function handleDbClick(row: NoticeModel, column: any, event: any) {
+  noticeId.value = row.id ?? "";
   dialogEditRef.value.dialogShow = true;
 }
 
-//给账号分配权限、菜单、角色
-function handleAssign(row: AccountModel) {
-  accountId.value = row.id ?? "";
-  accountName.value = row.loginName ?? "";
-  dialogRoleAuthRef.value.dialogShow = true;
-}
-
-//返回账号状态显示的tag类型
-function getTagType(row: AccountModel) {
-  if (row.status == 1) {
+//返回通知状态显示的tag类型
+function getTagType(row: NoticeModel) {
+  if (row.publishStatus == 1) {
     return "success";
-  } else if (row.status == 2) {
-    return "warning";
+  } else if (row.publishStatus == 2) {
+    return "info";
   } else {
-    return "danger";
+    return "info";
   }
 }
 
@@ -244,15 +240,11 @@ const statusOptions = [
   },
   {
     value: 1,
-    label: "启用",
+    label: "发布",
   },
   {
     value: 2,
-    label: "禁用",
-  },
-  {
-    value: 3,
-    label: "删除",
+    label: "草稿",
   },
 ];
 
