@@ -60,3 +60,19 @@ export function getAccounts(id: string) {
     method: "get",
   });
 }
+
+//获取权限码-常量
+export function GetConst() {
+  return request<any, string>({
+    url: "/authority/GetConst",
+    method: "get",
+  });
+}
+
+//获取权限码-枚举
+export function GetEnum() {
+  return request<any, string>({
+    url: "/authority/GetEnum",
+    method: "get",
+  });
+}

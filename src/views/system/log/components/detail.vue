@@ -21,7 +21,7 @@
       </el-descriptions-item>
       <el-descriptions-item label="堆栈" span="2">
         <el-scrollbar height="400px">
-          {{ logDetail.stackTrace }}
+          <div v-html="logDetail.stackTrace"></div>
         </el-scrollbar>
       </el-descriptions-item>
     </el-descriptions>

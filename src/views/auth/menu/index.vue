@@ -79,7 +79,10 @@
                     @click="handleOwnerAccounts(node, data)"
                     v-if="!data.isRoot"
                   >
-                    <svg-icon icon-class="user" />账号
+                    <svg-icon
+                      icon-class="user"
+                      style="width: 1.2em; height: 1.2em"
+                    />账号
                   </el-button>
                 </el-tooltip>
               </span>

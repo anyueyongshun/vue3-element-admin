@@ -16,6 +16,14 @@
               <i-ep-refresh />刷新</el-button
             >
           </el-form-item>
+          <el-form-item>
+            <el-button type="success" @click="handleAuthCode">
+              <svg-icon
+                icon-class="code"
+                style="width: 1.2em; height: 1.2em; color: white"
+              />权限码
+            </el-button>
+          </el-form-item>
         </el-form>
       </div>
       <el-card class="table-container">
@@ -78,7 +86,10 @@
                     @click="handleOwnerAccounts(node, data)"
                     v-if="!data.isRoot"
                   >
-                    <svg-icon icon-class="user" />账号
+                    <svg-icon
+                      icon-class="user"
+                      style="width: 1.2em; height: 1.2em"
+                    />账号
                   </el-button>
                 </el-tooltip>
               </span>
@@ -102,6 +113,7 @@
       v-model:id="authorityId"
       accountType="1"
     />
+    <authCode ref="dialogAuthCodeRef" />
   </div>
 </template>
 
@@ -112,6 +124,7 @@ import { Tree, AuthorityUpdateStatusModel } from "@/api/auth/authority/model";
 import addAuthority from "./components/addAuth.vue";
 import editAuthority from "./components/editAuth.vue";
 import roleAuthMenu from "../account/components/roleAuthMenu.vue";
+import authCode from "./components/authCode.vue";
 
 const filterText = ref("");
 const parentId = ref("");
@@ -119,6 +132,7 @@ const authorityId = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
 const dialogRoleAuthMenuRef = ref();
+const dialogAuthCodeRef = ref();
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<Tree[]>([]);
 
@@ -181,6 +195,11 @@ function handleDelete(node: Node, data: Tree) {
       handleLoadTree();
     })
     .finally(() => {});
+}
+
+//显示权限码
+function handleAuthCode() {
+  dialogAuthCodeRef.value.dialogShow = true;
 }
 
 watchEffect(
