@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogShow" width="400px" title="新增通知">
+  <el-dialog v-model="dialogShow" width="80%" title="新增通知">
     <el-form
       ref="dataFormRef"
       :model="formData"
@@ -10,24 +10,6 @@
         <el-col :span="24">
           <el-form-item label="标题" prop="title">
             <el-input v-model="formData.title" placeholder="请输入标题" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="内容" prop="contents">
-            <el-input
-              v-model="formData.contents"
-              type="contents"
-              placeholder="请输入内容"
-            />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="备注" prop="memo">
-            <el-input v-model="formData.memo" placeholder="请输入备注" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -45,6 +27,15 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-form-item label="内容" prop="contents">
+            <el-scrollbar height="400px">
+              <editor v-model="formData.contents"
+            /></el-scrollbar>
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
     <template #footer>
       <el-button type="primary" @click="handleSubmit">确 定</el-button>
@@ -57,6 +48,7 @@
 import { ref, reactive, onMounted } from "vue";
 import { addNotice } from "@/api/base/notice";
 import { NoticeAddModel } from "@/api/base/notice/model";
+import Editor from "@/components/WangEditor/index.vue";
 
 const formData = reactive<NoticeAddModel>({
   type: 1,
@@ -112,6 +104,9 @@ const rules = reactive({
       message: "请输入1-5000个字符",
       trigger: ["blur", "change"],
     },
+  ],
+  publishStatus: [
+    { required: true, message: "请输选择发布状态", trigger: "blur" },
   ],
   memo: [
     { required: false, message: "请输入备注", trigger: "blur" },
