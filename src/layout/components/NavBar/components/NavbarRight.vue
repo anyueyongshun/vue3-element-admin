@@ -61,6 +61,24 @@
               个人信息</el-dropdown-item
             >
           </a>
+          <a
+            target="_blank"
+            href="https://gitee.com/信息化系统org/vue3-element-admin"
+          >
+            <el-dropdown-item divided>
+              <svg-icon icon-class="publish" />
+              发布信息</el-dropdown-item
+            >
+          </a>
+          <a
+            target="_blank"
+            href="https://gitee.com/信息化系统org/vue3-element-admin"
+          >
+            <el-dropdown-item>
+              <svg-icon icon-class="message" />
+              收到信息</el-dropdown-item
+            >
+          </a>
           <el-dropdown-item divided @click="logout">
             <svg-icon icon-class="out" />
             {{ $t("navbar.logout") }}

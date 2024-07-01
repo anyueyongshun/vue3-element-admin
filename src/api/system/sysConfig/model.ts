@@ -7,3 +7,10 @@ export interface LogConfigModel {
   isOperate?: boolean;
   isWatchDog?: boolean;
 }
+
+//系统配置的模型
+export interface SysConfigModel {
+  id?: string;
+  defaultPassword?: string;
+  blackListIp?: string;
+}
