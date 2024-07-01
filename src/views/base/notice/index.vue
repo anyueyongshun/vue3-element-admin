@@ -51,7 +51,7 @@
             align="center"
             label="序号"
           />
-          <el-table-column prop="typeName" label="分类" width="150" />
+          <el-table-column prop="typeDesc" label="分类" width="150" />
           <el-table-column label="状态" width="70">
             <template #default="scope">
               <el-tooltip
@@ -124,6 +124,7 @@
       @handle-query-event="handleQuery"
       v-model:id="noticeId"
     />
+    <detailNotice ref="dialogDetailRef" v-model:id="noticeId" />
   </div>
 </template>
 
@@ -142,6 +143,7 @@ import {
 } from "@/api/base/notice/model";
 import addNotice from "./components/addNotice.vue";
 import editNotice from "./components/editNotice.vue";
+import detailNotice from "./components/detailNotice.vue";
 
 const loading = ref(false);
 const total = ref(0);
@@ -155,6 +157,7 @@ const NoticeDatas = ref<NoticeModel[]>();
 const noticeId = ref("");
 const dialogAddRef = ref();
 const dialogEditRef = ref();
+const dialogDetailRef = ref();
 
 //分页查询通知列表
 function handleQuery() {
@@ -219,7 +222,7 @@ function handleUpdateStatus(row: NoticeModel, status: number) {
 //双击行显示编辑通知
 function handleDbClick(row: NoticeModel, column: any, event: any) {
   noticeId.value = row.id ?? "";
-  dialogEditRef.value.dialogShow = true;
+  dialogDetailRef.value.dialogShow = true;
 }
 
 //返回通知状态显示的tag类型

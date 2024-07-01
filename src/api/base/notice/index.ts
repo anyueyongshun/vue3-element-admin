@@ -18,6 +18,24 @@ export function getNoticePage(queryParams: NoticeQuery) {
   });
 }
 
+//通知分页查询--我收到的通知
+export function getNoticePageMyReceive(queryParams: NoticeQuery) {
+  return request<any, PageResult<NoticeModel[]>>({
+    url: "/notice/PageListMyReceive",
+    method: "get",
+    params: queryParams,
+  });
+}
+
+//通知分页查询--我发布的通知
+export function getNoticePageMyPublish(queryParams: NoticeQuery) {
+  return request<any, PageResult<NoticeModel[]>>({
+    url: "/notice/PageListMyPublish",
+    method: "get",
+    params: queryParams,
+  });
+}
+
 //新增通知
 export function addNotice(data: NoticeAddModel): AxiosPromise<boolean> {
   return request({
@@ -62,6 +80,14 @@ export function updateStatus(
 export function getDetail(id: string) {
   return request<any, NoticeModel>({
     url: "/Notice/GetById?id=" + id,
+    method: "get",
+  });
+}
+
+//查看通知明细
+export function viewNotice(id: string) {
+  return request<any, NoticeModel>({
+    url: "/Notice/ViewNotice?id=" + id,
     method: "get",
   });
 }

@@ -10,11 +10,12 @@ export interface NoticeQuery extends PageQuery {
 export interface NoticeModel {
   id?: string;
   type?: number;
-  typeName?: string;
+  typeDesc?: string;
   title?: string;
   contents?: string;
   memo?: string;
   publishStatus?: number;
+  publishStatusDesc?: string;
   status?: number;
   addTime?: Date;
   addAccountName?: string;
