@@ -89,7 +89,7 @@
                 @click="handleEdit(scope.row)"
                 v-if="scope.row.publishStatus == 2"
               >
-                <i-ep-edit mr-1 />编辑
+                <i-ep-edit />编辑
               </el-button>
               <el-popconfirm
                 title="确认要删除?"
@@ -97,7 +97,7 @@
               >
                 <template #reference>
                   <el-button type="primary" size="small" link>
-                    <i-ep-delete mr-1 />删除
+                    <i-ep-delete />删除
                   </el-button>
                 </template>
               </el-popconfirm>

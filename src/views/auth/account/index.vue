@@ -81,7 +81,7 @@
           <el-table-column prop="lastLoginTime" label="上次登录时间" />
           <el-table-column prop="lastLoginIP" label="上次登录IP" />
           <el-table-column prop="memo" label="备注" />
-          <el-table-column fixed="right" label="操作" width="190">
+          <el-table-column fixed="right" label="操作" width="200">
             <template #default="scope">
               <el-button
                 type="primary"
@@ -89,7 +89,7 @@
                 link
                 @click="handleEdit(scope.row)"
               >
-                <i-ep-edit />编辑
+                <i-ep-edit mr-1 />编辑
               </el-button>
               <el-popconfirm
                 title="确认要删除?"
@@ -97,7 +97,7 @@
               >
                 <template #reference>
                   <el-button type="primary" size="small" link>
-                    <i-ep-delete />删除
+                    <i-ep-delete mr-1 />删除
                   </el-button>
                 </template>
               </el-popconfirm>

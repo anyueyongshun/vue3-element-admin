@@ -52,21 +52,15 @@
           <a target="_blank" href="https://juejin.cn/post/7228990409909108793">
             <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
           </a> -->
-          <a
-            target="_blank"
-            href="https://gitee.com/信息化系统org/vue3-element-admin"
-          >
+          <a href="https://gitee.com/信息化系统org/vue3-element-admin">
             <el-dropdown-item>
-              <svg-icon icon-class="user" />
+              <svg-icon icon-class="user" mr-2 />
               个人信息</el-dropdown-item
             >
           </a>
-          <a
-            target="_blank"
-            href="https://gitee.com/信息化系统org/vue3-element-admin"
-          >
+          <a target="_blank" href="#/base/notice">
             <el-dropdown-item divided>
-              <svg-icon icon-class="publish" />
+              <svg-icon icon-class="publish" mr-2 />
               发布信息</el-dropdown-item
             >
           </a>
@@ -75,12 +69,12 @@
             href="https://gitee.com/信息化系统org/vue3-element-admin"
           >
             <el-dropdown-item>
-              <svg-icon icon-class="message" />
+              <svg-icon icon-class="message2" mr-2 />
               收到信息</el-dropdown-item
             >
           </a>
           <el-dropdown-item divided @click="logout">
-            <svg-icon icon-class="out" />
+            <svg-icon icon-class="out" mr-2 />
             {{ $t("navbar.logout") }}
           </el-dropdown-item>
         </el-dropdown-menu>

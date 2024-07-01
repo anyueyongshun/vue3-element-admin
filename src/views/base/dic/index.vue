@@ -78,7 +78,7 @@
                     link
                     @click="handleEdit(scope.row)"
                   >
-                    <el-icon><Document /></el-icon>
+                    <el-icon mr-1><Document /></el-icon>
                     编辑
                   </el-button>
                   <el-popconfirm
@@ -87,7 +87,7 @@
                   >
                     <template #reference>
                       <el-button type="primary" size="small" link>
-                        <i-ep-delete />删除
+                        <i-ep-delete mr-1 />删除
                       </el-button>
                     </template>
                   </el-popconfirm>

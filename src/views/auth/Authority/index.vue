@@ -51,7 +51,7 @@
                   link
                   @click="handleAdd(node, data)"
                 >
-                  <i-ep-plus />新增
+                  <i-ep-plus mr-1 />新增
                 </el-button>
                 <el-button
                   type="primary"
@@ -60,7 +60,7 @@
                   @click="handleEdit(node, data)"
                   v-if="!data.isRoot"
                 >
-                  <i-ep-edit />编辑
+                  <i-ep-edit mr-1 />编辑
                 </el-button>
                 <el-popconfirm
                   title="确认要删除?"
@@ -69,7 +69,7 @@
                 >
                   <template #reference>
                     <el-button type="primary" size="small" link>
-                      <i-ep-delete />删除
+                      <i-ep-delete mr-1 />删除
                     </el-button>
                   </template>
                 </el-popconfirm>
