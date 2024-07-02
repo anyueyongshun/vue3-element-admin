@@ -1,47 +1,61 @@
 <template>
-  <el-dialog v-model="dialogShow" width="80%" title="新增通知">
-    <el-form
-      ref="dataFormRef"
-      :model="formData"
-      :rules="rules"
-      label-width="auto"
-    >
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="标题" prop="title">
-            <el-input v-model="formData.title" placeholder="请输入标题" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="发布状态" prop="publishStatus">
-            <el-switch
-              v-model="formData.publishStatus"
-              active-text="发布"
-              inactive-text="草稿"
-              :active-value="1"
-              :inactive-value="2"
-              inline-prompt
-            />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-form-item label="内容" prop="contents">
-            <el-scrollbar height="400px">
-              <editor v-model="formData.contents"
-            /></el-scrollbar>
-          </el-form-item>
-        </el-col>
-      </el-row>
-    </el-form>
-    <template #footer>
-      <el-button type="primary" @click="handleSubmit">确 定</el-button>
-      <el-button @click="closeDialog">取 消</el-button>
-    </template>
-  </el-dialog>
+  <div>
+    <el-dialog v-model="dialogShow" width="80%" title="新增通知">
+      <el-form
+        ref="dataFormRef"
+        :model="formData"
+        :rules="rules"
+        label-width="auto"
+      >
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="标题" prop="title">
+              <el-input v-model="formData.title" placeholder="请输入标题" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="发布状态" prop="publishStatus">
+              <el-switch
+                v-model="formData.publishStatus"
+                active-text="发布"
+                inactive-text="草稿"
+                :active-value="1"
+                :inactive-value="2"
+                inline-prompt
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="" prop="title">
+              <el-button type="success" @click="handleSelectEmployee"
+                >选择接收人</el-button
+              >
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="内容" prop="contents">
+              <el-scrollbar height="400px">
+                <editor v-model="formData.contents"
+              /></el-scrollbar>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <template #footer>
+        <el-button type="primary" @click="handleSubmit">确 定</el-button>
+        <el-button @click="closeDialog">取 消</el-button>
+      </template>
+    </el-dialog>
+    <employeeSelect
+      ref="dialogEmployeeSelectRef"
+      @handle-get-select-event="handleGetSelect"
+      v-model:selectEmployKeys="formData.AccountIds"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -49,22 +63,22 @@ import { ref, reactive, onMounted } from "vue";
 import { addNotice } from "@/api/base/notice";
 import { NoticeAddModel } from "@/api/base/notice/model";
 import Editor from "@/components/WangEditor/index.vue";
+import employeeSelect from "@/views/base/employee/components/employeeSelect.vue";
 
-const formData = reactive<NoticeAddModel>({
-  type: 1,
-  AccountIds: [
-    "C514BE01-5C72-4E24-B3D7-3E221B410BDE",
-    "28296269-ED12-43EA-AAEE-90804FB62D8C",
-  ],
-});
 const dataFormRef = ref(ElForm);
 const dialogShow = ref(false);
+const dialogEmployeeSelectRef = ref();
 const emit = defineEmits(["handleQueryEvent"]);
+const formData = reactive<NoticeAddModel>({
+  type: 1,
+});
 
 //新增通知提交
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
+      /* formData.AccountIds =
+        dialogEmployeeSelectRef.value.selectEmployKeysResult; */
       addNotice(formData)
         .then((data) => {
           if (data) {
@@ -76,6 +90,17 @@ function handleSubmit() {
         .finally();
     }
   });
+}
+
+//取选择的员工
+function handleGetSelect() {
+  formData.AccountIds = dialogEmployeeSelectRef.value.selectEmployKeysResult;
+}
+
+//显示选择人员弹窗
+function handleSelectEmployee() {
+  dialogEmployeeSelectRef.value.dialogShow = true;
+  dialogEmployeeSelectRef.value.selectEmployKeysResult = formData.AccountIds;
 }
 
 //关闭新增框

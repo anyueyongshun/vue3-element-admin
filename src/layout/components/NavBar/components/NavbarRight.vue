@@ -58,12 +58,16 @@
               个人信息</el-dropdown-item
             >
           </a>
-          <a target="_blank" href="#/base/notice">
+          <!-- <AppLink
+            :to="{
+              path: "/base/notice",
+            }"
+          >
             <el-dropdown-item divided>
               <svg-icon icon-class="publish" mr-2 />
               发布信息</el-dropdown-item
             >
-          </a>
+          </AppLink> -->
           <a
             target="_blank"
             href="https://gitee.com/信息化系统org/vue3-element-admin"
