@@ -7,10 +7,10 @@
     <div class="app-container">
       <div class="search-container">
         <el-form ref="queryFormRef" :inline="true">
-          <el-form-item label="登录名">
+          <el-form-item label="员工姓名">
             <el-input
-              placeholder="请输入登录名"
-              v-model="searchLoginName"
+              placeholder="请输入员工姓名"
+              v-model="searchEmployeeName"
               maxlength="20"
               clearable
             />
@@ -38,7 +38,9 @@
               align="center"
               label="序号"
             />
+            <el-table-column prop="orgName" label="组织机构" />
             <el-table-column prop="loginName" label="登录名" />
+            <el-table-column prop="employeeName" label="员工姓名" />
             <el-table-column label="状态" width="70">
               <template #default="scope">
                 <el-tag
@@ -50,8 +52,6 @@
                 >
               </template>
             </el-table-column>
-            <el-table-column prop="addTime" label="创建时间" />
-            <el-table-column prop="lastLoginTime" label="上次登录时间" />
             <el-table-column prop="memo" label="备注" /> </el-table
         ></el-scrollbar>
       </el-card>
@@ -86,14 +86,14 @@ const loading = ref(false);
 const AccountDatas = reactive<AccountModel[]>([]);
 const dialogShow = ref(false);
 const dialogTitle = ref("");
-const searchLoginName = ref("");
+const searchEmployeeName = ref("");
 const filterTableData = computed(() =>
   AccountDatas.filter(
     (data) =>
-      !searchLoginName.value ||
+      !searchEmployeeName.value ||
       data
-        .loginName!.toLowerCase()
-        .includes(searchLoginName.value.toLowerCase())
+        .employeeName!.toLowerCase()
+        .includes(searchEmployeeName.value.toLowerCase())
   )
 );
 //查询账号列表

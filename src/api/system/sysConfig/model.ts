@@ -6,6 +6,7 @@ export interface LogConfigModel {
   isException?: boolean;
   isOperate?: boolean;
   isWatchDog?: boolean;
+  isSQL?: boolean;
 }
 
 //系统配置的模型

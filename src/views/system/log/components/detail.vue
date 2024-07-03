@@ -17,11 +17,19 @@
         {{ logDetail.source }}
       </el-descriptions-item>
       <el-descriptions-item label="内容" span="2">
-        {{ logDetail.message }}
+        <el-scrollbar height="100px">
+          <div style="width: 880px" overflow-auto>
+            {{ logDetail.message }}
+          </div>
+        </el-scrollbar>
       </el-descriptions-item>
       <el-descriptions-item label="堆栈" span="2">
-        <el-scrollbar height="400px">
-          <div v-html="logDetail.stackTrace"></div>
+        <el-scrollbar height="300px">
+          <div
+            v-html="logDetail.stackTrace"
+            style="width: 880px"
+            overflow-auto
+          ></div>
         </el-scrollbar>
       </el-descriptions-item>
     </el-descriptions>

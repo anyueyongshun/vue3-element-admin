@@ -50,7 +50,7 @@
         label-width="auto"
       >
         <el-row>
-          <el-col :span="24">
+          <el-col :span="12">
             <el-form-item label="日志存储类型" prop="logStoreType">
               <el-switch
                 v-model="formDataLogConfig.logStoreType"
@@ -60,6 +60,11 @@
                 :inactive-value="2"
                 inline-prompt
               />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="开启SQL日志" prop="isSQL">
+              <el-switch v-model="formDataLogConfig.isSQL" />
             </el-form-item>
           </el-col>
         </el-row>

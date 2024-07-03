@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogShow" width="80%" title="查看通知">
+  <el-dialog v-model="dialogShow" width="60%" title="查看通知">
     <el-descriptions :column="2" border>
       <el-descriptions-item label="类型" width="100px">
         {{ formData.typeDesc }}
@@ -18,7 +18,7 @@
       </el-descriptions-item>
       <el-descriptions-item label="内容" span="2">
         <el-scrollbar height="400px">
-          <div v-html="formData.contents"></div>
+          <div v-html="formData.contents" overflow-auto></div>
         </el-scrollbar>
       </el-descriptions-item>
     </el-descriptions>

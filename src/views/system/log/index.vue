@@ -200,6 +200,10 @@ const logTypeOptions = [
     value: 3,
     label: "操作日志",
   },
+  {
+    value: 4,
+    label: "SQL日志",
+  },
 ];
 
 onMounted(() => {

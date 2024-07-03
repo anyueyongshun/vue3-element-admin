@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog v-model="dialogShow" width="80%" title="新增通知">
+    <el-dialog v-model="dialogShow" width="60%" title="新增通知">
       <el-form
         ref="dataFormRef"
         :model="formData"
@@ -77,8 +77,6 @@ const formData = reactive<NoticeAddModel>({
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
-      /* formData.AccountIds =
-        dialogEmployeeSelectRef.value.selectEmployKeysResult; */
       addNotice(formData)
         .then((data) => {
           if (data) {
@@ -100,7 +98,6 @@ function handleGetSelect() {
 //显示选择人员弹窗
 function handleSelectEmployee() {
   dialogEmployeeSelectRef.value.dialogShow = true;
-  dialogEmployeeSelectRef.value.selectEmployKeysResult = formData.AccountIds;
 }
 
 //关闭新增框

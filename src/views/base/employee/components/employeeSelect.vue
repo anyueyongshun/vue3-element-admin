@@ -49,6 +49,7 @@ const filterText = ref("");
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const datas = reactive<OrgEmployeeSelectTreeModel[]>([]);
 const emit = defineEmits(["handleGetSelectEvent"]);
+//选择的员工结果
 const selectEmployKeysResult = ref<string[]>([]);
 const propsTree = {
   label: "name",
@@ -70,9 +71,10 @@ function handleLoadTree() {
     .then((data) => {
       datas.length = 0;
       datas.push(data);
-      treeRef.value?.setCheckedKeys(props.selectEmployKeys);
     })
-    .finally(() => {});
+    .finally(() => {
+      treeRef.value?.setCheckedKeys(props.selectEmployKeys);
+    });
 }
 
 //确定选择员工

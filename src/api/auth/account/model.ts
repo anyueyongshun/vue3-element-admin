@@ -18,6 +18,8 @@ export interface AccountModel {
   lastLoginTime?: Date;
   lastLoginIP?: string;
   memo?: string;
+  employeeName?: string;
+  orgName?: string;
 }
 
 //编辑账号用的模型
