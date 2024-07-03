@@ -28,7 +28,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="" prop="title">
+            <el-form-item label="">
               <el-button type="success" @click="handleSelectEmployee"
                 >选择接收人</el-button
               >
@@ -53,7 +53,7 @@
     <employeeSelect
       ref="dialogEmployeeSelectRef"
       @handle-get-select-event="handleGetSelect"
-      v-model:selectEmployKeys="formData.AccountIds"
+      v-model:selectEmployKeys="formData.accountIds"
     />
   </div>
 </template>
@@ -75,6 +75,10 @@ const formData = reactive<NoticeAddModel>({
 
 //新增通知提交
 function handleSubmit() {
+  if (formData.accountIds == null || formData.accountIds?.length == 0) {
+    ElMessage.warning("请选择接收人员");
+    return;
+  }
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
       addNotice(formData)
@@ -92,7 +96,7 @@ function handleSubmit() {
 
 //取选择的员工
 function handleGetSelect() {
-  formData.AccountIds = dialogEmployeeSelectRef.value.selectEmployKeysResult;
+  formData.accountIds = dialogEmployeeSelectRef.value.selectEmployKeysResult;
 }
 
 //显示选择人员弹窗

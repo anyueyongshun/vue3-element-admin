@@ -19,7 +19,7 @@ export interface NoticeModel {
   status?: number;
   addTime?: Date;
   addAccountName?: string;
-  AccountIds?: string[];
+  accountIds?: string[];
 }
 
 //通知创建用的模型
@@ -29,7 +29,7 @@ export interface NoticeAddModel {
   contents?: string;
   memo?: string;
   publishStatus?: number;
-  AccountIds?: string[];
+  accountIds?: string[];
 }
 
 //通知编辑用的模型
@@ -39,7 +39,7 @@ export interface NoticeEditModel {
   contents?: string;
   memo?: string;
   publishStatus?: number;
-  AccountIds?: string[];
+  accountIds?: string[];
 }
 
 //通知更新发布状态用的模型
