@@ -220,7 +220,7 @@ function handleUpdateStatus(row: NoticeModel, status: number) {
     .finally(() => {});
 }
 
-//双击行显示编辑通知
+//双击行显示通知
 function handleDbClick(row: NoticeModel, column: any, event: any) {
   noticeId.value = row.id ?? "";
   dialogDetailRef.value.dialogShow = true;

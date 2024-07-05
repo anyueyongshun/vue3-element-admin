@@ -23,7 +23,7 @@
             <el-tree
               node-key="id"
               ref="treeAuthRef"
-              :props="propsTree"
+              :props="propsAuth"
               :data="datasAuth"
               show-checkbox
               default-expand-all
@@ -64,7 +64,7 @@
             <el-tree
               node-key="id"
               ref="treeMenuRef"
-              :props="propsTree"
+              :props="propsMenu"
               :data="datasMenu"
               show-checkbox
               default-expand-all
@@ -215,7 +215,12 @@ function handleMenuFilter(value: string, data: any) {
   return data.name.indexOf(value) !== -1;
 }
 
-const propsTree = {
+const propsMenu = {
+  label: "title",
+  children: "children",
+};
+
+const propsAuth = {
   label: "name",
   children: "children",
 };

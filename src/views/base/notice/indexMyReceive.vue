@@ -29,9 +29,6 @@
             <el-button type="primary" @click="handleQuery()">
               <i-ep-search />查询
             </el-button>
-            <el-button type="success" @click="handleAdd()">
-              <i-ep-plus />新增
-            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -80,29 +77,6 @@
           <!-- <el-table-column prop="memo" label="备注" /> -->
           <el-table-column prop="addAccountName" label="创建人" width="150" />
           <el-table-column prop="addTime" label="创建时间" width="190" />
-          <el-table-column fixed="right" label="操作" width="140">
-            <template #default="scope">
-              <el-button
-                type="primary"
-                size="small"
-                link
-                @click="handleEdit(scope.row)"
-                v-if="scope.row.publishStatus == 2"
-              >
-                <i-ep-edit />编辑
-              </el-button>
-              <el-popconfirm
-                title="确认要删除?"
-                @confirm="handleUpdateStatus(scope.row, 3)"
-              >
-                <template #reference>
-                  <el-button type="primary" size="small" link>
-                    <i-ep-delete />删除
-                  </el-button>
-                </template>
-              </el-popconfirm>
-            </template>
-          </el-table-column>
         </el-table>
         <template #footer>
           <el-pagination
@@ -119,12 +93,6 @@
         </template>
       </el-card>
     </div>
-    <addNotice ref="dialogAddRef" @handle-query-event="handleQuery" />
-    <editNotice
-      ref="dialogEditRef"
-      @handle-query-event="handleQuery"
-      v-model:id="noticeId"
-    />
     <detailNotice ref="dialogDetailRef" v-model:id="noticeId" />
   </div>
 </template>
@@ -132,7 +100,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import {
-  getNoticePage,
+  getNoticePageMyReceive,
   updatePublishStatus,
   updateStatus,
 } from "@/api/base/notice";
@@ -142,8 +110,6 @@ import {
   NoticeUpdatePublishStatusModel,
   NoticeUpdateStatusModel,
 } from "@/api/base/notice/model";
-import addNotice from "./components/addNotice.vue";
-import editNotice from "./components/editNotice.vue";
 import detailNotice from "./components/detailNotice.vue";
 
 const loading = ref(false);
@@ -156,14 +122,12 @@ const queryParams = reactive<NoticeQuery>({
 });
 const NoticeDatas = ref<NoticeModel[]>();
 const noticeId = ref("");
-const dialogAddRef = ref();
-const dialogEditRef = ref();
 const dialogDetailRef = ref();
 
 //分页查询通知列表
 function handleQuery() {
   loading.value = true;
-  getNoticePage(queryParams)
+  getNoticePageMyReceive(queryParams)
     .then((data) => {
       NoticeDatas.value = data.list;
       total.value = data.total;
@@ -179,17 +143,6 @@ const handleSizeChange = (val: number) => {
   queryParams.pageNum = 1;
   handleQuery();
 };
-
-//显示新增通知框
-function handleAdd() {
-  dialogAddRef.value.dialogShow = true;
-}
-
-//显示编辑通知框
-function handleEdit(row: NoticeModel) {
-  noticeId.value = row.id ?? "";
-  dialogEditRef.value.dialogShow = true;
-}
 
 //更新通知的状态
 function handleUpdatePublishStatus(row: NoticeModel, status: number) {
@@ -220,7 +173,7 @@ function handleUpdateStatus(row: NoticeModel, status: number) {
     .finally(() => {});
 }
 
-//双击行显示编辑通知
+//双击行显示通知
 function handleDbClick(row: NoticeModel, column: any, event: any) {
   noticeId.value = row.id ?? "";
   dialogDetailRef.value.dialogShow = true;
