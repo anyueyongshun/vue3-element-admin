@@ -134,7 +134,9 @@ function handleLoadAuthTree() {
         datasAuth.length = 0;
         datasAuth.push(data);
       })
-      .finally(() => {});
+      .finally(() => {
+        handleSetAuth();
+      });
   }
 }
 
@@ -145,7 +147,9 @@ function handleLoadMenuTree() {
       datasMenu.length = 0;
       datasMenu.push(data);
     })
-    .finally(() => {});
+    .finally(() => {
+      handleSetMenu();
+    });
 }
 
 //分配权限
@@ -233,8 +237,6 @@ watch(
     if (dialogShow.value && props.roleId != "") {
       handleLoadAuthTree();
       handleLoadMenuTree();
-      handleSetAuth();
-      handleSetMenu();
     }
   }
 );
@@ -261,8 +263,6 @@ onMounted(() => {
   if (dialogShow.value && props.roleId != "") {
     handleLoadAuthTree();
     handleLoadMenuTree();
-    handleSetAuth();
-    handleSetMenu();
   }
 });
 </script>
