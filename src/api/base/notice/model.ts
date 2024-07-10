@@ -20,6 +20,7 @@ export interface NoticeModel {
   addTime?: Date;
   addAccountName?: string;
   accountIds?: string[];
+  isView?: boolean;
 }
 
 //通知创建用的模型

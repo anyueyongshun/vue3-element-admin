@@ -91,3 +91,11 @@ export function viewNotice(id: string) {
     method: "get",
   });
 }
+
+//更新查看状态
+export function updateView(id: string) {
+  return request<any, boolean>({
+    url: "/NoticeViewRecord/UpdateView?id=" + id,
+    method: "get",
+  });
+}

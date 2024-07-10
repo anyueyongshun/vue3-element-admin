@@ -51,30 +51,16 @@
           <el-table-column prop="typeDesc" label="分类" width="150" />
           <el-table-column label="状态" width="70">
             <template #default="scope">
-              <el-tooltip
-                class="box-item"
+              <el-tag
+                :type="getTagType(scope.row)"
                 effect="dark"
-                content="点击会在 [发布] 与 [草稿] 之间切换"
-                placement="bottom"
-              >
-                <el-tag
-                  :type="getTagType(scope.row)"
-                  effect="dark"
-                  round
-                  size="small"
-                  @click="
-                    handleUpdatePublishStatus(
-                      scope.row,
-                      scope.row.publishStatus === 1 ? 2 : 1
-                    )
-                  "
-                  >{{ scope.row.publishStatusDesc }}</el-tag
-                >
-              </el-tooltip>
+                round
+                size="small"
+                >{{ scope.row.isView == true ? "已阅" : "未阅" }}
+              </el-tag>
             </template>
           </el-table-column>
           <el-table-column prop="title" label="标题" />
-          <!-- <el-table-column prop="memo" label="备注" /> -->
           <el-table-column prop="addAccountName" label="创建人" width="150" />
           <el-table-column prop="addTime" label="创建时间" width="190" />
         </el-table>
@@ -99,17 +85,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import {
-  getNoticePageMyReceive,
-  updatePublishStatus,
-  updateStatus,
-} from "@/api/base/notice";
-import {
-  NoticeQuery,
-  NoticeModel,
-  NoticeUpdatePublishStatusModel,
-  NoticeUpdateStatusModel,
-} from "@/api/base/notice/model";
+import { getNoticePageMyReceive, updateView } from "@/api/base/notice";
+import { NoticeQuery, NoticeModel } from "@/api/base/notice/model";
 import detailNotice from "./components/detailNotice.vue";
 
 const loading = ref(false);
@@ -144,47 +121,17 @@ const handleSizeChange = (val: number) => {
   handleQuery();
 };
 
-//更新通知的状态
-function handleUpdatePublishStatus(row: NoticeModel, status: number) {
-  var data: NoticeUpdatePublishStatusModel = {
-    id: row.id,
-    publishStatus: status,
-  };
-  if (row.publishStatus == 1) return;
-  updatePublishStatus(data)
-    .then((data) => {
-      ElMessage.success("操作成功");
-      handleQuery();
-    })
-    .finally(() => {});
-}
-
-//更新通知的状态
-function handleUpdateStatus(row: NoticeModel, status: number) {
-  var data: NoticeUpdateStatusModel = {
-    id: row.id,
-    status: status,
-  };
-  updateStatus(data)
-    .then((data) => {
-      ElMessage.success("操作成功");
-      handleQuery();
-    })
-    .finally(() => {});
-}
-
 //双击行显示通知
 function handleDbClick(row: NoticeModel, column: any, event: any) {
   noticeId.value = row.id ?? "";
   dialogDetailRef.value.dialogShow = true;
+  updateView(noticeId.value);
 }
 
 //返回通知状态显示的tag类型
 function getTagType(row: NoticeModel) {
-  if (row.publishStatus == 1) {
+  if (row.isView == true) {
     return "success";
-  } else if (row.publishStatus == 2) {
-    return "info";
   } else {
     return "info";
   }
