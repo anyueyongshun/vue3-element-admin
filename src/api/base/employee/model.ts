@@ -8,3 +8,83 @@ export interface OrgEmployeeSelectTreeModel {
   type?: number;
   children?: OrgEmployeeSelectTreeModel[];
 }
+
+//员工查询模型
+export interface QueryModel extends PageQuery {
+  name?: string;
+  loginName?: string;
+  jobNumber?: string;
+  orgId?: string;
+  mobile?: string;
+}
+
+//员工模型
+export interface EmployeeModel {
+  id?: string;
+  name?: string;
+  loginName?: string;
+  jobNumber?: string;
+  orgName?: string;
+  gender?: string;
+  birthday?: string;
+  idNumber?: string;
+  homeAddress?: string;
+  provinceName?: string;
+  cityName?: string;
+  areaName?: string;
+  nationalityName?: string;
+  politicsName?: string;
+  telephone?: string;
+  mobile?: string;
+  shortNumber?: string;
+  email?: string;
+  firstContactPerson?: string;
+  firstContactPersonPhone?: string;
+  photoPath?: string;
+  qualificationName?: string;
+  graduateSchool?: string;
+  professional?: string;
+  contractStartDate?: string;
+  contractEndDate?: string;
+  entryDate?: string;
+  positiveDate?: string;
+  quitDate?: string;
+  jobStateDesc?: string;
+  jobState?: number;
+  address?: string;
+  maritalStatusName?: string;
+  memo?: string;
+  status?: string;
+  addTime?: Date;
+  addAccountName?: string;
+  modifyTime?: Date;
+  modifyAccountName?: string;
+}
+
+//员工列表模型
+export interface EmployeeListModel {
+  id?: string;
+  name?: string;
+  loginName?: string;
+  jobNumber?: string;
+  orgName?: string;
+  mobile?: string;
+  qualificationName?: string;
+  provinceName?: string;
+  address?: string;
+  entryDate?: string;
+  jobStateDesc?: string;
+  jobState?: number;
+}
+
+//新增员工模型
+export interface EmployeeAddModel {}
+
+//编辑员工模型
+export interface EmployeeEditModel {}
+
+//更新员工状态模型
+export interface EmployeeUpdateStatusModel {
+  id?: string;
+  status?: number;
+}
