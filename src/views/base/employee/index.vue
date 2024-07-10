@@ -2,7 +2,9 @@
   <div>
     <div class="app-container">
       <el-row :gutter="12">
-        <el-col :lg="4" :xs="24" class="mb-[12px]" />
+        <el-col :lg="4" :xs="24">
+          <orgSelect ref="orgSelectRef" @handle-query-event="handleQuery" />
+        </el-col>
         <el-col :lg="20" :xs="24">
           <div class="search-container">
             <el-form :inline="true" :model="queryParams">
@@ -42,12 +44,12 @@
               />
               <el-table-column prop="orgName" label="组织机构" />
               <el-table-column prop="name" label="姓名" />
-              <el-table-column prop="loginName" label="登录名" />
-              <el-table-column prop="jobNumber" label="工号" />
+              <!-- <el-table-column prop="loginName" label="登录名" /> -->
+              <!-- <el-table-column prop="jobNumber" label="工号" /> -->
               <el-table-column prop="mobile" label="电话" />
               <el-table-column prop="qualificationName" label="学历" />
               <el-table-column prop="entryDate" label="入职日期" />
-              <el-table-column prop="provinceName" label="省" />
+              <!-- <el-table-column prop="provinceName" label="省" /> -->
               <el-table-column prop="address" label="现居地址" />
               <el-table-column label="状态" width="70">
                 <template #default="scope">
@@ -127,11 +129,11 @@ import {
 } from "@/api/base/employee/model";
 import addEmployee from "./components/addEmployee.vue";
 import editEmployee from "./components/editEmployee.vue";
-import groupSelect from "../org/components/orgSelect.vue";
+import orgSelect from "../org/components/orgSelect.vue";
 
 const dialogAddRef = ref();
 const dialogEditRef = ref();
-const orgSelect = ref();
+const orgSelectRef = ref();
 const orgId = ref("");
 const employeeId = ref("");
 
@@ -146,8 +148,8 @@ const datas = ref<EmployeeListModel[]>([]);
 //加载员工列表
 function handleQuery() {
   loading.value = true;
-  queryParams.orgId = orgSelect.value.orgId;
-  orgId.value = orgSelect.value.orgId;
+  queryParams.orgId = orgSelectRef.value.orgId;
+  orgId.value = orgSelectRef.value.orgId;
   getEmployeePage(queryParams)
     .then((data) => {
       datas.value = data.list;

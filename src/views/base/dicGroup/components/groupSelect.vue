@@ -1,23 +1,29 @@
 <template>
   <el-card>
     <div class="mb-2">
-      <el-input v-model="searchGroupName" placeholder="字典组名称" clearable>
+      <el-input
+        v-model="searchGroupName"
+        placeholder="请输入字典组名称"
+        clearable
+      >
         <template #prefix>
           <i-ep-search />
         </template>
       </el-input>
     </div>
-    <el-table
-      border
-      v-loading="loading"
-      highlight-current-row
-      :data="filterTableData"
-      stripe
-      style="width: 100%"
-      @row-click="handleRowClick"
-    >
-      <el-table-column prop="name" label="字典组名称" />
-    </el-table>
+    <el-scrollbar>
+      <el-table
+        border
+        v-loading="loading"
+        highlight-current-row
+        :data="filterTableData"
+        stripe
+        style="width: 100%"
+        @row-click="handleRowClick"
+      >
+        <el-table-column prop="name" label="字典组名称" />
+      </el-table>
+    </el-scrollbar>
   </el-card>
 </template>
 <script setup lang="ts">
