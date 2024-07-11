@@ -16,6 +16,16 @@
                 clearable
               />
             </el-form-item>
+            <el-form-item>
+              <el-button type="success" @click="handleExpandAllAuthOwner(true)">
+                <el-icon><FolderOpened /></el-icon>展开</el-button
+              >
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" @click="handleExpandAllAuthOwner(false)">
+                <el-icon><Folder /></el-icon>折叠</el-button
+              >
+            </el-form-item>
           </el-form>
         </div>
         <el-card class="table-container">
@@ -51,6 +61,19 @@
                 placeholder="请输入名称"
                 clearable
               />
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                type="success"
+                @click="handleExpandAllAuthInclude(true)"
+              >
+                <el-icon><FolderOpened /></el-icon>展开</el-button
+              >
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" @click="handleExpandAllAuthInclude(false)">
+                <el-icon><Folder /></el-icon>折叠</el-button
+              >
             </el-form-item>
           </el-form>
         </div>
@@ -93,6 +116,19 @@
                 clearable
               />
             </el-form-item>
+            <el-form-item>
+              <el-button
+                type="success"
+                @click="handleExpandAllAuthExclude(true)"
+              >
+                <el-icon><FolderOpened /></el-icon>展开</el-button
+              >
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" @click="handleExpandAllAuthExclude(false)">
+                <el-icon><Folder /></el-icon>折叠</el-button
+              >
+            </el-form-item>
           </el-form>
         </div>
         <el-card class="table-container">
@@ -134,6 +170,16 @@
                 clearable
               />
             </el-form-item>
+            <el-form-item>
+              <el-button type="success" @click="handleExpandAllRole(true)">
+                <el-icon><FolderOpened /></el-icon>展开</el-button
+              >
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" @click="handleExpandAllRole(false)">
+                <el-icon><Folder /></el-icon>折叠</el-button
+              >
+            </el-form-item>
           </el-form>
         </div>
         <el-card class="table-container">
@@ -173,6 +219,16 @@
                 placeholder="请输入名称"
                 clearable
               />
+            </el-form-item>
+            <el-form-item>
+              <el-button type="success" @click="handleExpandAllMenu(true)">
+                <el-icon><FolderOpened /></el-icon>展开</el-button
+              >
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" @click="handleExpandAllMenu(false)">
+                <el-icon><Folder /></el-icon>折叠</el-button
+              >
             </el-form-item>
           </el-form>
         </div>
@@ -458,6 +514,46 @@ function handleMenuFilter(value: string, data: any) {
     return true;
   }
   return data.title.indexOf(value) !== -1;
+}
+
+//tree折叠/展开
+function handleExpandAllAuthOwner(isExpand: boolean) {
+  const nodes = treeAuthOwnerRef.value.store._getAllNodes();
+  nodes.forEach((item) => {
+    item.expanded = isExpand;
+  });
+}
+
+//tree折叠/展开
+function handleExpandAllAuthInclude(isExpand: boolean) {
+  const nodes = treeAuthIncludeRef.value.store._getAllNodes();
+  nodes.forEach((item) => {
+    item.expanded = isExpand;
+  });
+}
+
+//tree折叠/展开
+function handleExpandAllAuthExclude(isExpand: boolean) {
+  const nodes = treeAuthExcludeRef.value.store._getAllNodes();
+  nodes.forEach((item) => {
+    item.expanded = isExpand;
+  });
+}
+
+//tree折叠/展开
+function handleExpandAllRole(isExpand: boolean) {
+  const nodes = treeRoleRef.value.store._getAllNodes();
+  nodes.forEach((item) => {
+    item.expanded = isExpand;
+  });
+}
+
+//tree折叠/展开
+function handleExpandAllMenu(isExpand: boolean) {
+  const nodes = treeMenuRef.value.store._getAllNodes();
+  nodes.forEach((item) => {
+    item.expanded = isExpand;
+  });
 }
 
 const propsTree = {

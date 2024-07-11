@@ -53,3 +53,11 @@ export function getDetail(id: string) {
     method: "get",
   });
 }
+
+//根据字典组取字典明细
+export function getDicByGroupId(groupCode: string) {
+  return request<any, DicEditModel>({
+    url: "/Dic/GetSelectByGroupId?groupCode=" + groupCode,
+    method: "get",
+  });
+}

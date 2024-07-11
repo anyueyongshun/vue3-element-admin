@@ -17,12 +17,22 @@
             >
           </el-form-item>
           <el-form-item>
-            <el-button type="success" @click="handleAuthCode">
+            <el-button type="info" @click="handleAuthCode">
               <svg-icon
                 icon-class="code"
                 style="width: 1.2em; height: 1.2em; color: white"
               />权限码
             </el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="success" @click="handleExpandAll(true)">
+              <el-icon><FolderOpened /></el-icon>展开</el-button
+            >
+          </el-form-item>
+          <el-form-item>
+            <el-button type="info" @click="handleExpandAll(false)">
+              <el-icon><Folder /></el-icon>折叠</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
@@ -200,6 +210,14 @@ function handleDelete(node: Node, data: Tree) {
 //显示权限码
 function handleAuthCode() {
   dialogAuthCodeRef.value.dialogShow = true;
+}
+
+//tree折叠/展开
+function handleExpandAll(isExpand: boolean) {
+  const nodes = treeRef.value.store._getAllNodes();
+  nodes.forEach((item) => {
+    item.expanded = isExpand;
+  });
 }
 
 watchEffect(

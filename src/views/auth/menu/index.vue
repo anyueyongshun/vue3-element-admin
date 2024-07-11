@@ -16,6 +16,16 @@
               <i-ep-refresh />刷新</el-button
             >
           </el-form-item>
+          <el-form-item>
+            <el-button type="success" @click="handleExpandAll(true)">
+              <el-icon><FolderOpened /></el-icon>展开</el-button
+            >
+          </el-form-item>
+          <el-form-item>
+            <el-button type="info" @click="handleExpandAll(false)">
+              <el-icon><Folder /></el-icon>折叠</el-button
+            >
+          </el-form-item>
         </el-form>
       </div>
       <el-card class="table-container">
@@ -186,6 +196,14 @@ function handleDelete(node: Node, data: Tree) {
       handleLoadTree();
     })
     .finally(() => {});
+}
+
+//tree折叠/展开
+function handleExpandAll(isExpand: boolean) {
+  const nodes = treeRef.value.store._getAllNodes();
+  nodes.forEach((item) => {
+    item.expanded = isExpand;
+  });
 }
 
 watchEffect(

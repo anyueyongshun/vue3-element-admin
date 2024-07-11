@@ -82,7 +82,50 @@ export interface EmployeeListModel {
 }
 
 //新增员工模型
-export interface EmployeeAddModel {}
+export interface EmployeeAddModel {
+  name?: string;
+  loginName?: string;
+  jobNumber?: string;
+  orgId?: string;
+  gender?: string;
+  genderDesc?: string;
+  birthday?: Date;
+  idNumber?: string;
+  homeAddress?: string;
+  provinceid?: string;
+  cityId?: string;
+  areaId?: string;
+  nationalityId?: string;
+  politicsId?: string;
+  telephone?: string;
+  mobile?: string;
+  shortNumber?: string;
+  email?: string;
+  firstContactPerson?: string;
+  firstContactPersonPhone?: string;
+  photoPath?: string;
+  qualificationId?: string;
+  graduateSchool?: string;
+  professional?: string;
+  contractStartDate?: Date;
+  contractEndDate?: Date;
+  entryDate?: Date;
+  positiveDate?: Date;
+  quitDate?: Date;
+  jobStatusDesc?: string;
+  jobStatus?: number;
+  workPositionId?: string;
+  jobPositionId?: string;
+  address?: string;
+  maritalStatusDesc?: string;
+  memo?: string;
+  status?: string;
+  statusDesc?: string;
+  addTime?: Date;
+  addAccountId?: string;
+  modifyTime?: Date;
+  modifyAccountId?: string;
+}
 
 //编辑员工模型
 export interface EmployeeEditModel {}
