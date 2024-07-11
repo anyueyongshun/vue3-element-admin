@@ -67,15 +67,15 @@
                       @click="
                         handleUpdateStatus(
                           scope.row,
-                          scope.row.jobState === 1 ? 2 : 1
+                          scope.row.jobStatus === 1 ? 2 : 1
                         )
                       "
-                      >{{ scope.row.jobStateDesc }}</el-tag
+                      >{{ scope.row.jobStatusDesc }}</el-tag
                     >
                   </el-tooltip>
                 </template>
               </el-table-column>
-              <el-table-column prop="memo" label="备注" />
+              <!-- <el-table-column prop="memo" label="备注" /> -->
               <el-table-column fixed="right" label="操作" width="180">
                 <template #default="scope">
                   <el-button
@@ -117,6 +117,7 @@
         </el-col>
       </el-row>
     </div>
+    <detailEmployee ref="detailEmployeeRef" v-model:employeeId="employeeId" />
   </div>
 </template>
 <script setup lang="ts">
@@ -129,10 +130,12 @@ import {
 } from "@/api/base/employee/model";
 import addEmployee from "./components/addEmployee.vue";
 import editEmployee from "./components/editEmployee.vue";
+import detailEmployee from "./components/detailEmployee.vue";
 import orgSelect from "../org/components/orgSelect.vue";
 
 const dialogAddRef = ref();
 const dialogEditRef = ref();
+const detailEmployeeRef = ref();
 const orgSelectRef = ref();
 const orgId = ref("");
 const employeeId = ref("");
@@ -167,10 +170,10 @@ const handleSizeChange = (val: number) => {
   handleQuery();
 };
 
-//编辑员工
+//员工详情
 function handleDbClick(row: EmployeeListModel, column: any, event: any) {
   employeeId.value = row.id ?? "";
-  dialogEditRef.value.dialogShow = true;
+  detailEmployeeRef.value.dialogShow = true;
 }
 
 //新增员工
@@ -201,9 +204,9 @@ function handleUpdateStatus(row: EmployeeListModel, status: number) {
 
 //状态类型
 function getTagType(row: EmployeeListModel) {
-  if (row.jobState == 1) {
+  if (row.jobStatus == 1) {
     return "success";
-  } else if (row.jobState == 2) {
+  } else if (row.jobStatus == 2) {
     return "warning";
   } else {
     return "danger";

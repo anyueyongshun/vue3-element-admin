@@ -26,7 +26,8 @@ export interface EmployeeModel {
   jobNumber?: string;
   orgName?: string;
   gender?: string;
-  birthday?: string;
+  genderDesc?: string;
+  birthday?: Date;
   idNumber?: string;
   homeAddress?: string;
   provinceName?: string;
@@ -44,17 +45,20 @@ export interface EmployeeModel {
   qualificationName?: string;
   graduateSchool?: string;
   professional?: string;
-  contractStartDate?: string;
-  contractEndDate?: string;
-  entryDate?: string;
-  positiveDate?: string;
-  quitDate?: string;
-  jobStateDesc?: string;
-  jobState?: number;
+  contractStartDate?: Date;
+  contractEndDate?: Date;
+  entryDate?: Date;
+  positiveDate?: Date;
+  quitDate?: Date;
+  jobStatusDesc?: string;
+  jobStatus?: number;
+  workPositionName?: string;
+  jobPositionName?: string;
   address?: string;
-  maritalStatusName?: string;
+  maritalStatusDesc?: string;
   memo?: string;
   status?: string;
+  statusDesc?: string;
   addTime?: Date;
   addAccountName?: string;
   modifyTime?: Date;
@@ -72,9 +76,9 @@ export interface EmployeeListModel {
   qualificationName?: string;
   provinceName?: string;
   address?: string;
-  entryDate?: string;
-  jobStateDesc?: string;
-  jobState?: number;
+  entryDate?: Date;
+  jobStatusDesc?: string;
+  jobStatus?: number;
 }
 
 //新增员工模型
