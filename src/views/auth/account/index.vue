@@ -18,7 +18,7 @@
               style="width: 140px"
             >
               <el-option
-                v-for="item in statusOptions"
+                v-for="item in StatusOptionsAll"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -153,6 +153,7 @@ import {
 import addAccount from "./components/addAccount.vue";
 import editAccount from "./components/editAccount.vue";
 import assignRoleAuth from "./components/assignRoleAuth.vue";
+import { StatusOptionsAll } from "@/hooks/commModel";
 
 const loading = ref(false);
 const total = ref(0);
@@ -236,25 +237,6 @@ function getTagType(row: AccountModel) {
     return "danger";
   }
 }
-
-const statusOptions = [
-  {
-    value: 0,
-    label: "==全部==",
-  },
-  {
-    value: 1,
-    label: "启用",
-  },
-  {
-    value: 2,
-    label: "禁用",
-  },
-  {
-    value: 3,
-    label: "删除",
-  },
-];
 
 onMounted(() => {
   handleQuery();

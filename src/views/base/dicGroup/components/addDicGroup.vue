@@ -25,7 +25,7 @@
           <el-form-item label="状态" prop="status">
             <el-select v-model="formData.status" placeholder="请选择状态">
               <el-option
-                v-for="item in statusOptions"
+                v-for="item in StatusOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
@@ -53,6 +53,7 @@
 import { ref, reactive, onMounted } from "vue";
 import { addDicGroup } from "@/api/base/dicGroup";
 import { DicGroupAddModel } from "@/api/base/dicGroup/model";
+import { StatusOptions } from "@/hooks/commModel";
 
 const formData = reactive<DicGroupAddModel>({ order: 1, status: 1 });
 const dataFormRef = ref(ElForm);
@@ -105,21 +106,6 @@ const rules = reactive({
     },
   ],
 });
-
-const statusOptions = [
-  {
-    value: 1,
-    label: "启用",
-  },
-  {
-    value: 2,
-    label: "禁用",
-  },
-  {
-    value: 3,
-    label: "删除",
-  },
-];
 
 defineExpose({ dialogShow });
 
