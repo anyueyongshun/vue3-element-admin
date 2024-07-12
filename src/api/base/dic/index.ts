@@ -1,6 +1,7 @@
 import request from "@/utils/request";
 import { AxiosPromise } from "axios";
 import { DicModel } from "./model";
+import { SelectModel } from "@/hooks/commModel";
 import {
   DicAddModel,
   DicEditModel,
@@ -56,7 +57,7 @@ export function getDetail(id: string) {
 
 //根据字典组取字典明细
 export function getDicByGroupId(groupCode: string) {
-  return request<any, DicEditModel>({
+  return request<any, SelectModel[]>({
     url: "/Dic/GetSelectByGroupId?groupCode=" + groupCode,
     method: "get",
   });

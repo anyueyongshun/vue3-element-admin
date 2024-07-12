@@ -5,6 +5,7 @@ import {
   QueryModel,
   EmployeeModel,
   EmployeeListModel,
+  EmployeeAddModel,
   EmployeeUpdateStatusModel,
 } from "./model";
 
@@ -26,7 +27,7 @@ export function getEmployeePage(queryParams: QueryModel) {
 }
 
 //新增员工
-export function addEmployee(data: EmployeeModel): AxiosPromise<boolean> {
+export function addEmployee(data: EmployeeAddModel): AxiosPromise<boolean> {
   return request({
     url: "/Employee/add",
     method: "post",
@@ -35,7 +36,7 @@ export function addEmployee(data: EmployeeModel): AxiosPromise<boolean> {
 }
 
 //编辑员工
-export function editEmployee(data: EmployeeModel): AxiosPromise<boolean> {
+export function editEmployee(data: EmployeeAddModel): AxiosPromise<boolean> {
   return request({
     url: "/Employee/update",
     method: "post",

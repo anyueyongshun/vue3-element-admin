@@ -2,6 +2,7 @@ import request from "@/utils/request";
 import { AxiosPromise } from "axios";
 import { Tree } from "./model";
 import { OrgAddModel, OrgEditModel, OrgUpdateStatusModel } from "./model";
+import { SelectModel } from "@/hooks/commModel";
 
 //加载组织机构树
 export function loadTree() {
@@ -44,6 +45,14 @@ export function updateStatus(
 export function getDetail(id: string) {
   return request<any, OrgEditModel>({
     url: "/Organization/GetById?id=" + id,
+    method: "get",
+  });
+}
+
+//取组织机构tree
+export function getOrgTreeSelect() {
+  return request<any, SelectModel[]>({
+    url: "/Organization/GetOrgTreeSelect",
     method: "get",
   });
 }

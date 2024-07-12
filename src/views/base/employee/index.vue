@@ -117,7 +117,9 @@
         </el-col>
       </el-row>
     </div>
-    <detailEmployee ref="detailEmployeeRef" v-model:employeeId="employeeId" />
+    <addEmployee ref="dialogAddRef" @handle-query-event="handleQuery" />
+    <editEmployee ref="dialogEditRef" @handle-query-event="handleQuery" />
+    <detailEmployee ref="dialogDetailRef" v-model:employeeId="employeeId" />
   </div>
 </template>
 <script setup lang="ts">
@@ -135,7 +137,7 @@ import orgSelect from "../org/components/orgSelect.vue";
 
 const dialogAddRef = ref();
 const dialogEditRef = ref();
-const detailEmployeeRef = ref();
+const dialogDetailRef = ref();
 const orgSelectRef = ref();
 const orgId = ref("");
 const employeeId = ref("");
@@ -173,7 +175,7 @@ const handleSizeChange = (val: number) => {
 //员工详情
 function handleDbClick(row: EmployeeListModel, column: any, event: any) {
   employeeId.value = row.id ?? "";
-  detailEmployeeRef.value.dialogShow = true;
+  dialogDetailRef.value.dialogShow = true;
 }
 
 //新增员工
