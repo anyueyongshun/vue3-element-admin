@@ -95,7 +95,7 @@
           <el-form-item label="职位" prop="jobPositionId">
             <el-select
               v-model="formData.jobPositionId"
-              placeholder="请选择状态"
+              placeholder="请选择职位"
             >
               <el-option
                 v-for="item in dicJobPosition"
@@ -151,7 +151,7 @@
           <el-form-item label="民族" prop="nationalityId">
             <el-select
               v-model="formData.nationalityId"
-              placeholder="请选择状态"
+              placeholder="请选择民族"
             >
               <el-option
                 v-for="item in dicNationality"
@@ -166,7 +166,10 @@
       <el-row>
         <el-col :span="12">
           <el-form-item label="政治面貌" prop="politicsId">
-            <el-select v-model="formData.politicsId" placeholder="请选择状态">
+            <el-select
+              v-model="formData.politicsId"
+              placeholder="请选择政治面貌"
+            >
               <el-option
                 v-for="item in dicPolitics"
                 :key="item.value"
@@ -232,7 +235,7 @@
           <el-form-item label="学历" prop="qualificationId">
             <el-select
               v-model="formData.qualificationId"
-              placeholder="请选择状态"
+              placeholder="请选择学历"
             >
               <el-option
                 v-for="item in dicQualification"
@@ -384,6 +387,7 @@ function closeDialog() {
 
 //获取select控件的数据
 function handleSetDic() {
+  if (dialogShow.value == false) return;
   getDicByGroupId("nat")
     .then((data) => {
       if (data) {
@@ -528,7 +532,12 @@ const genderOptions = [
 ];
 
 defineExpose({ dialogShow });
-
+watch(
+  () => dialogShow.value,
+  (newVal: boolean) => {
+    handleSetDic();
+  }
+);
 onMounted(() => {
   handleSetDic();
 });

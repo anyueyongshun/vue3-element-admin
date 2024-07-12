@@ -11,9 +11,163 @@
               <el-form-item label="名称">
                 <el-input
                   v-model="queryParams.name"
-                  style="width: 240px"
+                  style="width: 150px"
                   placeholder="请输入名称"
                   clearable
+                />
+              </el-form-item>
+              <el-form-item label="登录账号">
+                <el-input
+                  v-model="queryParams.loginName"
+                  style="width: 150px"
+                  placeholder="请输入登录账号"
+                  clearable
+                />
+              </el-form-item>
+              <el-form-item label="工号">
+                <el-input
+                  v-model="queryParams.jobNumber"
+                  style="width: 150px"
+                  placeholder="请输入工号"
+                  clearable
+                />
+              </el-form-item>
+              <el-form-item label="身份证号">
+                <el-input
+                  v-model="queryParams.idNumber"
+                  style="width: 150px"
+                  placeholder="请输入身份证号"
+                  clearable
+                />
+              </el-form-item>
+              <el-form-item label="手机号">
+                <el-input
+                  v-model="queryParams.mobile"
+                  style="width: 150px"
+                  placeholder="请输入手机号"
+                  clearable
+                />
+              </el-form-item>
+              <el-form-item label="性别">
+                <el-select
+                  v-model="queryParams.gender"
+                  placeholder="请选择性别"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in genderOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  /> </el-select
+              ></el-form-item>
+
+              <el-form-item label="婚姻状态">
+                <el-select
+                  v-model="queryParams.maritalStatus"
+                  placeholder="请选择婚姻状态"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in maritalStatusOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  /> </el-select
+              ></el-form-item>
+              <el-form-item label="政治面貌"
+                ><el-select
+                  v-model="queryParams.politicsId"
+                  placeholder="请选择政治面貌"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in dicPolitics"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item label="学历"
+                ><el-select
+                  v-model="queryParams.qualificationId"
+                  placeholder="请选择学历"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in dicQualification"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item label="在职状态">
+                <el-select
+                  v-model="queryParams.jobStatus"
+                  placeholder="请选择状态"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in jobStatusOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  /> </el-select
+              ></el-form-item>
+              <el-form-item label="职位"
+                ><el-select
+                  v-model="queryParams.jobPositionId"
+                  placeholder="请选择职位"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in dicJobPosition"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item label="岗位"
+                ><el-select
+                  v-model="queryParams.workPositionId"
+                  placeholder="请选择岗位"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in dicWorkPosition"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item label="民族"
+                ><el-select
+                  v-model="queryParams.nationalityId"
+                  placeholder="请选择民族"
+                  style="width: 150px"
+                >
+                  <el-option
+                    v-for="item in dicNationality"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  />
+                </el-select>
+              </el-form-item>
+              <el-form-item label="合同到期">
+                <el-date-picker
+                  v-model="contractEndDate"
+                  type="daterange"
+                  range-separator="--"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                  style="width: 250px"
+                  format="YYYY-MM-DD"
+                  value-format="YYYY-MM-DD"
                 />
               </el-form-item>
               <el-form-item>
@@ -46,9 +200,13 @@
               <el-table-column prop="name" label="姓名" />
               <!-- <el-table-column prop="loginName" label="登录名" /> -->
               <!-- <el-table-column prop="jobNumber" label="工号" /> -->
-              <el-table-column prop="mobile" label="电话" />
+              <el-table-column prop="mobile" label="手机" />
               <el-table-column prop="qualificationName" label="学历" />
-              <el-table-column prop="entryDate" label="入职日期" />
+              <el-table-column prop="entryDate" label="入职日期">
+                <template #default="scope">
+                  {{ formatDate(scope.entryDate) }}
+                </template>
+              </el-table-column>
               <!-- <el-table-column prop="provinceName" label="省" /> -->
               <el-table-column prop="address" label="现居地址" />
               <el-table-column label="状态" width="70">
@@ -134,6 +292,9 @@ import addEmployee from "./components/addEmployee.vue";
 import editEmployee from "./components/editEmployee.vue";
 import detailEmployee from "./components/detailEmployee.vue";
 import orgSelect from "../org/components/orgSelect.vue";
+import { SelectModel } from "@/hooks/commModel";
+import { getDicByGroupId } from "@/api/base/dic";
+import { formatDate } from "@/hooks/commFunction";
 
 const dialogAddRef = ref();
 const dialogEditRef = ref();
@@ -142,11 +303,28 @@ const orgSelectRef = ref();
 const orgId = ref("");
 const employeeId = ref("");
 
+const dicNationality = reactive<SelectModel[]>([]);
+const dicPolitics = reactive<SelectModel[]>([]);
+const dicQualification = reactive<SelectModel[]>([]);
+const dicJobPosition = reactive<SelectModel[]>([]);
+const dicWorkPosition = reactive<SelectModel[]>([]);
+
 const loading = ref(false);
 const total = ref(0);
+
+const contractEndDate = ref<Date[]>([]);
+const defaultOption = { value: " ", label: "==选择==" };
 const queryParams = reactive<QueryModel>({
   pageNum: 1,
   pageSize: 10,
+  gender: 0,
+  jobStatus: 0,
+  maritalStatus: 0,
+  nationalityId: " ",
+  politicsId: " ",
+  qualificationId: " ",
+  jobPositionId: " ",
+  workPositionId: " ",
 });
 const datas = ref<EmployeeListModel[]>([]);
 
@@ -155,6 +333,10 @@ function handleQuery() {
   loading.value = true;
   queryParams.orgId = orgSelectRef.value.orgId;
   orgId.value = orgSelectRef.value.orgId;
+  if (contractEndDate.value != null && contractEndDate.value.length == 2) {
+    queryParams.contractEndDateFrom = contractEndDate.value[0];
+    queryParams.contractEndDateTo = contractEndDate.value[1];
+  }
   getEmployeePage(queryParams)
     .then((data) => {
       datas.value = data.list;
@@ -180,7 +362,6 @@ function handleDbClick(row: EmployeeListModel, column: any, event: any) {
 
 //新增员工
 function handleAdd() {
-  //parentId.value = data.id ?? "";
   dialogAddRef.value.dialogShow = true;
 }
 
@@ -215,7 +396,101 @@ function getTagType(row: EmployeeListModel) {
   }
 }
 
+const maritalStatusOptions = [
+  {
+    value: 0,
+    label: "==选择==",
+  },
+  {
+    value: 1,
+    label: "已婚",
+  },
+  {
+    value: 2,
+    label: "未婚",
+  },
+  {
+    value: 3,
+    label: "离异",
+  },
+];
+
+const jobStatusOptions = [
+  {
+    value: 0,
+    label: "==选择==",
+  },
+  {
+    value: 1,
+    label: "在职",
+  },
+  {
+    value: 2,
+    label: "离职",
+  },
+];
+
+const genderOptions = [
+  {
+    value: 0,
+    label: "==选择==",
+  },
+  {
+    value: 1,
+    label: "男",
+  },
+  {
+    value: 2,
+    label: "女",
+  },
+];
+
+//获取select控件的数据
+function handleSetDic() {
+  getDicByGroupId("nat")
+    .then((data) => {
+      if (data) {
+        dicNationality.push(defaultOption);
+        dicNationality.push(...data);
+      }
+    })
+    .finally();
+  getDicByGroupId("pol")
+    .then((data) => {
+      if (data) {
+        dicPolitics.push(defaultOption);
+        dicPolitics.push(...data);
+      }
+    })
+    .finally();
+  getDicByGroupId("qual")
+    .then((data) => {
+      if (data) {
+        dicQualification.push(defaultOption);
+        dicQualification.push(...data);
+      }
+    })
+    .finally();
+  getDicByGroupId("jobp")
+    .then((data) => {
+      if (data) {
+        dicJobPosition.push(defaultOption);
+        dicJobPosition.push(...data);
+      }
+    })
+    .finally();
+  getDicByGroupId("workp")
+    .then((data) => {
+      if (data) {
+        dicWorkPosition.push(defaultOption);
+        dicWorkPosition.push(...data);
+      }
+    })
+    .finally();
+}
+
 onMounted(() => {
+  handleSetDic();
   handleQuery();
 });
 </script>

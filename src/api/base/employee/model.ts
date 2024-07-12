@@ -12,10 +12,21 @@ export interface OrgEmployeeSelectTreeModel {
 //员工查询模型
 export interface QueryModel extends PageQuery {
   name?: string;
+  orgId?: string;
   loginName?: string;
   jobNumber?: string;
-  orgId?: string;
+  gender?: number;
+  idNumber?: string;
+  politicsId?: string;
   mobile?: string;
+  qualificationId?: string;
+  jobStatus?: number;
+  jobPositionId?: string;
+  workPositionId?: string;
+  contractEndDateFrom?: Date;
+  contractEndDateTo?: Date;
+  maritalStatus?: number;
+  nationalityId?: string;
 }
 
 //员工模型

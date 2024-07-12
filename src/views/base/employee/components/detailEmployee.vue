@@ -125,6 +125,7 @@
 <script setup lang="ts">
 import { EmployeeModel } from "@/api/base/employee/model";
 import { getDetail } from "@/api/base/employee";
+import { formatDate } from "@/hooks/commFunction";
 
 const dialogShow = ref(false);
 const props = defineProps({
@@ -160,9 +161,4 @@ watch(
 onMounted(() => {
   GetDetail();
 });
-
-function formatDate(date?: Date): string {
-  if (date == null) return "";
-  return date.toString().slice(0, 10);
-}
 </script>
