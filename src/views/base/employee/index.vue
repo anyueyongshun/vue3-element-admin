@@ -7,12 +7,12 @@
         </el-col>
         <el-col :lg="20" :xs="24">
           <div class="search-container">
-            <el-form :inline="true" :model="queryParams">
-              <el-form-item label="名称">
+            <el-form ref="queryFormRef" :inline="true" :model="queryParams">
+              <el-form-item label="姓名">
                 <el-input
                   v-model="queryParams.name"
                   style="width: 150px"
-                  placeholder="请输入名称"
+                  placeholder="请输入姓名"
                   clearable
                 />
               </el-form-item>
@@ -32,144 +32,145 @@
                   clearable
                 />
               </el-form-item>
-              <el-form-item label="身份证号">
-                <el-input
-                  v-model="queryParams.idNumber"
-                  style="width: 150px"
-                  placeholder="请输入身份证号"
-                  clearable
-                />
-              </el-form-item>
-              <el-form-item label="手机号">
-                <el-input
-                  v-model="queryParams.mobile"
-                  style="width: 150px"
-                  placeholder="请输入手机号"
-                  clearable
-                />
-              </el-form-item>
-              <el-form-item label="性别">
-                <el-select
-                  v-model="queryParams.gender"
-                  placeholder="请选择性别"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in genderOptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  /> </el-select
-              ></el-form-item>
+              <template v-if="isExpand">
+                <el-form-item label="身份证号">
+                  <el-input
+                    v-model="queryParams.idNumber"
+                    style="width: 150px"
+                    placeholder="请输入身份证号"
+                    clearable
+                  />
+                </el-form-item>
+                <el-form-item label="手机号">
+                  <el-input
+                    v-model="queryParams.mobile"
+                    style="width: 150px"
+                    placeholder="请输入手机号"
+                    clearable
+                  />
+                </el-form-item>
+                <el-form-item label="性别">
+                  <el-select
+                    v-model="queryParams.gender"
+                    placeholder="请选择性别"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in genderOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    /> </el-select
+                ></el-form-item>
 
-              <el-form-item label="婚姻状态">
-                <el-select
-                  v-model="queryParams.maritalStatus"
-                  placeholder="请选择婚姻状态"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in maritalStatusOptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  /> </el-select
-              ></el-form-item>
-              <el-form-item label="政治面貌"
-                ><el-select
-                  v-model="queryParams.politicsId"
-                  placeholder="请选择政治面貌"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in dicPolitics"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  />
-                </el-select>
-              </el-form-item>
-              <el-form-item label="学历"
-                ><el-select
-                  v-model="queryParams.qualificationId"
-                  placeholder="请选择学历"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in dicQualification"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  />
-                </el-select>
-              </el-form-item>
-              <el-form-item label="在职状态">
-                <el-select
-                  v-model="queryParams.jobStatus"
-                  placeholder="请选择状态"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in jobStatusOptions"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  /> </el-select
-              ></el-form-item>
-              <el-form-item label="职位"
-                ><el-select
-                  v-model="queryParams.jobPositionId"
-                  placeholder="请选择职位"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in dicJobPosition"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  />
-                </el-select>
-              </el-form-item>
-              <el-form-item label="岗位"
-                ><el-select
-                  v-model="queryParams.workPositionId"
-                  placeholder="请选择岗位"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in dicWorkPosition"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  />
-                </el-select>
-              </el-form-item>
-              <el-form-item label="民族"
-                ><el-select
-                  v-model="queryParams.nationalityId"
-                  placeholder="请选择民族"
-                  style="width: 150px"
-                >
-                  <el-option
-                    v-for="item in dicNationality"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  />
-                </el-select>
-              </el-form-item>
-              <el-form-item label="合同到期">
-                <el-date-picker
-                  v-model="contractEndDate"
-                  type="daterange"
-                  range-separator="--"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期"
-                  style="width: 250px"
-                  format="YYYY-MM-DD"
-                  value-format="YYYY-MM-DD"
-                />
-              </el-form-item>
+                <el-form-item label="婚姻状态">
+                  <el-select
+                    v-model="queryParams.maritalStatus"
+                    placeholder="请选择婚姻状态"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in maritalStatusOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    /> </el-select
+                ></el-form-item>
+                <el-form-item label="政治面貌"
+                  ><el-select
+                    v-model="queryParams.politicsId"
+                    placeholder="请选择政治面貌"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in dicPolitics"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="学历"
+                  ><el-select
+                    v-model="queryParams.qualificationId"
+                    placeholder="请选择学历"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in dicQualification"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="在职状态">
+                  <el-select
+                    v-model="queryParams.jobStatus"
+                    placeholder="请选择状态"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in jobStatusOptions"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    /> </el-select
+                ></el-form-item>
+                <el-form-item label="职位"
+                  ><el-select
+                    v-model="queryParams.jobPositionId"
+                    placeholder="请选择职位"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in dicJobPosition"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="岗位"
+                  ><el-select
+                    v-model="queryParams.workPositionId"
+                    placeholder="请选择岗位"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in dicWorkPosition"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="民族"
+                  ><el-select
+                    v-model="queryParams.nationalityId"
+                    placeholder="请选择民族"
+                    style="width: 150px"
+                  >
+                    <el-option
+                      v-for="item in dicNationality"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="合同到期">
+                  <el-date-picker
+                    v-model="contractEndDate"
+                    type="daterange"
+                    range-separator="--"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    style="width: 250px"
+                    format="YYYY-MM-DD"
+                    value-format="YYYY-MM-DD"
+                  /> </el-form-item
+              ></template>
               <el-form-item>
                 <el-button type="primary" @click="handleQuery()">
                   <i-ep-search />查询
@@ -177,6 +178,16 @@
                 <el-button type="success" @click="handleAdd()">
                   <i-ep-plus />新增
                 </el-button>
+                <el-button icon="refresh" @click="handleReset">重置</el-button>
+                <el-link
+                  class="ml-2"
+                  type="primary"
+                  :underline="false"
+                  @click="isExpand = !isExpand"
+                >
+                  <template v-if="isExpand"> 收起<i-ep-arrow-up /> </template>
+                  <template v-else> 展开<i-ep-arrow-down /> </template>
+                </el-link>
               </el-form-item>
             </el-form>
           </div>
@@ -282,6 +293,7 @@
 </template>
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
+import type { FormInstance } from "element-plus";
 import { getEmployeePage, updateStatus } from "@/api/base/employee/index";
 import {
   EmployeeListModel,
@@ -296,12 +308,14 @@ import { SelectModel } from "@/hooks/commModel";
 import { getDicByGroupId } from "@/api/base/dic";
 import { formatDate } from "@/hooks/commFunction";
 
+const queryFormRef = ref<FormInstance>();
 const dialogAddRef = ref();
 const dialogEditRef = ref();
 const dialogDetailRef = ref();
 const orgSelectRef = ref();
 const orgId = ref("");
 const employeeId = ref("");
+const isExpand = ref(false);
 
 const dicNationality = reactive<SelectModel[]>([]);
 const dicPolitics = reactive<SelectModel[]>([]);
@@ -487,6 +501,12 @@ function handleSetDic() {
       }
     })
     .finally();
+}
+
+// 重置操作
+function handleReset() {
+  queryFormRef.value?.resetFields();
+  handleQuery();
 }
 
 onMounted(() => {
