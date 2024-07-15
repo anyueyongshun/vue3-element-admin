@@ -11,7 +11,7 @@ class FileAPI {
     const formData = new FormData();
     formData.append("file", file);
     return request<any, FileInfo>({
-      url: "/api/v1/files",
+      url: "/FileOperate/UploadFileEditor",
       method: "post",
       data: formData,
       headers: {
