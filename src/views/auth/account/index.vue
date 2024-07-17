@@ -32,6 +32,9 @@
             <el-button type="success" @click="handleAdd()">
               <i-ep-plus />新增
             </el-button>
+            <el-button @click="handleExport"
+              ><template #icon><i-ep-download /></template>导出</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
@@ -144,7 +147,11 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { getAccountPage, updateStatus } from "@/api/auth/account";
+import {
+  getAccountPage,
+  updateStatus,
+  exportAccount,
+} from "@/api/auth/account";
 import {
   AccountQuery,
   AccountModel,
@@ -180,6 +187,31 @@ function handleQuery() {
     .finally(() => {
       loading.value = false;
     });
+}
+
+//导出账号
+function handleExport() {
+  exportAccount(queryParams).then((response: any) => {
+    const fileData = response.data;
+    const fileName = decodeURI(
+      response.headers["content-disposition"].split(";")[1].split("=")[1]
+    );
+    const fileType =
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8";
+
+    const blob = new Blob([fileData], { type: fileType });
+    const downloadUrl = window.URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = downloadUrl;
+    downloadLink.download = fileName;
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    document.body.removeChild(downloadLink);
+    window.URL.revokeObjectURL(downloadUrl);
+  });
 }
 
 //调整分页大小时调用查询

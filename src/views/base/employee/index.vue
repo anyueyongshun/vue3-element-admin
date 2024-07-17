@@ -179,7 +179,7 @@
                   <i-ep-plus />新增
                 </el-button>
                 <el-button icon="refresh" @click="handleReset">重置</el-button>
-                <el-button class="ml-3" @click="handleExport"
+                <el-button @click="handleExport"
                   ><template #icon><i-ep-download /></template>导出</el-button
                 >
                 <el-link

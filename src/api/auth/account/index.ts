@@ -20,6 +20,16 @@ export function getAccountPage(queryParams: AccountQuery) {
   });
 }
 
+//导出账号
+export function exportAccount(queryParams: AccountQuery) {
+  return request({
+    url: "/account/ExportAccount",
+    method: "get",
+    params: queryParams,
+    responseType: "arraybuffer",
+  });
+}
+
 //新增账号
 export function addAccount(data: AccountAddModel): AxiosPromise<boolean> {
   return request({
