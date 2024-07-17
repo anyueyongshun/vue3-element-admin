@@ -179,6 +179,9 @@
                   <i-ep-plus />新增
                 </el-button>
                 <el-button icon="refresh" @click="handleReset">重置</el-button>
+                <el-button class="ml-3" @click="handleExport"
+                  ><template #icon><i-ep-download /></template>导出</el-button
+                >
                 <el-link
                   class="ml-2"
                   type="primary"
@@ -294,7 +297,11 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import type { FormInstance } from "element-plus";
-import { getEmployeePage, updateStatus } from "@/api/base/employee/index";
+import {
+  getEmployeePage,
+  updateStatus,
+  exportEmployee,
+} from "@/api/base/employee/index";
 import {
   EmployeeListModel,
   EmployeeUpdateStatusModel,
@@ -359,6 +366,18 @@ function handleQuery() {
     .finally(() => {
       loading.value = false;
     });
+}
+
+//导出员工
+function handleExport() {
+  queryParams.orgId = orgSelectRef.value.orgId;
+  if (contractEndDate.value != null && contractEndDate.value.length == 2) {
+    queryParams.contractEndDateFrom = contractEndDate.value[0];
+    queryParams.contractEndDateTo = contractEndDate.value[1];
+  }
+  exportEmployee(queryParams)
+    .then((data) => {})
+    .finally(() => {});
 }
 
 //调整页大小

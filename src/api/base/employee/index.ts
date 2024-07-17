@@ -26,6 +26,16 @@ export function getEmployeePage(queryParams: QueryModel) {
   });
 }
 
+//导出员工
+export function exportEmployee(queryParams: QueryModel) {
+  return request({
+    url: "/Employee/ExportEmployee",
+    method: "get",
+    params: queryParams,
+    responseType: "arraybuffer",
+  });
+}
+
 //新增员工
 export function addEmployee(data: EmployeeAddModel): AxiosPromise<boolean> {
   return request({
