@@ -375,9 +375,28 @@ function handleExport() {
     queryParams.contractEndDateFrom = contractEndDate.value[0];
     queryParams.contractEndDateTo = contractEndDate.value[1];
   }
-  exportEmployee(queryParams)
-    .then((data) => {})
-    .finally(() => {});
+
+  exportEmployee(queryParams).then((response: any) => {
+    const fileData = response.data;
+    const fileName = decodeURI(
+      response.headers["content-disposition"].split(";")[1].split("=")[1]
+    );
+    const fileType =
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8";
+
+    const blob = new Blob([fileData], { type: fileType });
+    const downloadUrl = window.URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = downloadUrl;
+    downloadLink.download = fileName;
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    document.body.removeChild(downloadLink);
+    window.URL.revokeObjectURL(downloadUrl);
+  });
 }
 
 //调整页大小
