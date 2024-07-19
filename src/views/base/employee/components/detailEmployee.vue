@@ -7,6 +7,13 @@
       <el-descriptions-item label="登录账号">
         {{ employeeDetail.loginName }}
       </el-descriptions-item>
+      <el-descriptions-item label="头像">
+        <img
+          v-if="employeeDetail.photoPath"
+          :src="employeeDetail.photoPath"
+          class="avatar"
+        />
+      </el-descriptions-item>
       <el-descriptions-item label="工号">
         {{ employeeDetail.jobNumber }}
       </el-descriptions-item>
@@ -57,9 +64,6 @@
       </el-descriptions-item>
       <el-descriptions-item label="紧急联系人电话">
         {{ employeeDetail.firstContactPersonPhone }}
-      </el-descriptions-item>
-      <el-descriptions-item label="照片路径">
-        {{ employeeDetail.photoPath }}
       </el-descriptions-item>
       <el-descriptions-item label="学历">
         {{ employeeDetail.qualificationName }}
@@ -126,6 +130,7 @@
 import { EmployeeModel } from "@/api/base/employee/model";
 import { getDetail } from "@/api/base/employee";
 import { formatDate } from "@/hooks/commFunction";
+import { ApiUrl } from "/systemConfig.json";
 
 const dialogShow = ref(false);
 const props = defineProps({
@@ -144,6 +149,9 @@ function GetDetail() {
     getDetail(props.employeeId)
       .then((data) => {
         Object.assign(employeeDetail, data);
+        if (employeeDetail.photoPath) {
+          employeeDetail.photoPath = ApiUrl + employeeDetail.photoPath;
+        }
       })
       .finally(() => {});
   }
@@ -162,3 +170,9 @@ onMounted(() => {
   GetDetail();
 });
 </script>
+<style>
+.avatar {
+  width: 50px;
+  height: 50px;
+}
+</style>

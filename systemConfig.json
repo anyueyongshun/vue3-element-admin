@@ -1,3 +1,4 @@
 {
-  "systemName": "信息化系统基础版"
+  "systemName": "信息化系统基础版",
+  "ApiUrl": "http://localhost:5264/"
 }

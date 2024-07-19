@@ -12,13 +12,15 @@
           <el-form-item>
             <el-upload
               class="avatar-uploader"
-              action="http://localhost:5264/Attachmenttemp/UploadFileAvatar"
+              :action="ApiUrl + 'Attachmenttemp/UploadFileAvatar'"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
             >
               <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-              <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+              <el-icon v-else class="avatar-uploader-icon" title="请选择头像"
+                ><Plus
+              /></el-icon>
             </el-upload>
           </el-form-item>
         </el-col>
@@ -369,6 +371,7 @@ import { getOrgTreeSelect } from "@/api/base/org";
 import { EmployeeAddModel } from "@/api/base/employee/model";
 import { SelectModel } from "@/hooks/commModel";
 import type { UploadProps } from "element-plus";
+import { ApiUrl } from "/systemConfig.json";
 
 const formData = reactive<EmployeeAddModel>({});
 const dataFormRef = ref(ElForm);
