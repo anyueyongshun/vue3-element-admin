@@ -133,6 +133,7 @@ export interface EmployeeAddModel {
   addAccountId?: string;
   modifyTime?: Date;
   modifyAccountId?: string;
+  avatarFileId?: string;
 }
 
 //编辑员工模型

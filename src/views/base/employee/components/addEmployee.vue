@@ -7,6 +7,23 @@
       label-width="auto"
     >
       <el-row>
+        <el-col :span="12" />
+        <el-col :span="12">
+          <el-form-item>
+            <el-upload
+              class="avatar-uploader"
+              action="http://localhost:5264/Attachmenttemp/UploadFileAvatar"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+              <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+            </el-upload>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="12">
           <el-form-item label="姓名" prop="name">
             <el-input v-model="formData.name" placeholder="请输入姓名" />
@@ -351,6 +368,7 @@ import { getDicByGroupId } from "@/api/base/dic";
 import { getOrgTreeSelect } from "@/api/base/org";
 import { EmployeeAddModel } from "@/api/base/employee/model";
 import { SelectModel } from "@/hooks/commModel";
+import type { UploadProps } from "element-plus";
 
 const formData = reactive<EmployeeAddModel>({});
 const dataFormRef = ref(ElForm);
@@ -532,6 +550,28 @@ const genderOptions = [
 ];
 
 defineExpose({ dialogShow });
+
+//------------------------上传头像
+const imageUrl = ref("");
+const handleAvatarSuccess: UploadProps["onSuccess"] = (
+  response,
+  uploadFile
+) => {
+  imageUrl.value = URL.createObjectURL(uploadFile.raw!);
+  formData.avatarFileId = response.data.id;
+};
+const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
+  if (rawFile.type !== "image/jpeg" && rawFile.type !== "image/png") {
+    ElMessage.error("Avatar picture must be JPG format!");
+    return false;
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error("Avatar picture size can not exceed 2MB!");
+    return false;
+  }
+  return true;
+};
+//--------------------
+
 watch(
   () => dialogShow.value,
   (newVal: boolean) => {
@@ -542,3 +582,34 @@ onMounted(() => {
   handleSetDic();
 });
 </script>
+
+<style scoped>
+.avatar-uploader .avatar {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+</style>
+
+<style>
+.avatar-uploader .el-upload {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
+  color: #8c939d;
+  text-align: center;
+}
+</style>
