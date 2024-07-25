@@ -1,5 +1,6 @@
 import request from "@/utils/request";
 import { AxiosPromise } from "axios";
+import type { CascaderOption } from "element-plus";
 import {
   OrgEmployeeSelectTreeModel,
   QueryModel,
@@ -69,6 +70,14 @@ export function updateStatus(
 export function getDetail(id: string) {
   return request<any, EmployeeModel>({
     url: "/Employee/GetById?id=" + id,
+    method: "get",
+  });
+}
+
+//取省市区
+export function getAddressByParentId(id: string) {
+  return request<any, CascaderOption[]>({
+    url: "/District/GetSelectByParentId?parentId=" + id,
     method: "get",
   });
 }

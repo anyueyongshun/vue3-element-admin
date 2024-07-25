@@ -2,6 +2,9 @@
 export interface SelectModel {
   label: string;
   value: string;
+  level: number;
+  disabled: boolean;
+  leaf: boolean;
   children?: SelectModel[];
 }
 

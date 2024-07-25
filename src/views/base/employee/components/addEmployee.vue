@@ -150,20 +150,12 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="省" prop="provinceId">
-            <el-input v-model="formData.provinceId" placeholder="请输入省" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="市" prop="cityId">
-            <el-input v-model="formData.cityId" placeholder="请输入市" />
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="区" prop="areaId">
-            <el-input v-model="formData.areaId" placeholder="请输入区" />
+          <el-form-item label="户籍地址" prop="areaId">
+            <el-cascader
+              :props="props"
+              v-model="address"
+              @change="handleChange"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -241,11 +233,18 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="照片路径" prop="photoPath">
-            <el-input
-              v-model="formData.photoPath"
-              placeholder="请输入照片路径"
-            />
+          <el-form-item label="婚姻状态" prop="maritalStatus">
+            <el-select
+              v-model="formData.maritalStatus"
+              placeholder="请选择状态"
+            >
+              <el-option
+                v-for="item in maritalStatusOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
           </el-form-item>
         </el-col>
       </el-row>
@@ -334,22 +333,7 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="12">
-          <el-form-item label="婚姻状态" prop="maritalStatus">
-            <el-select
-              v-model="formData.maritalStatus"
-              placeholder="请选择状态"
-            >
-              <el-option
-                v-for="item in maritalStatusOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="备注" prop="memo">
             <el-input v-model="formData.memo" placeholder="请输入备注" />
           </el-form-item>
@@ -365,13 +349,14 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { addEmployee } from "@/api/base/employee";
+import { addEmployee, getAddressByParentId } from "@/api/base/employee";
 import { getDicByGroupId } from "@/api/base/dic";
 import { getOrgTreeSelect } from "@/api/base/org";
 import { EmployeeAddModel } from "@/api/base/employee/model";
 import { SelectModel } from "@/hooks/commModel";
-import type { UploadProps } from "element-plus";
+import { cascaderProps, type UploadProps } from "element-plus";
 import { ApiUrl } from "/systemConfig.json";
+import type { CascaderProps, CascaderOption } from "element-plus";
 
 const formData = reactive<EmployeeAddModel>({});
 const dataFormRef = ref(ElForm);
@@ -383,11 +368,27 @@ const dicQualification = reactive<SelectModel[]>([]);
 const dicJobPosition = reactive<SelectModel[]>([]);
 const dicWorkPosition = reactive<SelectModel[]>([]);
 const orgData = reactive<SelectModel[]>([]);
+const address = ref<string[]>([]);
+const handleChange = (value: string[]) => {
+  address.value = value;
+};
+const props: CascaderProps = {
+  lazy: true,
+  lazyLoad(node, resolve) {
+    const { level, label, value } = node;
+    getAddressByParentId(value?.toString() ?? "").then((data) => {
+      resolve(data);
+    });
+  },
+};
 
 //新增员工提交
 function handleSubmit() {
   dataFormRef.value.validate((isValid: boolean) => {
     if (isValid) {
+      formData.provinceId = address.value[0];
+      formData.cityId = address.value[1];
+      formData.areaId = address.value[2];
       addEmployee(formData)
         .then((data) => {
           if (data) {

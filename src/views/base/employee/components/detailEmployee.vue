@@ -32,14 +32,12 @@
       <el-descriptions-item label="家庭住址">
         {{ employeeDetail.homeAddress }}
       </el-descriptions-item>
-      <el-descriptions-item label="省">
-        {{ employeeDetail.provinceName }}
-      </el-descriptions-item>
-      <el-descriptions-item label="市">
-        {{ employeeDetail.cityName }}
-      </el-descriptions-item>
-      <el-descriptions-item label="区">
-        {{ employeeDetail.areaName }}
+      <el-descriptions-item label="地址">
+        <template v-if="employeeDetail.provinceName">
+          {{ employeeDetail.provinceName }}>{{ employeeDetail.cityName }}>{{
+            employeeDetail.areaName
+          }}
+        </template>
       </el-descriptions-item>
       <el-descriptions-item label="民族">
         {{ employeeDetail.nationalityName }}
