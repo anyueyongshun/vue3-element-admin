@@ -74,6 +74,14 @@ export function getDetail(id: string) {
   });
 }
 
+//取当前登录员工明细
+export function getLoginDetail() {
+  return request<any, EmployeeModel>({
+    url: "/Employee/GetLoginEmployeeInfo",
+    method: "get",
+  });
+}
+
 //取省市区
 export function getAddressByParentId(id: string) {
   return request<any, CascaderOption[]>({
