@@ -81,3 +81,12 @@ export function getAddressByParentId(id: string) {
     method: "get",
   });
 }
+
+//取当前数据选择的省市区
+export function getCurrentChildren(pId: string, cId: string, aId: string) {
+  return request<any, CascaderOption[]>({
+    url:
+      "/District/getCurrentChildren?pId=" + pId + "&cId=" + cId + "&aId=" + aId,
+    method: "get",
+  });
+}

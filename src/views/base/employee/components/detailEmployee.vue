@@ -142,6 +142,7 @@ const props = defineProps({
 
 const employeeDetail = reactive<EmployeeModel>({});
 
+//员工详细
 function GetDetail() {
   if (props.employeeId != "") {
     getDetail(props.employeeId)

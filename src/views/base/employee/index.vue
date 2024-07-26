@@ -290,7 +290,11 @@
       </el-row>
     </div>
     <addEmployee ref="dialogAddRef" @handle-query-event="handleQuery" />
-    <editEmployee ref="dialogEditRef" @handle-query-event="handleQuery" />
+    <editEmployee
+      ref="dialogEditRef"
+      @handle-query-event="handleQuery"
+      v-model:employeeId="employeeId"
+    />
     <detailEmployee ref="dialogDetailRef" v-model:employeeId="employeeId" />
   </div>
 </template>
@@ -334,7 +338,13 @@ const loading = ref(false);
 const total = ref(0);
 
 const contractEndDate = ref<Date[]>([]);
-const defaultOption = { value: " ", label: "==选择==" };
+const defaultOption: SelectModel = {
+  value: " ",
+  label: "==选择==",
+  level: 0,
+  leaf: true,
+  disabled: false,
+};
 const queryParams = reactive<QueryModel>({
   pageNum: 1,
   pageSize: 10,

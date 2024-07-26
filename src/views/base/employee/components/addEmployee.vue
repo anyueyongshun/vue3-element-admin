@@ -354,7 +354,7 @@ import { getDicByGroupId } from "@/api/base/dic";
 import { getOrgTreeSelect } from "@/api/base/org";
 import { EmployeeAddModel } from "@/api/base/employee/model";
 import { SelectModel } from "@/hooks/commModel";
-import { cascaderProps, type UploadProps } from "element-plus";
+import { type UploadProps } from "element-plus";
 import { ApiUrl } from "/systemConfig.json";
 import type { CascaderProps, CascaderOption } from "element-plus";
 
@@ -580,6 +580,7 @@ watch(
   () => dialogShow.value,
   (newVal: boolean) => {
     handleSetDic();
+    address.value.length = 0;
   }
 );
 onMounted(() => {
