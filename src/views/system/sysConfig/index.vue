@@ -33,7 +33,7 @@
       </el-form>
       <template #footer>
         <el-button type="primary" @click="handleSubmitSysConfig"
-          >保存</el-button
+          ><el-icon class="mr-1"><Select /></el-icon>保存</el-button
         >
       </template>
     </el-card>
@@ -95,7 +95,7 @@
       </el-form>
       <template #footer>
         <el-button type="primary" @click="handleSubmitLogConfig"
-          >保存</el-button
+          ><el-icon class="mr-1"><Select /></el-icon>保存</el-button
         >
       </template>
     </el-card>

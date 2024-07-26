@@ -173,10 +173,10 @@
               ></template>
               <el-form-item>
                 <el-button type="primary" @click="handleQuery()">
-                  <i-ep-search />查询
+                  <i-ep-search class="mr-1" />查询
                 </el-button>
                 <el-button type="success" @click="handleAdd()">
-                  <i-ep-plus />新增
+                  <i-ep-plus class="mr-1" />新增
                 </el-button>
                 <el-button icon="refresh" @click="handleReset">重置</el-button>
                 <el-button @click="handleExport"
@@ -188,8 +188,12 @@
                   :underline="false"
                   @click="isExpand = !isExpand"
                 >
-                  <template v-if="isExpand"> 收起<i-ep-arrow-up /> </template>
-                  <template v-else> 展开<i-ep-arrow-down /> </template>
+                  <template v-if="isExpand">
+                    收起<i-ep-arrow-up class="mr-1" />
+                  </template>
+                  <template v-else>
+                    展开<i-ep-arrow-down class="mr-1" />
+                  </template>
                 </el-link>
               </el-form-item>
             </el-form>

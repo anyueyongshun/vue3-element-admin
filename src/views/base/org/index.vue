@@ -13,17 +13,17 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleLoadTree">
-              <i-ep-refresh />刷新</el-button
+              <i-ep-refresh class="mr-1" />刷新</el-button
             >
           </el-form-item>
           <el-form-item>
             <el-button type="success" @click="handleExpandAll(true)">
-              <el-icon><FolderOpened /></el-icon>展开</el-button
+              <el-icon class="mr-1"><FolderOpened /></el-icon>展开</el-button
             >
           </el-form-item>
           <el-form-item>
             <el-button type="info" @click="handleExpandAll(false)">
-              <el-icon><Folder /></el-icon>折叠</el-button
+              <el-icon class="mr-1"><Folder /></el-icon>折叠</el-button
             >
           </el-form-item>
         </el-form>

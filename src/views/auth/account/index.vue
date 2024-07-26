@@ -27,10 +27,10 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleQuery()">
-              <i-ep-search />查询
+              <i-ep-search class="mr-1" />查询
             </el-button>
             <el-button type="success" @click="handleAdd()">
-              <i-ep-plus />新增
+              <i-ep-plus class="mr-1" />新增
             </el-button>
             <el-button @click="handleExport"
               ><template #icon><i-ep-download /></template>导出</el-button
@@ -92,7 +92,7 @@
                 link
                 @click="handleEdit(scope.row)"
               >
-                <i-ep-edit mr-1 />编辑
+                <i-ep-edit class="mr-1" />编辑
               </el-button>
               <el-popconfirm
                 title="确认要删除?"
@@ -100,7 +100,7 @@
               >
                 <template #reference>
                   <el-button type="primary" size="small" link>
-                    <i-ep-delete mr-1 />删除
+                    <i-ep-delete class="mr-1" />删除
                   </el-button>
                 </template>
               </el-popconfirm>

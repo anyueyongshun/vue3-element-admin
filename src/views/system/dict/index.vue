@@ -14,10 +14,10 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery()"
-            ><i-ep-search />搜索</el-button
+            ><i-ep-search class="mr-1" />搜索</el-button
           >
           <el-button @click="handleResetQuery()"
-            ><i-ep-refresh />重置</el-button
+            ><i-ep-refresh class="mr-1" />重置</el-button
           >
         </el-form-item>
       </el-form>
@@ -29,13 +29,13 @@
           v-hasPerm="['sys:dict_type:add']"
           type="success"
           @click="openDialog()"
-          ><i-ep-plus />新增</el-button
+          ><i-ep-plus class="mr-1" />新增</el-button
         >
         <el-button
           type="danger"
           :disabled="ids.length === 0"
           @click="handleDelete()"
-          ><i-ep-delete />删除</el-button
+          ><i-ep-delete class="mr-1" />删除</el-button
         >
       </template>
       <el-table
@@ -62,7 +62,7 @@
               link
               size="small"
               @click.stop="openDictDialog(scope.row)"
-              ><i-ep-Collection />字典数据</el-button
+              ><i-ep-Collection class="mr-1" />字典数据</el-button
             >
             <el-button
               v-hasPerm="['sys:dict_type:edit']"
@@ -70,7 +70,7 @@
               link
               size="small"
               @click.stop="openDialog(scope.row.id)"
-              ><i-ep-edit />编辑</el-button
+              ><i-ep-edit class="mr-1" />编辑</el-button
             >
             <el-button
               v-hasPerm="['sys:dict_type:delete']"
@@ -78,7 +78,7 @@
               link
               size="small"
               @click.stop="handleDelete(scope.row.id)"
-              ><i-ep-delete />删除</el-button
+              ><i-ep-delete class="mr-1" />删除</el-button
             >
           </template>
         </el-table-column>

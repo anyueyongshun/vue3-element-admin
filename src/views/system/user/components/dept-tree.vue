@@ -3,7 +3,7 @@
   <el-card shadow="never">
     <el-input v-model="deptName" placeholder="部门名称" clearable>
       <template #prefix>
-        <i-ep-search />
+        <i-ep-search class="mr-1" />
       </template>
     </el-input>
 

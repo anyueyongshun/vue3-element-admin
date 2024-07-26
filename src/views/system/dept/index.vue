@@ -23,11 +23,11 @@
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" @click="handleQuery">
-            <i-ep-search />
+            <i-ep-search class="mr-1" />
             搜索
           </el-button>
           <el-button @click="handleResetQuery">
-            <i-ep-refresh />重置
+            <i-ep-refresh class="mr-1" />重置
           </el-button>
         </el-form-item>
       </el-form>
@@ -39,14 +39,14 @@
           v-hasPerm="['sys:dept:add']"
           type="success"
           @click="openDialog(0, undefined)"
-          ><i-ep-plus />新增</el-button
+          ><i-ep-plus class="mr-1" />新增</el-button
         >
         <el-button
           v-hasPerm="['sys:dept:delete']"
           type="danger"
           :disabled="ids.length === 0"
           @click="handleDelete()"
-          ><i-ep-delete />删除
+          ><i-ep-delete class="mr-1" />删除
         </el-button>
       </template>
 
@@ -77,7 +77,7 @@
               link
               size="small"
               @click.stop="openDialog(scope.row.id, undefined)"
-              ><i-ep-plus />新增
+              ><i-ep-plus class="mr-1" />新增
             </el-button>
             <el-button
               v-hasPerm="['sys:dept:edit']"
@@ -85,7 +85,7 @@
               link
               size="small"
               @click.stop="openDialog(scope.row.parentId, scope.row.id)"
-              ><i-ep-edit />编辑
+              ><i-ep-edit class="mr-1" />编辑
             </el-button>
             <el-button
               v-hasPerm="['sys:dept:delete']"
@@ -94,7 +94,7 @@
               size="small"
               @click.stop="handleDelete(scope.row.id)"
             >
-              <i-ep-delete />删除
+              <i-ep-delete class="mr-1" />删除
             </el-button>
           </template>
         </el-table-column>

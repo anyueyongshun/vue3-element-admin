@@ -47,10 +47,10 @@
 
             <el-form-item>
               <el-button type="primary" @click="handleQuery"
-                ><i-ep-search />搜索</el-button
+                ><i-ep-search class="mr-1" />搜索</el-button
               >
               <el-button @click="handleResetQuery">
-                <i-ep-refresh />
+                <i-ep-refresh class="mr-1" />
                 重置</el-button
               >
             </el-form-item>
@@ -65,14 +65,14 @@
                   v-hasPerm="['sys:user:add']"
                   type="success"
                   @click="openDialog('user-form')"
-                  ><i-ep-plus />新增</el-button
+                  ><i-ep-plus class="mr-1" />新增</el-button
                 >
                 <el-button
                   v-hasPerm="['sys:user:delete']"
                   type="danger"
                   :disabled="removeIds.length === 0"
                   @click="handleDelete()"
-                  ><i-ep-delete />删除</el-button
+                  ><i-ep-delete class="mr-1" />删除</el-button
                 >
               </div>
               <div>
@@ -81,10 +81,10 @@
                   <template #dropdown>
                     <el-dropdown-menu>
                       <el-dropdown-item @click="downloadTemplate">
-                        <i-ep-download />下载模板</el-dropdown-item
+                        <i-ep-download class="mr-1" />下载模板</el-dropdown-item
                       >
                       <el-dropdown-item @click="openDialog('user-import')">
-                        <i-ep-top />导入数据</el-dropdown-item
+                        <i-ep-top class="mr-1" />导入数据</el-dropdown-item
                       >
                     </el-dropdown-menu>
                   </template>
@@ -163,7 +163,7 @@
                   size="small"
                   link
                   @click="resetPassword(scope.row)"
-                  ><i-ep-refresh-left />重置密码</el-button
+                  ><i-ep-refresh-left class="mr-1" />重置密码</el-button
                 >
                 <el-button
                   v-hasPerm="['sys:user:edit']"
@@ -171,7 +171,7 @@
                   link
                   size="small"
                   @click="openDialog('user-form', scope.row.id)"
-                  ><i-ep-edit />编辑</el-button
+                  ><i-ep-edit class="mr-1" />编辑</el-button
                 >
                 <el-button
                   v-hasPerm="['sys:user:delete']"
@@ -179,7 +179,7 @@
                   link
                   size="small"
                   @click="handleDelete(scope.row.id)"
-                  ><i-ep-delete />删除</el-button
+                  ><i-ep-delete class="mr-1" />删除</el-button
                 >
               </template>
             </el-table-column>

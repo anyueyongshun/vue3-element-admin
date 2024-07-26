@@ -57,8 +57,10 @@
           :underline="false"
           @click="isExpand = !isExpand"
         >
-          <template v-if="isExpand"> 收起<i-ep-arrow-up /> </template>
-          <template v-else> 展开<i-ep-arrow-down /> </template>
+          <template v-if="isExpand">
+            收起<i-ep-arrow-up class="mr-1" />
+          </template>
+          <template v-else> 展开<i-ep-arrow-down class="mr-1" /> </template>
         </el-link>
       </el-form-item>
     </el-form>

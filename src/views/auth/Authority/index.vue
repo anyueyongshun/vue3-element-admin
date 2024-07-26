@@ -13,7 +13,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleLoadTree">
-              <i-ep-refresh />刷新</el-button
+              <i-ep-refresh class="mr-1" />刷新</el-button
             >
           </el-form-item>
           <el-form-item>
@@ -26,12 +26,12 @@
           </el-form-item>
           <el-form-item>
             <el-button type="success" @click="handleExpandAll(true)">
-              <el-icon><FolderOpened /></el-icon>展开</el-button
+              <el-icon class="mr-1"><FolderOpened /></el-icon>展开</el-button
             >
           </el-form-item>
           <el-form-item>
             <el-button type="info" @click="handleExpandAll(false)">
-              <el-icon><Folder /></el-icon>折叠</el-button
+              <el-icon class="mr-1"><Folder /></el-icon>折叠</el-button
             >
           </el-form-item>
         </el-form>
@@ -61,7 +61,7 @@
                   link
                   @click="handleAdd(node, data)"
                 >
-                  <i-ep-plus mr-1 />新增
+                  <i-ep-plus class="mr-1" />新增
                 </el-button>
                 <el-button
                   type="primary"
@@ -70,7 +70,7 @@
                   @click="handleEdit(node, data)"
                   v-if="!data.isRoot"
                 >
-                  <i-ep-edit mr-1 />编辑
+                  <i-ep-edit class="mr-1" />编辑
                 </el-button>
                 <el-popconfirm
                   title="确认要删除?"
@@ -79,7 +79,7 @@
                 >
                   <template #reference>
                     <el-button type="primary" size="small" link>
-                      <i-ep-delete mr-1 />删除
+                      <i-ep-delete class="mr-1" />删除
                     </el-button>
                   </template>
                 </el-popconfirm>

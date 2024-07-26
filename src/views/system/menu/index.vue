@@ -12,10 +12,11 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery"
-            ><template #icon><i-ep-search /></template>搜索</el-button
+            ><template #icon><i-ep-search class="mr-1" /></template
+            >搜索</el-button
           >
           <el-button @click="handleResetQuery">
-            <template #icon><i-ep-refresh /></template>
+            <template #icon><i-ep-refresh class="mr-1" /></template>
             重置</el-button
           >
         </el-form-item>
@@ -29,7 +30,7 @@
           type="success"
           @click="handleDialogOpen(0)"
         >
-          <template #icon><i-ep-plus /></template>
+          <template #icon><i-ep-plus class="mr-1" /></template>
           新增</el-button
         >
       </template>
@@ -112,7 +113,7 @@
               size="small"
               @click.stop="handleDialogOpen(scope.row.id)"
             >
-              <i-ep-plus />新增
+              <i-ep-plus class="mr-1" />新增
             </el-button>
 
             <el-button
@@ -122,7 +123,7 @@
               size="small"
               @click.stop="handleDialogOpen(undefined, scope.row.id)"
             >
-              <i-ep-edit />编辑
+              <i-ep-edit class="mr-1" />编辑
             </el-button>
             <el-button
               v-hasPerm="['sys:menu:delete']"
@@ -130,7 +131,7 @@
               link
               size="small"
               @click.stop="handleDelete(scope.row.id)"
-              ><i-ep-delete />
+              ><i-ep-delete class="mr-1" />
               删除
             </el-button>
           </template>

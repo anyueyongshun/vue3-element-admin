@@ -17,7 +17,7 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleQuery()">
-              <i-ep-search />查询
+              <i-ep-search class="mr-1" />查询
             </el-button>
           </el-form-item>
         </el-form>

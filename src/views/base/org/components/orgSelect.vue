@@ -4,7 +4,7 @@
       <div class="mb-2">
         <el-input v-model="filterText" placeholder="请输入名称" clearable>
           <template #prefix>
-            <i-ep-search />
+            <i-ep-search class="mr-1" />
           </template>
         </el-input>
       </div>

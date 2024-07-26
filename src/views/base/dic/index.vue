@@ -18,10 +18,10 @@
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="handleQuery()">
-                  <i-ep-search />查询
+                  <i-ep-search class="mr-1" />查询
                 </el-button>
                 <el-button type="success" @click="handleAdd()">
-                  <i-ep-plus />新增
+                  <i-ep-plus class="mr-1" />新增
                 </el-button>
               </el-form-item>
             </el-form>
@@ -78,7 +78,7 @@
                     link
                     @click="handleEdit(scope.row)"
                   >
-                    <el-icon mr-1><Document /></el-icon>
+                    <el-icon class="mr-1"><Document /></el-icon>
                     编辑
                   </el-button>
                   <el-popconfirm
@@ -87,7 +87,7 @@
                   >
                     <template #reference>
                       <el-button type="primary" size="small" link>
-                        <i-ep-delete mr-1 />删除
+                        <i-ep-delete class="mr-1" />删除
                       </el-button>
                     </template>
                   </el-popconfirm>

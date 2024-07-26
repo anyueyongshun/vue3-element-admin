@@ -7,7 +7,7 @@
         clearable
       >
         <template #prefix>
-          <i-ep-search />
+          <i-ep-search class="mr-1" />
         </template>
       </el-input>
     </div>
