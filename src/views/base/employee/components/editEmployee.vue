@@ -410,6 +410,8 @@ function GetDetail() {
         address.value.push(formData.areaId ?? "");
         if (formData.photoPath) {
           imageUrl.value = ApiUrl + formData.photoPath;
+        } else {
+          imageUrl.value = "";
         }
       })
       .finally(() => {

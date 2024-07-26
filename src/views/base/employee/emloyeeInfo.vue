@@ -144,6 +144,8 @@ function GetDetail() {
       Object.assign(employeeDetail, data);
       if (employeeDetail.photoPath) {
         employeeDetail.photoPath = ApiUrl + employeeDetail.photoPath;
+      } else {
+        employeeDetail.photoPath = "";
       }
     })
     .finally(() => {});
