@@ -584,7 +584,7 @@ watch(
   }
 );
 onMounted(() => {
-  handleSetDic();
+  //handleSetDic();
 });
 </script>
 

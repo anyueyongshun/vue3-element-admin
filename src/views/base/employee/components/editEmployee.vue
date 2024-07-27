@@ -400,6 +400,7 @@ const props = defineProps({
 
 //员工详细
 function GetDetail() {
+  if (dialogShow.value == false) return;
   if (props.employeeId != "") {
     getDetail(props.employeeId)
       .then((data) => {
@@ -638,8 +639,8 @@ watch(
   }
 );
 onMounted(() => {
-  handleSetDic();
-  GetDetail();
+  //handleSetDic();
+  //GetDetail();
 });
 </script>
 
