@@ -168,8 +168,8 @@ const loginRules = computed(() => {
     ],
     captchaCode: [
       {
-        min: 4,
-        max: 4,
+        min: 1,
+        max: 1,
         required: true,
         trigger: "blur",
         message: t("login.message.captchaCode.required"),
