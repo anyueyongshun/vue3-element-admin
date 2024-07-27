@@ -20,21 +20,22 @@
       <!-- 语言选择 -->
       <lang-select class="setting-item" />
     </template>
-    <el-badge
-      :value="viewNoticeCount"
-      :max="9"
-      class="setting-item"
-      :offset="[-7, 15]"
-      v-if="viewNoticeCount > 0"
-    >
-      <svg-icon icon-class="notice2" />
-    </el-badge>
-
+    <a href="/#/userCenter/received">
+      <el-badge
+        :value="viewNoticeCount"
+        :max="9"
+        class="setting-item"
+        :offset="[-7, 15]"
+        v-if="viewNoticeCount > 0"
+      >
+        <svg-icon icon-class="notice2" />
+      </el-badge>
+    </a>
     <!-- 用户头像 -->
     <el-dropdown class="setting-item" trigger="click">
       <div class="flex-center h100% p10px">
         <img
-          :src="userStore.user.avatar + '?imageView2/1/w/80/h/80'"
+          :src="ApiUrl + userStore.user.avatar + '?imageView2/1/w/80/h/80'"
           class="rounded-full mr-10px w24px w24px"
         />
         <span>
@@ -43,35 +44,19 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <!-- <a
-            target="_blank"
-            href="https://gitee.com/信息化系统org/vue3-element-admin"
-          >
-            <el-dropdown-item>{{ $t("navbar.gitee") }}</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://juejin.cn/post/7228990409909108793">
-            <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
-          </a> -->
-          <a href="https://gitee.com/信息化系统org/vue3-element-admin">
+          <a href="/#/userCenter/employeeInfo">
             <el-dropdown-item>
               <svg-icon icon-class="user" mr-2 />
               个人信息</el-dropdown-item
             >
           </a>
-          <!-- <AppLink
-            :to="{
-              path: "/base/notice",
-            }"
-          >
-            <el-dropdown-item divided>
+          <a href="/#/userCenter/published">
+            <el-dropdown-item>
               <svg-icon icon-class="publish" mr-2 />
               发布信息</el-dropdown-item
             >
-          </AppLink> -->
-          <a
-            target="_blank"
-            href="https://gitee.com/信息化系统org/vue3-element-admin"
-          >
+          </a>
+          <a href="/#/userCenter/received">
             <el-dropdown-item>
               <svg-icon icon-class="message2" mr-2 />
               收到信息</el-dropdown-item
@@ -103,6 +88,7 @@ import {
 } from "@/store";
 import defaultSettings from "@/settings";
 import { DeviceEnum } from "@/enums/DeviceEnum";
+import { ApiUrl } from "/systemConfig.json";
 
 const appStore = useAppStore();
 const tagsViewStore = useTagsViewStore();

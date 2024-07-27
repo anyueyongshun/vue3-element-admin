@@ -92,6 +92,7 @@
                     <svg-icon
                       icon-class="user"
                       style="width: 1.2em; height: 1.2em"
+                      class="mr-1"
                     />账号
                   </el-button>
                 </el-tooltip>

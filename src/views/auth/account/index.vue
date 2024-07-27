@@ -111,7 +111,7 @@
                 link
                 @click="handleAssign(scope.row)"
               >
-                <i-ep-lock />权限
+                <i-ep-lock class="mr-1" />权限
               </el-button>
             </template>
           </el-table-column>
