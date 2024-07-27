@@ -64,7 +64,7 @@
         </el-tooltip>
 
         <!-- 验证码 -->
-        <!-- <el-form-item prop="captchaCode">
+        <el-form-item prop="captchaCode">
           <div class="flex-y-center w-full">
             <svg-icon icon-class="captcha" class="mx-2" />
             <el-input
@@ -72,6 +72,7 @@
               auto-complete="off"
               size="large"
               class="flex-1"
+              maxlength="4"
               :placeholder="$t('login.captchaCode')"
               @keyup.enter="handleLogin"
             />
@@ -82,7 +83,7 @@
               class="rounded-tr-md rounded-br-md cursor-pointer h-[48px]"
             />
           </div>
-        </el-form-item> -->
+        </el-form-item>
 
         <!-- 登录按钮 -->
         <el-button
@@ -165,23 +166,25 @@ const loginRules = computed(() => {
         trigger: "blur",
       },
     ],
-    /* captchaCode: [
+    captchaCode: [
       {
+        min: 4,
+        max: 4,
         required: true,
         trigger: "blur",
         message: t("login.message.captchaCode.required"),
-      }, 
-    ],*/
+      },
+    ],
   };
 });
 
 /** 获取验证码 */
-/* function getCaptcha() {
+function getCaptcha() {
   AuthAPI.getCaptcha().then((data) => {
     loginData.value.captchaKey = data.captchaKey;
     captchaBase64.value = data.captchaBase64;
   });
-} */
+}
 
 /** 登录 */
 const route = useRoute();
@@ -207,7 +210,7 @@ function handleLogin() {
           router.push({ path: redirect, query: otherQueryParams });
         })
         .catch(() => {
-          /* getCaptcha(); */
+          getCaptcha();
         })
         .finally(() => {
           loading.value = false;
@@ -241,7 +244,7 @@ function checkCapslock(event: KeyboardEvent) {
 }
 
 onMounted(() => {
-  /* getCaptcha(); */
+  getCaptcha();
 });
 </script>
 

@@ -12,8 +12,8 @@ class AuthAPI {
     const formData = new FormData();
     formData.append("username", data.username);
     formData.append("password", data.password);
-    /* formData.append("captchaKey", data.captchaKey || "");
-    formData.append("captchaCode", data.captchaCode || ""); */
+    formData.append("captchaKey", data.captchaKey || "");
+    formData.append("captchaCode", data.captchaCode || "");
     return request<any, LoginResult>({
       url: "/account/login",
       method: "post",
@@ -39,7 +39,7 @@ class AuthAPI {
    */
   static getCaptcha() {
     return request<any, CaptchaResult>({
-      url: "/api/v1/auth/captcha",
+      url: "/captcha/getCaptcha",
       method: "get",
     });
   }
