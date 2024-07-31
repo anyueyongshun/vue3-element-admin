@@ -9,6 +9,7 @@ import {
   AccountAuthorityModel,
   AccountMenuModel,
   AccountRoleModel,
+  AccountChangePasswordModel,
 } from "./model";
 
 //账号分页查询
@@ -66,6 +67,24 @@ export function getDetail(id: string) {
     method: "get",
   });
 }
+
+//重置密码
+export function reSetPassword(id: string) {
+  return request<any, AccountEditModel>({
+    url: "/account/ReSetPassword?accountId=" + id,
+    method: "get",
+  });
+}
+
+//修改密码
+export function changePassword(data: AccountChangePasswordModel) {
+  return request<any, AccountEditModel>({
+    url: "/account/ChangePassword",
+    method: "post",
+    data: data,
+  });
+}
+
 //------------------------账号添加权限，菜单，角色-----------------------------
 //账号添加菜单
 export function assignMenu(data: AccountMenuModel): AxiosPromise<boolean> {

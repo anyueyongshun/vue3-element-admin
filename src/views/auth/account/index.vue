@@ -84,7 +84,7 @@
           <el-table-column prop="lastLoginTime" label="上次登录时间" />
           <el-table-column prop="lastLoginIP" label="上次登录IP" />
           <el-table-column prop="memo" label="备注" />
-          <el-table-column fixed="right" label="操作" width="200">
+          <el-table-column fixed="right" label="操作" width="280">
             <template #default="scope">
               <el-button
                 type="primary"
@@ -104,7 +104,16 @@
                   </el-button>
                 </template>
               </el-popconfirm>
-
+              <el-popconfirm
+                title="确认要重置密码?"
+                @confirm="handleReSetPassword(scope.row)"
+              >
+                <template #reference>
+                  <el-button type="primary" size="small" link>
+                    <el-icon class="mr-1"><Key /></el-icon>重置密码
+                  </el-button>
+                </template>
+              </el-popconfirm>
               <el-button
                 type="primary"
                 size="small"
@@ -151,6 +160,7 @@ import {
   getAccountPage,
   updateStatus,
   exportAccount,
+  reSetPassword,
 } from "@/api/auth/account";
 import {
   AccountQuery,
@@ -242,6 +252,15 @@ function handleUpdateStatus(row: AccountModel, status: number) {
     .then((data) => {
       ElMessage.success("操作成功");
       handleQuery();
+    })
+    .finally(() => {});
+}
+
+//重置密码
+function handleReSetPassword(row: AccountModel) {
+  reSetPassword(row.id!)
+    .then((data) => {
+      ElMessage.success("操作成功");
     })
     .finally(() => {});
 }

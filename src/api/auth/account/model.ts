@@ -61,3 +61,11 @@ export interface AccountRoleModel {
   accountId: string;
   roleIds?: TreeKey[];
 }
+
+//修改密码模型
+export interface AccountChangePasswordModel {
+  accountId: string;
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
