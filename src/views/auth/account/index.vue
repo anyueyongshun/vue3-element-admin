@@ -110,7 +110,7 @@
               >
                 <template #reference>
                   <el-button type="primary" size="small" link>
-                    <el-icon class="mr-1"><Key /></el-icon>重置密码
+                    <i-ep-key class="mr-1" />重置密码
                   </el-button>
                 </template>
               </el-popconfirm>

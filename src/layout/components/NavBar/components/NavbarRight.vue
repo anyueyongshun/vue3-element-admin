@@ -62,6 +62,12 @@
               收到信息</el-dropdown-item
             >
           </a>
+          <a href="/#/userCenter/changepassword">
+            <el-dropdown-item>
+              <i-ep-key mr-2 />
+              修改密码</el-dropdown-item
+            >
+          </a>
           <el-dropdown-item divided @click="logout">
             <svg-icon icon-class="out" mr-2 />
             {{ $t("navbar.logout") }}
