@@ -129,8 +129,8 @@ const rules = reactive({
     {
       required: true,
       min: 1,
-      max: 20,
-      message: "请输入1-20个字符",
+      max: 40,
+      message: "请输入1-40个字符",
       trigger: ["blur", "change"],
     },
   ],

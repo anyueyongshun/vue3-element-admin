@@ -100,7 +100,7 @@
           </el-scrollbar>
           <template #footer
             ><el-button type="primary" @click="handleAssignAuthInclude(1)">
-              <el-icon><Select /></el-icon>分配权限
+              <el-icon mr-1><Select /></el-icon>分配权限
             </el-button>
           </template>
         </el-card>
@@ -154,7 +154,7 @@
           </el-scrollbar>
           <template #footer
             ><el-button type="primary" @click="handleAssignAuthExclude(2)">
-              <el-icon><Select /></el-icon>分配权限
+              <el-icon mr-1><Select /></el-icon>分配权限
             </el-button>
           </template>
         </el-card>
@@ -204,7 +204,7 @@
           </el-scrollbar>
           <template #footer
             ><el-button type="primary" @click="handleAssignRole">
-              <el-icon><Select /></el-icon>分配角色
+              <el-icon mr-1><Select /></el-icon>分配角色
             </el-button>
           </template>
         </el-card>
@@ -254,7 +254,7 @@
           </el-scrollbar>
           <template #footer
             ><el-button type="primary" @click="handleAssignMenu">
-              <el-icon><Select /></el-icon>分配菜单
+              <el-icon mr-1><Select /></el-icon>分配菜单
             </el-button></template
           >
         </el-card>

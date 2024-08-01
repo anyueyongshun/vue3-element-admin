@@ -51,7 +51,7 @@
           </el-scrollbar>
           <template #footer
             ><el-button type="primary" @click="handleAssignAuth">
-              <el-icon><Select /></el-icon>分配权限
+              <el-icon mr-1><Select /></el-icon>分配权限
             </el-button>
           </template>
         </el-card>
@@ -101,7 +101,7 @@
           </el-scrollbar>
           <template #footer
             ><el-button type="primary" @click="handleAssignMenu">
-              <el-icon><Select /></el-icon>分配菜单
+              <el-icon mr-1><Select /></el-icon>分配菜单
             </el-button></template
           >
         </el-card>
