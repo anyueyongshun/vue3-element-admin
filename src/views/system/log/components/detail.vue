@@ -35,9 +35,11 @@
         </el-descriptions-item>
       </el-descriptions>
     </div>
-    <el-button type="primary" v-print="'#LogInfos'" class="mt-5"
-      ><el-icon class="mr-1"><Printer /></el-icon> 打印</el-button
-    >
+    <div class="flex-x-end">
+      <el-button type="default" v-print="'#LogInfos'" class="mt-5"
+        ><el-icon class="mr-1"><Printer /></el-icon> 打印</el-button
+      >
+    </div>
   </el-dialog>
 </template>
 

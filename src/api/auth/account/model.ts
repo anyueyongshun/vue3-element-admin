@@ -64,7 +64,6 @@ export interface AccountRoleModel {
 
 //修改密码模型
 export interface AccountChangePasswordModel {
-  accountId: string;
   oldPassword: string;
   newPassword: string;
   confirmPassword: string;

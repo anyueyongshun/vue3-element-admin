@@ -127,12 +127,11 @@
           </el-descriptions-item>
         </el-descriptions>
       </div>
-      <el-button
-        type="primary"
-        v-print="'#EmployeeInfos'"
-        class="mt-5 mb-5 float-right"
-        ><el-icon class="mr-1"><Printer /></el-icon>打印</el-button
-      >
+      <div class="flex-x-end mt-5">
+        <el-button type="default" v-print="'#EmployeeInfos'"
+          ><el-icon class="mr-1"><Printer /></el-icon>打印</el-button
+        >
+      </div>
     </el-card>
   </div>
 </template>

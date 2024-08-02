@@ -78,7 +78,7 @@ export function reSetPassword(id: string) {
 
 //修改密码
 export function changePassword(data: AccountChangePasswordModel) {
-  return request<any, AccountEditModel>({
+  return request<any, boolean>({
     url: "/account/ChangePassword",
     method: "post",
     data: data,
