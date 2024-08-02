@@ -1,56 +1,54 @@
 <template>
-  <div class="app-container">
-    <el-card>
-      <template #header>
-        <div class="card-header">
-          <span>系统配置</span>
-        </div>
-      </template>
-      <el-form
-        ref="dataFormSysConfigRef"
-        :model="formDataSysConfig"
-        label-width="auto"
-      >
-        <el-row>
-          <el-col :span="6">
+  <el-row justify="center">
+    <el-col :xs="12" :sm="10" :md="8" :lg="6" :xl="6">
+      <div class="app-container">
+        <el-card>
+          <template #header>
+            <div class="card-header">
+              <span>系统配置</span>
+            </div>
+          </template>
+          <el-form
+            ref="dataFormSysConfigRef"
+            :model="formDataSysConfig"
+            label-width="auto"
+            label-position="top"
+          >
             <el-form-item label="默认密码" prop="defaultPassword">
               <el-input
                 v-model="formDataSysConfig.defaultPassword"
                 placeholder="请输入默认密码"
               />
             </el-form-item>
-          </el-col>
-          <el-col :span="1" />
-          <el-col :span="17">
+
             <el-form-item label="IP黑名单" prop="blackListIp">
               <el-input
                 v-model="formDataSysConfig.blackListIp"
                 placeholder="请输入IP黑名单(用逗号分隔)"
               />
             </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-      <template #footer>
-        <el-button type="primary" @click="handleSubmitSysConfig"
-          ><el-icon class="mr-1"><Select /></el-icon>保存</el-button
-        >
-      </template>
-    </el-card>
-    <el-divider />
-    <el-card>
-      <template #header>
-        <div class="card-header">
-          <span>日志配置</span>
-        </div>
-      </template>
-      <el-form
-        ref="dataFormLogConfigRef"
-        :model="formDataLogConfig"
-        label-width="auto"
-      >
-        <el-row>
-          <el-col :span="12">
+          </el-form>
+          <template #footer>
+            <div class="flex-x-end">
+              <el-button type="primary" @click="handleSubmitSysConfig"
+                ><el-icon class="mr-1"><Select /></el-icon>保存</el-button
+              >
+            </div>
+          </template>
+        </el-card>
+        <el-divider />
+        <el-card>
+          <template #header>
+            <div class="card-header">
+              <span>日志配置</span>
+            </div>
+          </template>
+          <el-form
+            ref="dataFormLogConfigRef"
+            :model="formDataLogConfig"
+            label-width="auto"
+            :inline="true"
+          >
             <el-form-item label="日志存储类型" prop="logStoreType">
               <el-switch
                 v-model="formDataLogConfig.logStoreType"
@@ -61,45 +59,33 @@
                 inline-prompt
               />
             </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="开启SQL日志" prop="isSQL">
               <el-switch v-model="formDataLogConfig.isSQL" />
             </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
             <el-form-item label="开启登录日志" prop="isLogin">
               <el-switch v-model="formDataLogConfig.isLogin" />
             </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="开启异常日志" prop="isException">
               <el-switch v-model="formDataLogConfig.isException" />
             </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
             <el-form-item label="开启操作日志" prop="isOperate">
               <el-switch v-model="formDataLogConfig.isOperate" />
             </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="开启访问日志" prop="isWatchDog">
               <el-switch v-model="formDataLogConfig.isWatchDog" />
             </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-      <template #footer>
-        <el-button type="primary" @click="handleSubmitLogConfig"
-          ><el-icon class="mr-1"><Select /></el-icon>保存</el-button
-        >
-      </template>
-    </el-card>
-  </div>
+          </el-form>
+          <template #footer>
+            <div class="flex-x-end">
+              <el-button type="primary" @click="handleSubmitLogConfig">
+                <el-icon class="mr-1"><Select /></el-icon>保存
+              </el-button>
+            </div>
+          </template>
+        </el-card>
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
 <script setup lang="ts">
