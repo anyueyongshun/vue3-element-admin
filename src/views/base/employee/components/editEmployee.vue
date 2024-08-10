@@ -425,6 +425,8 @@ function GetDetail() {
             addressOptions.value.length = 0;
             addressOptions.value.push(...data);
           });
+        } else {
+          addressOptions.value.length = 0;
         }
       });
   }
