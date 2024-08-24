@@ -518,40 +518,40 @@ function handleMenuFilter(value: string, data: any) {
 
 //tree折叠/展开
 function handleExpandAllAuthOwner(isExpand: boolean) {
-  const nodes = treeAuthOwnerRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeAuthOwnerRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }
 
 //tree折叠/展开
 function handleExpandAllAuthInclude(isExpand: boolean) {
-  const nodes = treeAuthIncludeRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeAuthIncludeRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }
 
 //tree折叠/展开
 function handleExpandAllAuthExclude(isExpand: boolean) {
-  const nodes = treeAuthExcludeRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeAuthExcludeRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }
 
 //tree折叠/展开
 function handleExpandAllRole(isExpand: boolean) {
-  const nodes = treeRoleRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeRoleRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }
 
 //tree折叠/展开
 function handleExpandAllMenu(isExpand: boolean) {
-  const nodes = treeMenuRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeMenuRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }

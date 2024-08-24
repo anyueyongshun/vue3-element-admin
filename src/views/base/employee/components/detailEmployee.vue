@@ -133,7 +133,7 @@
 import { EmployeeModel } from "@/api/base/employee/model";
 import { getDetail } from "@/api/base/employee";
 import { formatDate } from "@/hooks/commFunction";
-import { ApiUrl } from "/systemConfig.json";
+import { ApiUrl } from "@/systemConfig.json";
 
 const dialogShow = ref(false);
 const props = defineProps({

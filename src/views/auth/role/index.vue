@@ -188,8 +188,8 @@ function handleFilter(value: string, data: any) {
 
 //tree折叠/展开
 function handleExpandAll(isExpand: boolean) {
-  const nodes = treeRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }

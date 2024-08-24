@@ -236,16 +236,16 @@ function handleMenuFilter(value: string, data: any) {
 
 //tree折叠/展开
 function handleExpandAllAuth(isExpand: boolean) {
-  const nodes = treeAuthRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeAuthRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }
 
 //tree折叠/展开
 function handleExpandAllMenu(isExpand: boolean) {
-  const nodes = treeMenuRef.value.store._getAllNodes();
-  nodes.forEach((item) => {
+  const nodes = treeMenuRef.value?.store._getAllNodes();
+  nodes?.forEach((item) => {
     item.expanded = isExpand;
   });
 }

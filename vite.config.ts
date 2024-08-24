@@ -21,7 +21,7 @@ import {
   devDependencies,
 } from "./package.json";
 
-import { systemName } from "./systemConfig.json";
+import { systemName } from "./src/systemConfig.json";
 
 // https://devtools-next.vuejs.org/
 import VueDevTools from "vite-plugin-vue-devtools";

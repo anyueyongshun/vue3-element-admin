@@ -94,7 +94,7 @@ import {
 } from "@/store";
 import defaultSettings from "@/settings";
 import { DeviceEnum } from "@/enums/DeviceEnum";
-import { ApiUrl } from "/systemConfig.json";
+import { ApiUrl } from "@/systemConfig.json";
 
 const appStore = useAppStore();
 const tagsViewStore = useTagsViewStore();

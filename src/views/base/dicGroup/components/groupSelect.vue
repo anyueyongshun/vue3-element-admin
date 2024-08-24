@@ -40,7 +40,7 @@ const filterTableData = computed(() =>
   datas.filter(
     (data) =>
       !searchGroupName.value ||
-      data.name.toLowerCase().includes(searchGroupName.value.toLowerCase())
+      data.name?.toLowerCase().includes(searchGroupName.value.toLowerCase())
   )
 );
 

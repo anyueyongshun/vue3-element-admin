@@ -355,7 +355,7 @@ import { getOrgTreeSelect } from "@/api/base/org";
 import { EmployeeAddModel } from "@/api/base/employee/model";
 import { SelectModel } from "@/hooks/commModel";
 import { type UploadProps } from "element-plus";
-import { ApiUrl } from "/systemConfig.json";
+import { ApiUrl } from "@/systemConfig.json";
 import type { CascaderProps, CascaderOption } from "element-plus";
 
 const formData = reactive<EmployeeAddModel>({});
