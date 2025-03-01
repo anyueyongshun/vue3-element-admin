@@ -4,6 +4,7 @@ export interface NoticeQuery extends PageQuery {
   toDate?: Date;
   title?: string;
   publishStatus?: number;
+  addAccountName?: string;
 }
 
 //通知列表用的模型

@@ -25,6 +25,21 @@
               />
             </el-select>
           </el-form-item>
+          <el-form-item label="发布日期">
+            <el-date-picker
+              v-model="queryParams.fromDate"
+              style="width: 150px"
+              placeholder="请输入开始日期"
+            />
+          </el-form-item>
+          <el-form-item label="--" />
+          <el-form-item>
+            <el-date-picker
+              v-model="queryParams.toDate"
+              style="width: 150px"
+              placeholder="请输入结束日期"
+            />
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleQuery()">
               <i-ep-search class="mr-1" />查询

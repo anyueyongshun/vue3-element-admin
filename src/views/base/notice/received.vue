@@ -11,19 +11,28 @@
               clearable
             />
           </el-form-item>
-          <el-form-item label="发布状态">
-            <el-select
-              v-model="queryParams.publishStatus"
-              placeholder="请选择发布状态"
-              style="width: 140px"
-            >
-              <el-option
-                v-for="item in statusOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              />
-            </el-select>
+          <el-form-item label="发布人">
+            <el-input
+              placeholder="请输入发布人"
+              maxlength="20"
+              v-model="queryParams.addAccountName"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="发布日期">
+            <el-date-picker
+              v-model="queryParams.fromDate"
+              style="width: 150px"
+              placeholder="请输入开始日期"
+            />
+          </el-form-item>
+          <el-form-item label="--" />
+          <el-form-item>
+            <el-date-picker
+              v-model="queryParams.toDate"
+              style="width: 150px"
+              placeholder="请输入结束日期"
+            />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="handleQuery()">
@@ -95,7 +104,6 @@ const queryParams = reactive<NoticeQuery>({
   pageNum: 1,
   pageSize: 10,
   title: "",
-  publishStatus: 0,
 });
 const NoticeDatas = ref<NoticeModel[]>();
 const noticeId = ref("");
@@ -136,21 +144,6 @@ function getTagType(row: NoticeModel) {
     return "info";
   }
 }
-
-const statusOptions = [
-  {
-    value: 0,
-    label: "==全部==",
-  },
-  {
-    value: 1,
-    label: "发布",
-  },
-  {
-    value: 2,
-    label: "草稿",
-  },
-];
 
 onMounted(() => {
   handleQuery();
