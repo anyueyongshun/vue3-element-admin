@@ -9,6 +9,7 @@
               style="width: 120px"
               placeholder="请输入日志内容"
               clearable
+              maxlength="20"
             />
           </el-form-item>
           <el-form-item label="账号">
@@ -17,6 +18,7 @@
               style="width: 120px"
               placeholder="请输入登录账号"
               clearable
+              maxlength="20"
             />
           </el-form-item>
           <el-form-item label="类型">

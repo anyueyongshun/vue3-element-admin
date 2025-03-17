@@ -8,6 +8,7 @@
             style="width: 240px"
             placeholder="请输入关键字"
             clearable
+            maxlength="20"
           />
         </el-form-item>
       </el-form>

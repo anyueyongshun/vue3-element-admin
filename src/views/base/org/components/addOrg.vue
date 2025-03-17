@@ -9,7 +9,11 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="名称" prop="name">
-            <el-input v-model="formData.name" placeholder="请输入名称" />
+            <el-input
+              v-model="formData.name"
+              placeholder="请输入名称"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -37,7 +41,11 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="备注" prop="memo">
-            <el-input v-model="formData.memo" placeholder="请输入备注" />
+            <el-input
+              v-model="formData.memo"
+              placeholder="请输入备注"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -107,8 +115,8 @@ const rules = reactive({
     {
       required: false,
       min: 0,
-      max: 100,
-      message: "最多输入100个字符",
+      max: 20,
+      message: "最多输入20个字符",
       trigger: ["blur", "change"],
     },
   ],

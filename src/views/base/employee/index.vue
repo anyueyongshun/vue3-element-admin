@@ -14,6 +14,7 @@
                   style="width: 150px"
                   placeholder="请输入姓名"
                   clearable
+                  maxlength="20"
                 />
               </el-form-item>
               <el-form-item label="登录账号">
@@ -22,6 +23,7 @@
                   style="width: 150px"
                   placeholder="请输入登录账号"
                   clearable
+                  maxlength="20"
                 />
               </el-form-item>
               <el-form-item label="工号">
@@ -30,6 +32,7 @@
                   style="width: 150px"
                   placeholder="请输入工号"
                   clearable
+                  maxlength="20"
                 />
               </el-form-item>
               <template v-if="isExpand">
@@ -39,6 +42,7 @@
                     style="width: 150px"
                     placeholder="请输入身份证号"
                     clearable
+                    maxlength="20"
                   />
                 </el-form-item>
                 <el-form-item label="手机号">
@@ -47,6 +51,7 @@
                     style="width: 150px"
                     placeholder="请输入手机号"
                     clearable
+                    maxlength="11"
                   />
                 </el-form-item>
                 <el-form-item label="性别">

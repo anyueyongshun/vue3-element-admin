@@ -9,14 +9,22 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="名称" prop="name">
-            <el-input v-model="formData.name" placeholder="请输入名称" />
+            <el-input
+              v-model="formData.name"
+              placeholder="请输入名称"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-form-item label="权限码" prop="code">
-            <el-input v-model="formData.code" placeholder="请输入权限码" />
+            <el-input
+              v-model="formData.code"
+              placeholder="请输入权限码"
+              maxlength="40"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -51,7 +59,11 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="备注" prop="memo">
-            <el-input v-model="formData.memo" placeholder="请输入备注" />
+            <el-input
+              v-model="formData.memo"
+              placeholder="请输入备注"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>

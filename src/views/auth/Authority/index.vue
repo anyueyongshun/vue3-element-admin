@@ -9,6 +9,7 @@
               style="width: 240px"
               placeholder="请输入名称"
               clearable
+              maxlength="20"
             />
           </el-form-item>
           <el-form-item>

@@ -9,19 +9,31 @@
       <el-row>
         <el-col :span="12">
           <el-form-item label="名称" prop="name">
-            <el-input v-model="formData.name" placeholder="请输入名称" />
+            <el-input
+              v-model="formData.name"
+              placeholder="请输入名称"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="标题" prop="title">
-            <el-input v-model="formData.title" placeholder="请输入标题" />
+            <el-input
+              v-model="formData.title"
+              placeholder="请输入标题"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
           <el-form-item label="路由" prop="routePath">
-            <el-input v-model="formData.routePath" placeholder="请输入路由" />
+            <el-input
+              v-model="formData.routePath"
+              placeholder="请输入路由"
+              maxlength="100"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -38,7 +50,11 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="URL" prop="url">
-            <el-input v-model="formData.url" placeholder="请输入URL" />
+            <el-input
+              v-model="formData.url"
+              placeholder="请输入URL"
+              maxlength="200"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -64,14 +80,22 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="图标" prop="icon">
-            <el-input v-model="formData.icon" placeholder="请输入图标" />
+            <el-input
+              v-model="formData.icon"
+              placeholder="请输入图标"
+              maxlength="50"
+            />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <el-form-item label="备注" prop="memo">
-            <el-input v-model="formData.memo" placeholder="请输入备注" />
+            <el-input
+              v-model="formData.memo"
+              placeholder="请输入备注"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -151,8 +175,8 @@ const rules = reactive({
     {
       required: true,
       min: 1,
-      max: 50,
-      message: "请输入1-50个字符",
+      max: 100,
+      message: "请输入1-100个字符",
       trigger: ["blur", "change"],
     },
   ],
@@ -161,8 +185,8 @@ const rules = reactive({
     {
       required: true,
       min: 1,
-      max: 100,
-      message: "请输入1-100个字符",
+      max: 200,
+      message: "请输入1-200个字符",
       trigger: ["blur", "change"],
     },
   ],
@@ -171,8 +195,8 @@ const rules = reactive({
     {
       required: false,
       min: 0,
-      max: 100,
-      message: "最多输入100个字符",
+      max: 20,
+      message: "最多输入20个字符",
       trigger: ["blur", "change"],
     },
   ],

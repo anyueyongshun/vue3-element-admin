@@ -28,7 +28,11 @@
       <el-row>
         <el-col :span="12">
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="formData.name" placeholder="请输入姓名" />
+            <el-input
+              v-model="formData.name"
+              placeholder="请输入姓名"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -36,6 +40,7 @@
             <el-input
               v-model="formData.loginName"
               placeholder="请输入登录账号"
+              maxlength="20"
             />
           </el-form-item>
         </el-col>
@@ -43,7 +48,11 @@
       <el-row>
         <el-col :span="12">
           <el-form-item label="工号" prop="jobNumber">
-            <el-input v-model="formData.jobNumber" placeholder="请输入工号" />
+            <el-input
+              v-model="formData.jobNumber"
+              placeholder="请输入工号"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -85,6 +94,7 @@
             <el-input
               v-model="formData.idNumber"
               placeholder="请输入身份证号"
+              maxlength="20"
             />
           </el-form-item>
         </el-col>
@@ -93,6 +103,7 @@
             <el-input
               v-model="formData.homeAddress"
               placeholder="请输入家庭住址"
+              maxlength="20"
             />
           </el-form-item>
         </el-col>
@@ -144,7 +155,11 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="现住地址" prop="address">
-            <el-input v-model="formData.address" placeholder="请输入现住地址" />
+            <el-input
+              v-model="formData.address"
+              placeholder="请输入现住地址"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -155,6 +170,7 @@
               :props="propsCas"
               :options="addressOptions"
               v-model="address"
+              maxlength="20"
               @change="handleChange"
             />
           </el-form-item>
@@ -193,26 +209,42 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="电话" prop="telephone">
-            <el-input v-model="formData.telephone" placeholder="请输入电话" />
+            <el-input
+              v-model="formData.telephone"
+              placeholder="请输入电话"
+              maxlength="11"
+            />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
           <el-form-item label="手机" prop="mobile">
-            <el-input v-model="formData.mobile" placeholder="请输入手机" />
+            <el-input
+              v-model="formData.mobile"
+              placeholder="请输入手机"
+              maxlength="11"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="短号" prop="shortNumber">
-            <el-input v-model="formData.shortNumber" placeholder="请输入短号" />
+            <el-input
+              v-model="formData.shortNumber"
+              placeholder="请输入短号"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
           <el-form-item label="电子邮件" prop="email">
-            <el-input v-model="formData.email" placeholder="请输入电子邮件" />
+            <el-input
+              v-model="formData.email"
+              placeholder="请输入电子邮件"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -220,6 +252,7 @@
             <el-input
               v-model="formData.firstContactPerson"
               placeholder="请输入紧急联系人"
+              maxlength="20"
             />
           </el-form-item>
         </el-col>
@@ -230,6 +263,7 @@
             <el-input
               v-model="formData.firstContactPersonPhone"
               placeholder="请输入紧急联系人电话"
+              maxlength="20"
             />
           </el-form-item>
         </el-col>
@@ -270,6 +304,7 @@
             <el-input
               v-model="formData.graduateSchool"
               placeholder="请输入毕业院校"
+              maxlength="20"
             />
           </el-form-item>
         </el-col>
@@ -280,6 +315,7 @@
             <el-input
               v-model="formData.professional"
               placeholder="请输入专业"
+              maxlength="20"
             />
           </el-form-item>
         </el-col>
@@ -336,7 +372,11 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="备注" prop="memo">
-            <el-input v-model="formData.memo" placeholder="请输入备注" />
+            <el-input
+              v-model="formData.memo"
+              placeholder="请输入备注"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>

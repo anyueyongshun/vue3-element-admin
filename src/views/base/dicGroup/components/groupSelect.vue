@@ -5,6 +5,7 @@
         v-model="searchGroupName"
         placeholder="请输入字典组名称"
         clearable
+        maxlength="20"
       >
         <template #prefix>
           <i-ep-search class="mr-1" />

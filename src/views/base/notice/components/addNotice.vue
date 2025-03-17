@@ -10,7 +10,11 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="标题" prop="title">
-              <el-input v-model="formData.title" placeholder="请输入标题" />
+              <el-input
+                v-model="formData.title"
+                placeholder="请输入标题"
+                maxlength="20"
+              />
             </el-form-item>
           </el-col>
         </el-row>

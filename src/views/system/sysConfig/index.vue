@@ -18,6 +18,7 @@
               <el-input
                 v-model="formDataSysConfig.defaultPassword"
                 placeholder="请输入默认密码"
+                maxlength="20"
               />
             </el-form-item>
 
@@ -25,6 +26,7 @@
               <el-input
                 v-model="formDataSysConfig.blackListIp"
                 placeholder="请输入IP黑名单(用逗号分隔)"
+                maxlength="200"
               />
             </el-form-item>
 

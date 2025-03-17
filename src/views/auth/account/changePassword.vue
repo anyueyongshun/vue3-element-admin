@@ -21,6 +21,7 @@
                 type="password"
                 show-password
                 placeholder="请输入原密码"
+                maxlength="20"
               />
             </el-form-item>
             <el-form-item
@@ -32,6 +33,7 @@
               <el-input
                 v-model="formData.newPassword"
                 placeholder="请输入新密码"
+                maxlength="20"
               />
             </el-form-item>
             <el-form-item
@@ -43,6 +45,7 @@
               <el-input
                 v-model="formData.confirmPassword"
                 placeholder="请输入确认密码"
+                maxlength="20"
               />
             </el-form-item>
           </el-form>

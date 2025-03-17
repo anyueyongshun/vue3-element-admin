@@ -2,7 +2,12 @@
   <div>
     <el-card>
       <div class="mb-2">
-        <el-input v-model="filterText" placeholder="请输入名称" clearable>
+        <el-input
+          v-model="filterText"
+          placeholder="请输入名称"
+          clearable
+          maxlength="20"
+        >
           <template #prefix>
             <i-ep-search class="mr-1" />
           </template>

@@ -9,7 +9,11 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="登录名" prop="loginName">
-            <el-input v-model="formData.loginName" placeholder="请输入登录名" />
+            <el-input
+              v-model="formData.loginName"
+              placeholder="请输入登录名"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
@@ -30,7 +34,11 @@
       <el-row>
         <el-col :span="24">
           <el-form-item label="备注" prop="memo">
-            <el-input v-model="formData.memo" placeholder="请输入备注" />
+            <el-input
+              v-model="formData.memo"
+              placeholder="请输入备注"
+              maxlength="20"
+            />
           </el-form-item>
         </el-col>
       </el-row>
