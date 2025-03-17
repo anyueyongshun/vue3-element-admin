@@ -27,6 +27,22 @@
                 placeholder="请输入IP黑名单(用逗号分隔)"
               />
             </el-form-item>
+
+            <el-form-item label="系统更新检测频率(秒)" prop="UpdateRate">
+              <el-input-number
+                v-model="formDataSysConfig.updateRate"
+                :min="1"
+                :max="9999"
+              />
+            </el-form-item>
+
+            <el-form-item label="未读通知查询频率(秒)" prop="NoticeRate">
+              <el-input-number
+                v-model="formDataSysConfig.noticeRate"
+                :min="1"
+                :max="9999"
+              />
+            </el-form-item>
           </el-form>
           <template #footer>
             <div class="flex-x-end">

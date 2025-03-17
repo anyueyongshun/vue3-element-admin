@@ -14,4 +14,6 @@ export interface SysConfigModel {
   id?: string;
   defaultPassword?: string;
   blackListIp?: string;
+  updateRate?: number;
+  noticeRate?: number;
 }
